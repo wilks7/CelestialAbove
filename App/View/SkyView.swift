@@ -11,15 +11,22 @@ struct SkyView: View {
     @ObservedObject var sky: Sky
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text(sky.title)
-                Button("Green"){
-                    sky.color = .green
+        List {
+            ForEach(1..<10){ section in
+                Section {
+                    ForEach(1..<5) { cell in
+                        Text(cell.description)
+                    }
+                } header: {
+                    Text(section.description)
                 }
             }
-            .background(sky.color)
+            .listRowBackground(Color.blue)
         }
+        .listStyle(.plain)
+        .background(Color.indigo)
+        .scrollContentBackground(.hidden)
+
     }
 }
 

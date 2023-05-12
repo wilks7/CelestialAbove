@@ -12,22 +12,26 @@ struct SkiesListView: View {
 
     @FetchRequest(fetchRequest: Sky.sorted, animation: .default)
     private var skies: FetchedResults<Sky>
+    
+    @Binding var selected: Sky?
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(skies) { sky in
-                    NavigationLink {
-                        SkyView(sky: sky)
-                    } label: {
-                        SkyCell(sky: sky)
-                    }
+                    SkyCell(sky: sky)
                     .task {
                         await sky.fetchForecast()
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            self.selected = sky
+                        }
                     }
                 }
                 .onDelete(perform: deleteSkies)
             }
+            .listStyle(.plain)
             #if !os(watchOS)
             .skySearchable()
             #endif
@@ -58,7 +62,7 @@ struct SkiesListView: View {
 
 struct SkiesListView_Previews: PreviewProvider {
     static var previews: some View {
-        SkiesListView()
+        SkiesListView(selected: .constant(nil))
             .environment(\.managedObjectContext, skyData.context)
     }
 }

@@ -13,9 +13,15 @@ struct ContentView: View {
 
     @FetchRequest(fetchRequest: Sky.sorted, animation: .default)
     private var skies: FetchedResults<Sky>
+    @State private var selected: Sky?
 
     var body: some View {
-        SkiesListView()
+        ZStack {
+            SkiesListView(selected: $selected)
+            if let selected {
+                SkiesTabView(skies: skies, selected: $selected)
+            }
+        }
     }
 
 }

@@ -11,6 +11,7 @@ struct SkyCell: View {
     @ObservedObject var sky: Sky
     
     var font: Font = .subheadline
+    var subFont: Font = .title2
     
     var timeString: String {
         let format = Date.FormatStyle(date: .omitted, time: .shortened, timeZone: sky.timezone)
@@ -29,9 +30,9 @@ struct SkyCell: View {
                 Spacer()
                 Text("80%").font(.largeTitle)
             }
-            
+            .padding(.bottom)
             HStack(alignment: .bottom) {
-                VStack(alignment: .trailing, spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
                     Circle().frame(width: 30, height: 30)
                     Text(Date.now.formatted(date: .omitted, time: .shortened) )
                 }
@@ -50,11 +51,16 @@ struct SkyCell: View {
         .foregroundColor(.white.opacity(0.9))
         .padding(.horizontal)
         .padding(.vertical, 8)
+        .background(sky.color)
+        .cornerRadius(16)
     }
 }
 
 struct SkyCell_Previews: PreviewProvider {
     static var previews: some View {
-        SkyCell(sky: NY)
+        List {
+            SkyCell(sky: NY)
+        }
+        .listStyle(.plain)
     }
 }
