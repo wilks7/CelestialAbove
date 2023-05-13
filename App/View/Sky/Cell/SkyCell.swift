@@ -22,7 +22,7 @@ struct SkyCell: View {
                         .font(.footnote.weight(.semibold))
                 }
                 Spacer()
-                Text("80%").font(.largeTitle)
+                Text(Int(sky.weather?.today?.percent ?? 50).description).font(.largeTitle)
             }
             .padding(.bottom)
             HStack(alignment: .bottom) {

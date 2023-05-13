@@ -40,23 +40,42 @@ public class Sky: NSManagedObject {
 // MARK: - Weather
 extension Sky {
     
-    func fetchForecast() {
-        Task(priority: .background) {
-            let weather = try? await WeatherService.shared.fetchWeather(for: location, title: title, stored: weather)
-            if let weather {
-                let weatherData = try? JSONEncoder().encode(weather)
-                Task{@MainActor in
-                    self.weatherData = weatherData
-                    try? self.managedObjectContext?.save()
-                    withAnimation {
-                        self.weather = weather
-                    }
-                }
-            }
+    func fetchData(){
+        if self.events.isEmpty {
+            self.events = CelestialService().fetchPlanetEvenets(at: location, in: timezone, title: title)
         }
-        
+        guard self.weather == nil else {return}
+        guard let weatherData, let weather = try? JSONDecoder().decode(Weather.self, from: weatherData) else {
+            fetchForecast()
+            return
+        }
 
+        if Calendar.current.isDateInToday(weather.currentWeather.date) {
+            print("💿 [\(title)] has weather")
+            self.weather = weather
+        } else {
+            fetchForecast(weather)
+        }
     }
+    
+    private func fetchForecast(_ weather: Weather? = nil){
+        Task { @MainActor in
+            let weather = try await WeatherService.shared.fetchWeather(for: location, title: title, stored: weather)
+            let weatherData = try JSONEncoder().encode(weather)
+            self.weatherData = weatherData
+            self.weather = weather
+
+            do {
+                if let managedObjectContext {
+                    try managedObjectContext.save()
+                }
+            } catch {
+                print(error)
+            }
+            
+        }
+    }
+    
 }
 
 // MARK: CoreData Init
@@ -64,20 +83,10 @@ extension Sky {
     
     public override func awakeFromFetch() {
         super.awakeFromFetch()
-        
-        self.events = CelestialService().fetchPlanetEvenets(at: location, in: timezone, title: title)
-        
-        if let data = weatherData,
-           let weather = try? JSONDecoder().decode(Weather.self, from: data),
-           Calendar.current.isDateInToday(weather.currentWeather.date) {
-            
-            self.weather = weather
-        }
-        fetchForecast()
     }
 
     
-    public convenience init(context: NSManagedObjectContext, title: String, timezone: TimeZone, location: CLLocation, currentLocation: Bool = false) {
+    public convenience init(context: NSManagedObjectContext, title: String, timezone: TimeZone, location: CLLocation, weatherData: Data? = nil, currentLocation: Bool = false) {
         self.init(context: context)
         self.id = UUID()
         self.currentLocation = currentLocation
@@ -86,7 +95,7 @@ extension Sky {
         self.altitude = location.altitude
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
-        self.weatherData = nil
+        self.weatherData = weatherData
     }
     
 }

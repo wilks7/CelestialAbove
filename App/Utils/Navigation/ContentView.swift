@@ -32,6 +32,11 @@ struct ContentView: View {
                     .background(selected.color)
             }
         }
+        .onAppear {
+            for sky in skies {
+                sky.fetchData()
+            }
+        }
     }
 
 }

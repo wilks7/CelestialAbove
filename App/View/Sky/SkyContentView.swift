@@ -14,10 +14,14 @@ struct SkyContentView<Content: View, Header: View>: View {
     var body: some View {
         List {
             header
+                #if !os(watchOS)
                 .listRowSeparator(.hidden)
+                #endif
                 .listRowBackground(Color.clear)
             content
+                #if !os(watchOS)
                 .listRowSeparator(.hidden)
+                #endif
                 .listRowBackground(Color.clear)
                 .cornerRadius(16)
         }

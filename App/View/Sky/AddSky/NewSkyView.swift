@@ -23,16 +23,7 @@ struct NewSkyView: View {
                 .toolbar {
                     ToolbarItem {
                         Button("Add") {
-                            withAnimation {
-                                do {
-                                    let _ = Sky(context: context, title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
 
-                                    try context.save()
-                                    model.tappedSky = nil
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
                         }
                     }
                     ToolbarItem {
@@ -41,6 +32,14 @@ struct NewSkyView: View {
                         }
                     }
                 }
+        }
+    }
+    
+    private func add(){
+        let sky = Sky(context: context, title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
+        sky.fetchData()
+        withAnimation {
+            model.tappedSky = nil
         }
     }
 }

@@ -17,10 +17,16 @@ struct SkiesListView: View {
     var body: some View {
             List {
                 ForEach(skies) { sky in
+                    #if os(watchOS)
+                    NavigationLink(destination: SkyView(sky: sky)) {
+                        SkyCell(sky: sky)
+                    }
+                    #else
                     SkyCell(sky: sky)
                     .onTapGesture {
                         navigation.navigate(to: sky)
                     }
+                    #endif
                 }
                 .onDelete(perform: deleteSkies)
             }

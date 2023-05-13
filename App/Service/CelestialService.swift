@@ -36,6 +36,14 @@ class CelestialService {
         return CelestialEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
     }
     
+    func celestialLocation(for body: CelestialBody.Type, at location: CLLocation, at date: Date) -> CelestialEvents.Location {
+        let object = body.init(julianDay: .init(date), highPrecision: true)
+        let geographic = GeographicCoordinates(location)
+        let horizontalCoord = object.makeHorizontalCoordinates(with: geographic)
+        
+        return CelestialEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
+    }
+    
     private func createEvent(for planet: Planet.Type, at location: CLLocation, date: Date = .now) -> CelestialEvents {
         
         let object = planet.init(julianDay: .init(date), highPrecision: true)

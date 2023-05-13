@@ -7,11 +7,15 @@
 
 import SwiftUI
 import CoreLocation
+import WeatherKit
 
 struct CelestialCharts: View {
     let events: [CelestialEvents]
     let location: CLLocation
+    let weather: Weather?
     @State private var time: Date = .now
+    @State private var selected: CelestialEvents?
+    
     var body: some View {
         ForEach(events){ event in
             VStack {
@@ -19,6 +23,9 @@ struct CelestialCharts: View {
                     PlanetView(celestial: event.name, width: 50, height: 50, interactions: true)
                     Text(event.name)
                         .font(.title2.weight(.semibold))
+                        .onTapGesture {
+                            self.selected = event
+                        }
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("Rise: " + (event.rise?.time() ?? "--"))
@@ -32,11 +39,14 @@ struct CelestialCharts: View {
             }
         }
         .transparent()
+        .sheet(item: $selected) { event in
+            SkyItemDetailView(weather: weather, events: events, location: location, item: .venus, selected: weather?.today)
+        }
     }
 }
 
 struct CelestialCharts_Previews: PreviewProvider {
     static var previews: some View {
-        CelestialCharts(events: events, location: sky.location)
+        CelestialCharts(events: events, location: sky.location, weather: nil)
     }
 }

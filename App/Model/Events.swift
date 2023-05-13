@@ -15,7 +15,7 @@ protocol Events {
     var color: Color {get}
 }
 
-enum EventType { case rise, set, transit }
+enum EventType: String { case rise, set, transit }
 extension Events {
     var color: Color { .white }
     

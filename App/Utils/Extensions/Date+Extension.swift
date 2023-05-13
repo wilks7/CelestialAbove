@@ -29,4 +29,27 @@ extension Date {
         
         return calendar.date(byAdding: components, to: startOfDay(timezone))!
     }
+    
+    func sameDay(as date: Date = .now, at timezone: TimeZone = Calendar.current.timeZone) -> Bool {
+        return self.startOfDay(timezone) == date.startOfDay(timezone)
+    }
+}
+
+// MARK: - Percent of the Day
+extension Date {
+    
+    func percent(_ timezone: TimeZone) -> Double {
+        let start = self.startOfDay(timezone).timeIntervalSince1970
+        let end = self.endOfDay(timezone).timeIntervalSince1970
+        let current = self.timeIntervalSince1970
+        
+        return ((current - start) / (end - start))
+
+    }
+    
+    init(percent double: Double, at timezone: TimeZone){
+        let start = Date.now.startOfDay(timezone)
+        let advanced = start.addingTimeInterval(double * 24 * 60 * 60)
+        self = advanced
+    }
 }

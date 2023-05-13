@@ -9,7 +9,11 @@ import CoreData
 
 struct SkyData {
     static let shared = SkyData()
-
+    static var sharedStore: URL {
+        FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: "group.app.rifigy.CelestialAbove")!
+            .appendingPathComponent("SkyData.sqlite")
+    }
     let container: NSPersistentCloudKitContainer
     
     var context: NSManagedObjectContext { container.viewContext }
@@ -18,6 +22,8 @@ struct SkyData {
         container = NSPersistentCloudKitContainer(name: "SkyData")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            container.persistentStoreDescriptions.first!.url = Self.sharedStore
         }
         container.loadPersistentStores(completionHandler: handleError)
         container.viewContext.automaticallyMergesChangesFromParent = true

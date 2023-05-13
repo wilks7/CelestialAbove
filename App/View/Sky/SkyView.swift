@@ -17,7 +17,7 @@ struct SkyView: View {
                 WeatherItemView(item: sky.weather?.today?.sun, timezone: sky.timezone)
                 WeatherItemView(item: sky.weather?.today?.moon, timezone: sky.timezone)
             }
-            CelestialCharts(events: sky.events, location: sky.location)
+            CelestialCharts(events: sky.events, location: sky.location, weather: sky.weather)
             ForecastView(forecast: sky.weather?.hourly, timezone: sky.timezone)
             ForecastView(forecast: sky.weather?.daily, timezone: sky.timezone, alignment: .vertical)
             HStack {
@@ -29,6 +29,8 @@ struct SkyView: View {
                 WeatherItemView(item: sky.weather?.today?.precipitationItem, timezone: sky.timezone)
             }
         }
+        .navigationTitle(sky.title)
+
     }
     
     var header: some View {

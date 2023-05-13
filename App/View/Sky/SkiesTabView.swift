@@ -20,7 +20,6 @@ struct SkiesTabView: View {
                         .tag(sky)
                 }
             }
-            .navigationTitle(selected.title)
             .background(selected.color)
         #if !os(macOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
