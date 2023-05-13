@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Celestial Above Watch Watch App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>CelestialAbove Watch Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,26 +17,41 @@
 		<key>CelestialAbove.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>SwiftAA (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<key>SwiftAA (Playground) 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>SwiftAA (Playground).xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>iOS WidgetsExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>macOS WidgetsExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>watchOS.xcscheme_^#shared#^_</key>
+		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -39,6 +59,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>4C31F7E02A0D6D6F00219A0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CCE78942A0F08E400C0F5F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
