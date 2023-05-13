@@ -21,7 +21,7 @@ extension DebugPrint {
     static func print(_ string: String = "", error: Error? = nil){
         let emoji = error != nil ? "⚠️" : emoji
                 
-        Swift.print("\(emoji) [\(name)] " + string + (error?.localizedDescription ?? "") )
+        Swift.print("\(emoji) " + string + (error?.localizedDescription ?? "") )
     }
     
     

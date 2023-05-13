@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct CelestialAboveApp: App {
     let skyData = SkyData.shared
-
+    @StateObject var navigation = NavigationManager.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(navigation)
                 .environment(\.managedObjectContext, skyData.container.viewContext)
         }
     }

@@ -10,16 +10,16 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @EnvironmentObject var navigation: NavigationManager
+    
     @FetchRequest(fetchRequest: Sky.sorted, animation: .default)
     private var skies: FetchedResults<Sky>
-    @State private var selected: Sky?
 
     var body: some View {
         ZStack {
-            SkiesListView(selected: $selected)
-            if let selected {
-                SkiesTabView(skies: skies, selected: $selected)
+            SkiesListView()
+            if let selected = navigation.selected {
+                SkiesTabView(skies: skies, selected: selected)
             }
         }
     }
