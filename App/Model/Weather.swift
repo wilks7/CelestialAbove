@@ -1,68 +1,34 @@
 //
-//  Weather.swift
+//  Weather+Extension.swift
 //  CelestialAbove
 //
 //  Created by Michael Wilkowski on 5/12/23.
 //
 
-import Foundation
 import WeatherKit
+import Foundation
 
-protocol WeatherProtocol: Codable, Equatable, Identifiable {
-    var date: Date {get}
-    var percent: Double {get}
-    var condition: WeatherCondition {get}
-    var symbolName: String {get}
-}
-
-extension WeatherProtocol { public var id: Date { date } }
-
-extension DayWeather: WeatherProtocol {
-    var percent: Double { precipitationChance }
-}
-extension HourWeather: WeatherProtocol {
-    var percent: Double { (cloudCover + precipitationChance) / 2 }
-}
-
-extension CurrentWeather: WeatherProtocol {
-    var percent: Double { (cloudCover + humidity) / 2 }
-}
-
-extension MinuteWeather: WeatherProtocol {
-    var percent: Double {
-        self.precipitationChance
+extension Weather {
+    var today: DayWeather? {
+        dailyForecast.first{ Calendar.current.isDateInToday($0.date) }
+    }
+    var hour: HourWeather? {
+        hourlyForecast.first{ Calendar.current.isDateInHour($0.date) }
+    }
+    var now: MinuteWeather? {
+        minuteForecast?.first{ Calendar.current.isDateInMinute($0.date) }
     }
     
-    var conditionString: String {
-        self.precipitation.description
+    var daily: [DayWeather] {
+        dailyForecast.forecast
     }
     
-    var condition: WeatherCondition {
-        if let condition = WeatherCondition(rawValue: precipitation.rawValue) {
-            return condition
-        } else if self.precipitation == .mixed {
-            return .wintryMix
-        } else {
-            return .clear
-        }
+    var hourly: [HourWeather] {
+        hourlyForecast.forecast.filter{ Calendar.current.isDateInToday($0.date) }
     }
     
-    var symbolName: String {
-        switch self.precipitation {
-        case .none:
-            return "circle"
-        case .hail:
-            return "circle"
-        case .mixed:
-            return "circle"
-        case .rain:
-            return "circle"
-        case .sleet:
-            return "circle"
-        case .snow:
-            return "circle"
-        @unknown default:
-            return "circle"
-        }
+    var minutely: [MinuteWeather] {
+        guard let minuteForecast else {return []}
+        return minuteForecast.forecast.filter{ Calendar.current.isDateInHour($0.date) }
     }
 }

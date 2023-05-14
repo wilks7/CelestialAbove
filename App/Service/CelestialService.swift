@@ -30,12 +30,12 @@ class CelestialService {
         return CelestialEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
     }
     
-    func celestialLocation(for body: CelestialBody.Type, at location: CLLocation, at date: Date) -> CelestialEvents.Location {
-        let object = body.init(julianDay: .init(date), highPrecision: true)
-        let geographic = GeographicCoordinates(location)
+    func celestialLocation(_ parameter: Parameter) -> CelestialEvents.Location {
+        let object = parameter.celestial.init(julianDay: .init(parameter.date), highPrecision: true)
+        let geographic = GeographicCoordinates(parameter.location)
         let horizontalCoord = object.makeHorizontalCoordinates(with: geographic)
         
-        return CelestialEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
+        return CelestialEvents.Location(date: parameter.date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
     }
     
     func createEvent(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone, date: Date = .now) -> CelestialEvents {
@@ -56,6 +56,7 @@ class CelestialService {
         
         return CelestialEvents(
             planet: planet,
+            location: location,
             rise: riseTime,
             set: setTime,
             transit: transitTime,
@@ -76,6 +77,14 @@ class CelestialService {
 
     }
 
+}
+
+extension CelestialService {
+    struct Parameter {
+        let celestial: CelestialBody.Type
+        let location: CLLocation
+        var date: Date = .now
+    }
 }
 
 extension CelestialService: DebugPrint {

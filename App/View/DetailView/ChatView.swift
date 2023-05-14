@@ -9,13 +9,10 @@ import SwiftUI
 import Charts
 
 
-
-
-
 struct ChartView<D:ChartData>: View {
     let data: [D]
     @Binding var time: Date
-    var value: (_ date: Date) -> D.T
+//    var value: (_ date: Date) -> D.T
     
     @State private var selected: D?
 
@@ -42,11 +39,11 @@ struct ChartView<D:ChartData>: View {
                 )
                 .foregroundStyle(.white)
             } else {
-                PointMark(
-                    x: .value("Time", time),
-                    y: .value("Value", value(time))
-                )
-                .foregroundStyle(.white)
+//                PointMark(
+//                    x: .value("Time", time),
+//                    y: .value("Value", value(time))
+//                )
+//                .foregroundStyle(.white)
             }
         }
     }
@@ -64,6 +61,6 @@ struct ChartView_Previews: PreviewProvider {
         CelestialService().celestialLocation(for: Mars.self, at: sky.location, at: date).altitude
     }
     static var previews: some View {
-        ChartView(data: event.data, time: .constant(.now), value: test)
+        ChartView(data: event.data, time: .constant(.now))
     }
 }

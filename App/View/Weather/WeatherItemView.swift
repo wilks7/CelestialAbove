@@ -31,19 +31,9 @@ struct WeatherItemView<W:SkyItem>: View {
 
 struct WeatherItemView_Previews: PreviewProvider {
     
-    struct Item: SkyItem {
-        var title: String = "Cloud"
-        var symbolName: String = "cloud"
-        var label: String? = "Cloudy"
-        var subtitle: String? = "subtitle"
-        var data: [WeatherChartData] {
-            []
-        }
-        
-        
-    }
+
     static var previews: some View {
-        WeatherItemView(item: Item(), timezone: timezone)
+        WeatherItemView(item: event, timezone: timezone)
             .previewLayout(.sizeThatFits)
     }
 }

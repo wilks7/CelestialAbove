@@ -10,14 +10,16 @@ import WeatherKit
 
 
 struct CloudItem: WeatherItem {
-    init(_ weather: Weather?) {
-        self.hourly = weather?.hourly ?? []
-        self.condition = weather?.hour?.condition
-        self.coverage = weather?.hour?.cloudCover
-    }
     let hourly: [HourWeather]
     let condition: WeatherCondition?
     let coverage: Double?
+    
+    init(_ weather: Weather) {
+        self.hourly = weather.hourly
+        self.condition = weather.hour?.condition
+        self.coverage = weather.hour?.cloudCover
+    }
+
     
     var title: String { "Clouds" }
     var symbolName: String { "cloud" }
@@ -30,9 +32,9 @@ struct CloudItem: WeatherItem {
 }
 
 struct WindItem: WeatherItem {
-    init(_ weather: Weather?) {
-        self.hourly = weather?.hourly ?? []
-        self.wind = weather?.hour?.wind
+    init(_ weather: Weather) {
+        self.hourly = weather.hourly
+        self.wind = weather.hour?.wind
     }
     let hourly: [HourWeather]
     let wind: Wind?
@@ -59,13 +61,21 @@ struct WindItem: WeatherItem {
 
 }
 
-struct TemperatureItem: SkyItem {
+struct TemperatureItem: WeatherItem {
     
     let hourly: [HourWeather]
-    
     var temperature: Measurement<UnitTemperature>?
     var high: Measurement<UnitTemperature>?
     var low: Measurement<UnitTemperature>?
+    
+    init(_ weather: Weather) {
+        self.hourly = weather.hourly
+        self.temperature = weather.hour?.temperature
+        self.high = weather.today?.highTemperature
+        self.low = weather.today?.lowTemperature
+    }
+    
+
     
     let title = "Temperature"
     let symbolName = "thermometer.medium"
@@ -77,53 +87,63 @@ struct TemperatureItem: SkyItem {
         return fmt
     }()
     var label: String? {
+        guard let high else {return nil}
         return Self.formatter.string(from: high)
     }
     
     var subtitle: String? {
-        "L: \(Self.formatter.string(from: low)) - H: \(Self.formatter.string(from: high))"
+        guard let low, let high else {return nil}
+        return "L: \(Self.formatter.string(from: low)) - H: \(Self.formatter.string(from: high))"
     }
     
-    var data: [WeatherChartData] {
-        guard let hourly else {return []}
-        return hourly.map{ .init(date: $0.date, value: $0.temperature.value) }
-    }
     static func data(for hour: HourWeather) -> WeatherChartData {
         WeatherChartData(date: hour.date, value: hour.temperature.value)
     }
 }
 
 
-struct PrecipitationItem: SkyItem {
+struct PrecipitationItem: WeatherItem {
     
+    init(_ weather: Weather) {
+        self.hourly = weather.hourly
+        self.precipitation = weather.hour?.precipitation
+        self.chance = weather.hour?.precipitationChance
+        self.amount = weather.hour?.precipitationAmount.value
+    }
     let hourly: [HourWeather]
-    let precipitation: WeatherKit.Precipitation
-    let chance: Double
-    let amount: Double
+    let precipitation: WeatherKit.Precipitation?
+    let chance: Double?
+    let amount: Double?
     
     let title = "Precipitation"
     var symbolName: String { "drop" }
 
     var label: String? {
-        chance.percent?.description
+        chance?.percent?.description
     }
     var subtitle: String? {
-        precipitation.description
+        precipitation?.description
     }
     
-    var data: [WeatherChartData] {
-        hourly.map{ .init(date: $0.date, value: $0.precipitationAmount.value) }
+    static func data(for hour: HourWeather) -> WeatherChartData {
+        WeatherChartData(date: hour.date, value: hour.precipitationAmount.value)
     }
 }
 
 
-struct Visibility: SkyItem {
+struct Visibility: WeatherItem {
+    
+    init(_ weather: Weather) {
+        self.hourly = weather.hourly
+        self.visibility = weather.hour?.visibility
+    }
     let hourly: [HourWeather]
-    let visibility: Measurement<UnitLength>
+    let visibility: Measurement<UnitLength>?
 
     let title = "Visibility"
     var symbolName: String { "eye.fill" }
     var label: String? {
+        guard let visibility else {return nil}
         let measurementFormatter = MeasurementFormatter()
         measurementFormatter.unitStyle = .medium
         measurementFormatter.numberFormatter.maximumFractionDigits = 0
@@ -131,10 +151,10 @@ struct Visibility: SkyItem {
         return measurementFormatter.string(from: visibility)
     }
     
-    var subtitle: String? { nil }
+    var subtitle: String? { "Good Visibility" }
     
-    var data: [WeatherChartData] {
-        hourly.map{ .init(date: $0.date, value: $0.precipitationAmount.value) }
+    static func data(for hour: HourWeather) -> WeatherChartData {
+        WeatherChartData(date: hour.date, value: hour.visibility.value)
     }
 
 }

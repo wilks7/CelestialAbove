@@ -11,16 +11,36 @@ struct SkyView: View {
     @EnvironmentObject var navigation: NavigationManager
     @ObservedObject var sky: Sky
     
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8)
+    ]
+    
     var body: some View {
-        SkyContentView(color: sky.color, header: header ) {
+        ScrollView(.vertical) {
+            VStack {
+                header
+                ForEach(sky.events) { events in
+                    SkyItemCell(events)
+                        .transparent()
+                }
+                if let weather = sky.weather {
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        SkyItemCell<CloudItem>(weather).transparent()
+                        SkyItemCell<WindItem>(weather).transparent()
+                        SkyItemCell<TemperatureItem>(weather).transparent()
+                        SkyItemCell<PrecipitationItem>(weather).transparent()
+                    }
+                }
+            }
+        }
+        .scrollContentBackground(.hidden)
 //            HStack {
 //                WeatherItemView(item: sky.weather?.today?.sun, timezone: sky.timezone)
 //                WeatherItemView(item: sky.weather?.today?.moon, timezone: sky.timezone)
 //            }
-            SkyItemCell(sky.events.first)
-            SkyItemCell<CloudItem>(.init(sky.weather))
-            SkyItemCell<WindItem>(.init(hourly: sky.weather?.hourly, wind: sky.weather.w))
-            SkyItemCell(item: WindItem(hourly: sky.weather?.hourly, wind: sky.weather?.hour?.wind))
+
+
 //            CelestialCharts(events: sky.events, location: sky.location, weather: sky.weather)
 //            ForecastView(forecast: sky.weather?.hourly, timezone: sky.timezone)
 //            ForecastView(forecast: sky.weather?.daily, timezone: sky.timezone, alignment: .vertical)
@@ -32,7 +52,7 @@ struct SkyView: View {
 //                WeatherItemView(item: sky.weather?.today?.temperatureItem, timezone: sky.timezone)
 //                WeatherItemView(item: sky.weather?.today?.precipitationItem, timezone: sky.timezone)
 //            }
-        }
+//        }
         .navigationTitle(sky.title)
 
     }

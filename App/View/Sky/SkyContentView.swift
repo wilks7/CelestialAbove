@@ -11,24 +11,41 @@ struct SkyContentView<Content: View, Header: View>: View {
     let color: Color
     var header: Header
     @ViewBuilder var content: Content
+    
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8)
+    ]
+    
     var body: some View {
-        List {
-            header
-                #if !os(watchOS)
-                .listRowSeparator(.hidden)
-                #endif
-                .listRowBackground(Color.clear)
-            content
-                #if !os(watchOS)
-                .listRowSeparator(.hidden)
-                #endif
-                .listRowBackground(Color.clear)
-                .cornerRadius(16)
+        ScrollView(.vertical) {
+            VStack {
+                header
+                LazyVGrid(columns: columns, spacing: 8) {
+                    content
+                }
+            }
         }
-        .listStyle(.plain)
-//        .background(color)
         .scrollContentBackground(.hidden)
     }
+//    var body: some View {
+//        List {
+//            header
+//                #if !os(watchOS)
+//                .listRowSeparator(.hidden)
+//                #endif
+//                .listRowBackground(Color.clear)
+//            content
+//                #if !os(watchOS)
+//                .listRowSeparator(.hidden)
+//                #endif
+//                .listRowBackground(Color.clear)
+//                .cornerRadius(16)
+//        }
+//        .listStyle(.plain)
+////        .background(color)
+//        .scrollContentBackground(.hidden)
+//    }
 }
 
 struct SkyContentView_Previews: PreviewProvider {

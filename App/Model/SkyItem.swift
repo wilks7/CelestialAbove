@@ -16,7 +16,7 @@ protocol SkyItemView: View {
     associatedtype Medium: View
     associatedtype Full: View
     
-    var item: Item? {get}
+    var item: Item {get}
     
     @ViewBuilder
     var compact: Compact {get}
@@ -41,6 +41,7 @@ extension ChartData {
 
 protocol SkyItem: Identifiable {
     associatedtype ChartValue: ChartData
+    associatedtype Object
 //    associatedtype Object: SkyItemObject
 //    associatedtype View: SkyItemView
 //    var range: ClosedRange<D> {get}
@@ -49,17 +50,29 @@ protocol SkyItem: Identifiable {
     var label: String? {get}
     var subtitle: String? {get}
     var data: [ChartValue] {get}
+    static func data(for object: Object) -> ChartValue
+
 //    var view: View {get}
 }
 
 protocol WeatherItem: SkyItem {
     var hourly: [HourWeather] {get}
-    init(_ weather: Weather?)
+    init(_ weather: Weather)
     static func data(for hour: HourWeather) -> WeatherChartData
 }
 extension WeatherItem {
     var data: [WeatherChartData] {
         hourly.map{ Self.data(for: $0) }
+    }
+    
+    func dataFor(_ date: Date) -> Double {
+        if let first = hourly.first{$0.date.hour == date.hour} {
+            return Self.data(for: first).value
+        } else {
+            #warning("fix this")
+            return 0
+        }
+        
     }
 }
 extension SkyItem {

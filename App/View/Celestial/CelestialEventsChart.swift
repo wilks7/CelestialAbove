@@ -50,7 +50,7 @@ struct CelestialEventsChart: View {
     }
     
     private func getLocation(at date: Date) -> CelestialEvents.Location {
-        CelestialService().celestialLocation(for: event.celestial, at: location, at: date)
+        CelestialService().celestialLocation(.init(celestial: event.celestial, location: location, date: date))
     }
 }
 
