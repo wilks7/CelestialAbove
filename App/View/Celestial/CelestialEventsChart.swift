@@ -23,7 +23,7 @@ struct CelestialEventsChart: View {
                 RuleMark(x: .value("Time", selected.date))
                     .foregroundStyle(.gray)
             }
-            ForEach(event.locations){
+            ForEach(event.data){
                 LineMark(
                     x: .value("Time", $0.date),
                     y: .value("Altitude", $0.altitude),

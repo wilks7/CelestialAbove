@@ -9,21 +9,8 @@ import SwiftUI
 import Charts
 
 
-struct WeatherChartData:ChartData {
-    var date: Date
-    var value: Double
-}
 
-protocol ChartData: Identifiable {
-    associatedtype T: PrimitivePlottableProtocol, Comparable
-    static var range: ClosedRange<T>? {get}
-    var date: Date {get}
-    var value: T {get}
-}
-extension ChartData {
-    var id: Date {date}
-    static var range: ClosedRange<T>? { nil }
-}
+
 
 struct ChartView<D:ChartData>: View {
     let data: [D]
@@ -65,12 +52,18 @@ struct ChartView<D:ChartData>: View {
     }
 }
 
+struct WeatherChartData:ChartData {
+    var date: Date
+    var value: Double
+}
+
+
 import SwiftAA
 struct ChartView_Previews: PreviewProvider {
     static func test(date: Date) -> Double {
         CelestialService().celestialLocation(for: Mars.self, at: sky.location, at: date).altitude
     }
     static var previews: some View {
-        ChartView(data: event.locations, time: .constant(.now), value: test)
+        ChartView(data: event.data, time: .constant(.now), value: test)
     }
 }

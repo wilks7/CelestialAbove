@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SwiftAA
 
 protocol Events {
-    var name: String {get}
+    var celestial: CelestialBody.Type {get}
+    var title: String {get}
     var rise: Date? {get}
     var set: Date? {get}
     var transit: Date? {get}
-    var color: Color {get}
+    var color: SwiftUI.Color {get}
 }
 
 enum EventType: String { case rise, set, transit }
 extension Events {
-    var color: Color { .white }
+    var color: SwiftUI.Color { .white }
     
     var nextEvent: (date: Date?, type: EventType) {
         if let sunrise = rise, let sunset = set {
@@ -37,6 +39,12 @@ extension Events {
     var nextTime: String {
         nextEvent.date?.time() ?? "--"
     }
+}
+
+extension Events {
+    var label: String? { self.nextEvent.type.rawValue.capitalized }
+    var subtitle: String? { nextEvent.date?.time() }
+    var symbolName: String {"circle"}
 }
 
 

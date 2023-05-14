@@ -8,15 +8,15 @@
 import SwiftUI
 import WeatherKit
 
-struct WeatherItemView<W:WeatherItem>: View {
+struct WeatherItemView<W:SkyItem>: View {
     let item: W?
     let timezone: TimeZone?
 
     var body: some View {
         if let item {
             VStack(alignment: .leading, spacing: 10) {
-                ItemHeader(title: W.title, symbolName: item.symbolName)
-                Text(item.label)
+                ItemHeader(title: item.title, symbolName: item.symbolName)
+                Text(item.label ?? "--")
                     .font(.title2)
                     .fontWeight(.semibold)
                 Text(item.subtitle ?? "--")
@@ -31,12 +31,14 @@ struct WeatherItemView<W:WeatherItem>: View {
 
 struct WeatherItemView_Previews: PreviewProvider {
     
-    struct Item: WeatherItem {
-        static var title: String = "Cloud"
-        
-        static var symbolName: String = "cloud"
-        
-        var label: String = "Cloudy"
+    struct Item: SkyItem {
+        var title: String = "Cloud"
+        var symbolName: String = "cloud"
+        var label: String? = "Cloudy"
+        var subtitle: String? = "subtitle"
+        var data: [WeatherChartData] {
+            []
+        }
         
         
     }

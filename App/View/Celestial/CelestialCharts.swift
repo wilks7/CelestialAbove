@@ -20,8 +20,8 @@ struct CelestialCharts: View {
         ForEach(events){ event in
             VStack {
                 HStack(alignment: .center) {
-                    PlanetView(celestial: event.name, width: 50, height: 50, interactions: true)
-                    Text(event.name)
+                    PlanetView(celestial: event.title, width: 50, height: 50, interactions: true)
+                    Text(event.title)
                         .font(.title2.weight(.semibold))
                         .onTapGesture {
                             self.selected = event

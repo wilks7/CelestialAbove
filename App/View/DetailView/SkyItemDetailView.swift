@@ -77,8 +77,8 @@ struct SkyItemDetailView: View {
             }
             if let selected {
                 Header(weather: selected, item: $item)
-                DetailChartView(hourly: hourly, item: item, location: location, time: $time)
-                .frame(height: 250)
+//                DetailChartView(hourly: hourly, item: item, location: location, time: $time)
+//                .frame(height: 250)
             }
             Spacer()
         }
