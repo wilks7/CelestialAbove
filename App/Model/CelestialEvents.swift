@@ -10,7 +10,7 @@ import SwiftAA
 import WeatherKit
 import CoreLocation
 
-struct CelestialEvents: SkyItem, Events {
+struct CelestialEvents: CelestialItem, Events {
     
     var celestial: SwiftAA.CelestialBody.Type {
         planet
@@ -32,9 +32,14 @@ struct CelestialEvents: SkyItem, Events {
         var aboveHorizon: Bool { altitude > 0 }
         var northBasedAzimuth: Double { return (Degree(azimuth) + 180).reduced.value }
     }
-    
-    static func data(for object: CelestialService.Parameter) -> Location {
-        CelestialService().celestialLocation(object)
+}
+
+extension CelestialEvents {
+    struct ValueView: ItemValueView {
+        let item: CelestialEvents
+        var body: some View {
+            PlanetView(celestial: item.title, width: 75, height: 75)
+        }
     }
 }
 
@@ -51,7 +56,7 @@ extension CelestialEvents: Identifiable, Equatable, Hashable {
     
 }
 
-extension CelestialEvents.Location: Identifiable, ChartData {
-    var id: Date { date }
+extension CelestialEvents.Location: ItemChartData {
+    var reference: Date { date }
     var value: Double { altitude }
 }

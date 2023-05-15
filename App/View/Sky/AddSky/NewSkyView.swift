@@ -22,9 +22,8 @@ struct NewSkyView: View {
             }
                 .toolbar {
                     ToolbarItem {
-                        Button("Add") {
+                        Button("Add", action: add)
 
-                        }
                     }
                     ToolbarItem {
                         Button("Cancel") {

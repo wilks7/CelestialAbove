@@ -12,6 +12,10 @@ import SwiftUI
 struct iOS_WidgetsBundle: WidgetBundle {
     var body: some Widget {
         iOS_Widgets()
-        iOS_WidgetsLiveActivity()
+        #if os(iOS)
+        if #available(iOS 16.1, *) {
+            iOS_WidgetsLiveActivity()
+        }
+        #endif
     }
 }

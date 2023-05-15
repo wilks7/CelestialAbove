@@ -42,7 +42,7 @@ struct SkyData {
     }
     
     enum Error: Swift.Error {
-        case load, save, add, delete
+        case load, save, add, delete, notFound, badID
     }
 }
 
@@ -53,4 +53,37 @@ extension Sky {
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Sky.currentLocation, ascending: false)]
         return request
     }()
+}
+
+extension SkyData {
+    func skies()->[Sky] {
+        do {
+            return try context.fetch(Sky.sorted)
+        } catch {
+            print(error)
+            return []
+        }
+    }
+    
+    func findSky(withId id: String) throws -> Sky {
+        guard let uuid = UUID(uuidString: id) else {
+            throw Error.badID
+        }
+        return try findSky(withId: uuid)
+    }
+    
+    func findSky(withId id: UUID) throws -> Sky {
+        let request: NSFetchRequest<Sky> = Sky.request
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        
+        do {
+            guard let sky = try context.fetch(request).first else {
+                throw Error.notFound
+            }
+            return sky
+        } catch {
+            throw Error.notFound
+        }
+    }
 }

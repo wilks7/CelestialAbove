@@ -26,7 +26,7 @@ enum DetailItem: String, CaseIterable, Identifiable {
         }
     }
     
-    var chartData: any ChartData.Type {
+    var chartData: any ItemChartData.Type {
         switch self {
         case .sun, .moon, .venus, .mars, .jupiter, .saturn: return CelestialEvents.Location.self
         default: return WeatherChartData.self

@@ -8,9 +8,13 @@
 import SwiftUI
 import CoreData
 
+extension View {
+    func skySearchable() -> some View { modifier( SkySearchView() ) }
+}
 struct SkySearchView: ViewModifier {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.isSearching) private var isSearching: Bool
+    
     @StateObject var model = SearchResults()
     
     func body(content: Content) -> some View {
@@ -106,11 +110,7 @@ extension SkySearchView {
     }    
 }
 
-extension View {
-    func skySearchable() -> some View {
-        modifier(SkySearchView())
-    }
-}
+
 
 struct SkySearchView_Previews: PreviewProvider {
     static var previews: some View {

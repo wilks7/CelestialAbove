@@ -21,19 +21,23 @@ struct SkyView: View {
             VStack {
                 header
                 ForEach(sky.events) { events in
-                    SkyItemCell(events)
+                    SkyItem(events, .medium)
                         .transparent()
                 }
                 if let weather = sky.weather {
                     LazyVGrid(columns: columns, spacing: 8) {
-                        SkyItemCell<CloudItem>(weather).transparent()
-                        SkyItemCell<WindItem>(weather).transparent()
-                        SkyItemCell<TemperatureItem>(weather).transparent()
-                        SkyItemCell<PrecipitationItem>(weather).transparent()
+                        SkyItem<CloudItem>(weather).transparent()
+                        SkyItem<WindItem>(weather).transparent()
+                        SkyItem<TemperatureItem>(weather).transparent()
+                        SkyItem<PrecipitationItem>(weather).transparent()
+                        SkyItem<Visibility>(weather).transparent()
+
                     }
                 }
             }
+            .padding(.horizontal)
         }
+        .environmentObject(sky)
         .scrollContentBackground(.hidden)
 //            HStack {
 //                WeatherItemView(item: sky.weather?.today?.sun, timezone: sky.timezone)

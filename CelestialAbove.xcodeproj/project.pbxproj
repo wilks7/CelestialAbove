@@ -27,6 +27,26 @@
 		4C7B2F072A0E1A490052B875 /* SkiesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */; };
 		4C7B2F092A0E1D000052B875 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F082A0E1D000052B875 /* Color+Extension.swift */; };
 		4C80AF082A0D6F07007DA427 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C80AF072A0D6F07007DA427 /* PreviewProvider.swift */; };
+		4CAD86F12A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */; };
+		4CAD86F22A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */; };
+		4CAD86F32A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */; };
+		4CAD86F42A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */; };
+		4CAD86F62A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */; };
+		4CAD86F72A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */; };
+		4CAD86F82A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */; };
+		4CAD86F92A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */; };
+		4CAD86FB2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */; };
+		4CAD86FC2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */; };
+		4CAD86FD2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */; };
+		4CAD86FE2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */; };
+		4CAD86FF2A12C77E002FE5C2 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78702A0EFF5D00C0F5F6 /* PlanetView.swift */; };
+		4CAD87002A12C77F002FE5C2 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78702A0EFF5D00C0F5F6 /* PlanetView.swift */; };
+		4CAD87022A12CE5F002FE5C2 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */; };
+		4CAD87032A12CE5F002FE5C2 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */; };
+		4CAD87052A12CE8E002FE5C2 /* WidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87042A12CE8E002FE5C2 /* WidgetIntentHandler.swift */; };
+		4CAD87062A12CE8E002FE5C2 /* WidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87042A12CE8E002FE5C2 /* WidgetIntentHandler.swift */; };
+		4CAD87082A12DE33002FE5C2 /* StatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87072A12DE33002FE5C2 /* StatusProvider.swift */; };
+		4CAD87092A12DE33002FE5C2 /* StatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87072A12DE33002FE5C2 /* StatusProvider.swift */; };
 		4CBB01942A0F3CD300262673 /* watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4CBB01872A0F3CD200262673 /* watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4CBB01982A0F3D0B00262673 /* SwiftAA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 4CCE785F2A0EEF1000C0F5F6 /* SwiftAA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4CBB019E2A0F3D3B00262673 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCE78C72A0F0A6300C0F5F6 /* WidgetKit.framework */; };
@@ -38,11 +58,8 @@
 		4CBB01B62A0F3D5400262673 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCE78C92A0F0A6300C0F5F6 /* SwiftUI.framework */; };
 		4CBB01B92A0F3D5400262673 /* iOS_WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01B82A0F3D5400262673 /* iOS_WidgetsBundle.swift */; };
 		4CBB01BB2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BA2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift */; };
-		4CBB01BD2A0F3D5400262673 /* iOS_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BC2A0F3D5400262673 /* iOS_Widgets.swift */; };
-		4CBB01C22A0F3D5400262673 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BE2A0F3D5400262673 /* Widgets.intentdefinition */; };
-		4CBB01C32A0F3D5400262673 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BE2A0F3D5400262673 /* Widgets.intentdefinition */; };
+		4CBB01BD2A0F3D5400262673 /* StatusWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BC2A0F3D5400262673 /* StatusWidgets.swift */; };
 		4CBB01C62A0F3D5400262673 /* iOS Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4CBB01B42A0F3D5300262673 /* iOS Widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4CBB01CA2A0F3DC900262673 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CBB01BE2A0F3D5400262673 /* Widgets.intentdefinition */; };
 		4CBB01CE2A0F404E00262673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C31F7ED2A0D6D7000219A0D /* Assets.xcassets */; };
 		4CBB01D02A0F40C200262673 /* SkyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3322A0D71BF00EEE28B /* SkyData.xcdatamodeld */; };
 		4CBB01D12A0F40CF00262673 /* SkyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31F7E62A0D6D6F00219A0D /* SkyData.swift */; };
@@ -169,7 +186,6 @@
 		4CCE783E2A0EC34B00C0F5F6 /* SkyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE783D2A0EC34B00C0F5F6 /* SkyContentView.swift */; };
 		4CCE78402A0EC93A00C0F5F6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE783F2A0EC93A00C0F5F6 /* Weather.swift */; };
 		4CCE78422A0EC9FF00C0F5F6 /* WeatherItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */; };
-		4CCE78442A0ECA5B00C0F5F6 /* WeatherItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78432A0ECA5B00C0F5F6 /* WeatherItemView.swift */; };
 		4CCE784A2A0ECF2900C0F5F6 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78492A0ECF2900C0F5F6 /* Events.swift */; };
 		4CCE784C2A0ED1CA00C0F5F6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE784B2A0ED1CA00C0F5F6 /* Double+Extension.swift */; };
 		4CCE78502A0ED3A200C0F5F6 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE784F2A0ED3A200C0F5F6 /* Navigation.swift */; };
@@ -215,7 +231,6 @@
 		4CCFCA6E2A10021100BB473F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31F7EB2A0D6D6F00219A0D /* ContentView.swift */; };
 		4CCFCA6F2A10021100BB473F /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78702A0EFF5D00C0F5F6 /* PlanetView.swift */; };
 		4CCFCA702A10021100BB473F /* CelestialEventsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE786A2A0EFA3200C0F5F6 /* CelestialEventsChart.swift */; };
-		4CCFCA712A10021100BB473F /* WeatherItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78432A0ECA5B00C0F5F6 /* WeatherItemView.swift */; };
 		4CCFCA722A10021100BB473F /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78392A0EB9C100C0F5F6 /* ForecastView.swift */; };
 		4CCFCA732A10022000BB473F /* Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78552A0ED83D00C0F5F6 /* Transparent.swift */; };
 		4CCFCA742A10022000BB473F /* ItemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78572A0EDFE000C0F5F6 /* ItemHeader.swift */; };
@@ -250,14 +265,14 @@
 		4CCFCA9B2A1041EF00BB473F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFCA992A1041EF00BB473F /* ChatView.swift */; };
 		4CCFCA9C2A1041EF00BB473F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFCA992A1041EF00BB473F /* ChatView.swift */; };
 		4CCFCA9D2A1041EF00BB473F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFCA992A1041EF00BB473F /* ChatView.swift */; };
-		4CD61B262A10607000C3B608 /* SkyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* SkyItem.swift */; };
-		4CD61B272A10607000C3B608 /* SkyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* SkyItem.swift */; };
-		4CD61B282A10607000C3B608 /* SkyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* SkyItem.swift */; };
-		4CD61B292A10607000C3B608 /* SkyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* SkyItem.swift */; };
-		4CD61B2B2A1084CA00C3B608 /* SkyItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */; };
-		4CD61B2C2A1084CA00C3B608 /* SkyItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */; };
-		4CD61B2D2A1084CA00C3B608 /* SkyItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */; };
-		4CD61B2E2A1084CA00C3B608 /* SkyItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */; };
+		4CD61B262A10607000C3B608 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* Item.swift */; };
+		4CD61B272A10607000C3B608 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* Item.swift */; };
+		4CD61B282A10607000C3B608 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* Item.swift */; };
+		4CD61B292A10607000C3B608 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B252A10607000C3B608 /* Item.swift */; };
+		4CD61B2B2A1084CA00C3B608 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* ItemView.swift */; };
+		4CD61B2C2A1084CA00C3B608 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* ItemView.swift */; };
+		4CD61B2D2A1084CA00C3B608 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* ItemView.swift */; };
+		4CD61B2E2A1084CA00C3B608 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD61B2A2A1084CA00C3B608 /* ItemView.swift */; };
 		4CD61B2F2A10905F00C3B608 /* ItemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78572A0EDFE000C0F5F6 /* ItemHeader.swift */; };
 		4CD61B302A10905F00C3B608 /* ItemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78572A0EDFE000C0F5F6 /* ItemHeader.swift */; };
 		4CF1959F2A0E070700B8AE32 /* SkyTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1959E2A0E070700B8AE32 /* SkyTitle.swift */; };
@@ -381,6 +396,12 @@
 		4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiesTabView.swift; sourceTree = "<group>"; };
 		4C7B2F082A0E1D000052B875 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		4C80AF072A0D6F07007DA427 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSmallView.swift; sourceTree = "<group>"; };
+		4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewMedium.swift; sourceTree = "<group>"; };
+		4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewLarge.swift; sourceTree = "<group>"; };
+		4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
+		4CAD87042A12CE8E002FE5C2 /* WidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntentHandler.swift; sourceTree = "<group>"; };
+		4CAD87072A12DE33002FE5C2 /* StatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProvider.swift; sourceTree = "<group>"; };
 		4CBB01872A0F3CD200262673 /* watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CBB019D2A0F3D3B00262673 /* macOS Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "macOS Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CBB01A12A0F3D3B00262673 /* macOS_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS_Widgets.swift; sourceTree = "<group>"; };
@@ -390,8 +411,7 @@
 		4CBB01B42A0F3D5300262673 /* iOS Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "iOS Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CBB01B82A0F3D5400262673 /* iOS_WidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WidgetsBundle.swift; sourceTree = "<group>"; };
 		4CBB01BA2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WidgetsLiveActivity.swift; sourceTree = "<group>"; };
-		4CBB01BC2A0F3D5400262673 /* iOS_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Widgets.swift; sourceTree = "<group>"; };
-		4CBB01BE2A0F3D5400262673 /* Widgets.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
+		4CBB01BC2A0F3D5400262673 /* StatusWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidgets.swift; sourceTree = "<group>"; };
 		4CBB01C12A0F3D5400262673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CBB02522A0F42DE00262673 /* WeatherEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEvents.swift; sourceTree = "<group>"; };
 		4CCE78342A0EABDC00C0F5F6 /* WeatherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProtocol.swift; sourceTree = "<group>"; };
@@ -400,7 +420,6 @@
 		4CCE783D2A0EC34B00C0F5F6 /* SkyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyContentView.swift; sourceTree = "<group>"; };
 		4CCE783F2A0EC93A00C0F5F6 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherItem.swift; sourceTree = "<group>"; };
-		4CCE78432A0ECA5B00C0F5F6 /* WeatherItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherItemView.swift; sourceTree = "<group>"; };
 		4CCE78492A0ECF2900C0F5F6 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		4CCE784B2A0ED1CA00C0F5F6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		4CCE784F2A0ED3A200C0F5F6 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -441,8 +460,8 @@
 		4CCFCA8D2A10221500BB473F /* DetailDayScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayScroll.swift; sourceTree = "<group>"; };
 		4CCFCA922A102F1100BB473F /* DetailChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChartView.swift; sourceTree = "<group>"; };
 		4CCFCA992A1041EF00BB473F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		4CD61B252A10607000C3B608 /* SkyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyItem.swift; sourceTree = "<group>"; };
-		4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyItemCell.swift; sourceTree = "<group>"; };
+		4CD61B252A10607000C3B608 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		4CD61B2A2A1084CA00C3B608 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		4CF1959E2A0E070700B8AE32 /* SkyTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyTitle.swift; sourceTree = "<group>"; };
 		4CF195A02A0E08D500B8AE32 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -521,7 +540,6 @@
 				4CCE78342A0EABDC00C0F5F6 /* WeatherProtocol.swift */,
 				4C2FE3422A0D80B600EEE28B /* CoreLocation+Extension.swift */,
 				4CCE78362A0EB3CA00C0F5F6 /* Calendar+Extension.swift */,
-				4CCFCA7D2A101DCA00BB473F /* WeatherKit+Extension.swift */,
 				4CCE784B2A0ED1CA00C0F5F6 /* Double+Extension.swift */,
 				4CCE78592A0EE0AB00C0F5F6 /* View+Extension.swift */,
 				4C7B2F082A0E1D000052B875 /* Color+Extension.swift */,
@@ -562,6 +580,7 @@
 				4C31F7E42A0D6D6F00219A0D /* App.swift */,
 				4C31F7ED2A0D6D7000219A0D /* Assets.xcassets */,
 				4C31F7EF2A0D6D7000219A0D /* Entitlements.entitlements */,
+				4C3EEEA62A11DCC30090B46C /* Item */,
 				4CCE78692A0EF94100C0F5F6 /* Model */,
 				4CBB01FC2A0F41C800262673 /* View */,
 				4CBB01FB2A0F41A900262673 /* Service */,
@@ -569,6 +588,29 @@
 				4CCE78722A0EFFC000C0F5F6 /* USDZ */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		4C3EEEA62A11DCC30090B46C /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				4CCFCA7D2A101DCA00BB473F /* WeatherKit+Extension.swift */,
+				4CD61B252A10607000C3B608 /* Item.swift */,
+				4CCFCA992A1041EF00BB473F /* ChatView.swift */,
+				4CAD86EF2A12BDE5002FE5C2 /* View */,
+				4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		4CAD86EF2A12BDE5002FE5C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CD61B2A2A1084CA00C3B608 /* ItemView.swift */,
+				4CAD86F02A12BDF5002FE5C2 /* ItemSmallView.swift */,
+				4CAD86F52A12BF09002FE5C2 /* ItemViewMedium.swift */,
+				4CAD86FA2A12BF37002FE5C2 /* ItemViewLarge.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4CBB01882A0F3CD200262673 /* watchOS */ = {
@@ -583,7 +625,8 @@
 			isa = PBXGroup;
 			children = (
 				4CBB01A42A0F3D3C00262673 /* Assets.xcassets */,
-				4CBB01BE2A0F3D5400262673 /* Widgets.intentdefinition */,
+				4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */,
+				4CAD87042A12CE8E002FE5C2 /* WidgetIntentHandler.swift */,
 				4CBB01CD2A0F3E5D00262673 /* iOS */,
 				4CBB01CC2A0F3E5400262673 /* macOS */,
 			);
@@ -603,10 +646,11 @@
 		4CBB01CD2A0F3E5D00262673 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4CBB01C12A0F3D5400262673 /* Info.plist */,
-				4CBB01BC2A0F3D5400262673 /* iOS_Widgets.swift */,
-				4CBB01BA2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift */,
 				4CBB01B82A0F3D5400262673 /* iOS_WidgetsBundle.swift */,
+				4CBB01C12A0F3D5400262673 /* Info.plist */,
+				4CBB01BC2A0F3D5400262673 /* StatusWidgets.swift */,
+				4CAD87072A12DE33002FE5C2 /* StatusProvider.swift */,
+				4CBB01BA2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -668,7 +712,6 @@
 		4CCE783B2A0EB9DA00C0F5F6 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				4CCE78432A0ECA5B00C0F5F6 /* WeatherItemView.swift */,
 				4CCE78392A0EB9C100C0F5F6 /* ForecastView.swift */,
 			);
 			path = Weather;
@@ -698,9 +741,6 @@
 			children = (
 				4C2FE3362A0D728A00EEE28B /* Sky.swift */,
 				4CCE783F2A0EC93A00C0F5F6 /* Weather.swift */,
-				4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */,
-				4CD61B252A10607000C3B608 /* SkyItem.swift */,
-				4CD61B2A2A1084CA00C3B608 /* SkyItemCell.swift */,
 				4CCE78492A0ECF2900C0F5F6 /* Events.swift */,
 				4CBB02522A0F42DE00262673 /* WeatherEvents.swift */,
 				4CCE78612A0EEF3000C0F5F6 /* CelestialEvents.swift */,
@@ -742,7 +782,6 @@
 			isa = PBXGroup;
 			children = (
 				4CCFCA822A101EDD00BB473F /* SkyItemDetailView.swift */,
-				4CCFCA992A1041EF00BB473F /* ChatView.swift */,
 				4CCFCA8D2A10221500BB473F /* DetailDayScroll.swift */,
 				4CCFCA922A102F1100BB473F /* DetailChartView.swift */,
 				4CCFCA872A10203900BB473F /* PlanetDetailVIew.swift */,
@@ -1001,15 +1040,14 @@
 				4CCE78642A0EEFC100C0F5F6 /* CelestialService.swift in Sources */,
 				4CCE78372A0EB3CA00C0F5F6 /* Calendar+Extension.swift in Sources */,
 				4C2FE3412A0D7F4400EEE28B /* WeatherService.swift in Sources */,
-				4CD61B262A10607000C3B608 /* SkyItem.swift in Sources */,
-				4CCE78442A0ECA5B00C0F5F6 /* WeatherItemView.swift in Sources */,
+				4CD61B262A10607000C3B608 /* Item.swift in Sources */,
 				4CCE78582A0EDFE000C0F5F6 /* ItemHeader.swift in Sources */,
-				4CBB01C32A0F3D5400262673 /* Widgets.intentdefinition in Sources */,
 				4C7B2F092A0E1D000052B875 /* Color+Extension.swift in Sources */,
 				4CCFCA7E2A101DCA00BB473F /* WeatherKit+Extension.swift in Sources */,
 				4C2FE3592A0D94E000EEE28B /* SkyCell.swift in Sources */,
 				4C7B2F072A0E1A490052B875 /* SkiesTabView.swift in Sources */,
 				4CCFCA8E2A10221500BB473F /* DetailDayScroll.swift in Sources */,
+				4CAD86FB2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */,
 				4CF1959F2A0E070700B8AE32 /* SkyTitle.swift in Sources */,
 				4C80AF082A0D6F07007DA427 /* PreviewProvider.swift in Sources */,
 				4CCE78662A0EF7D400C0F5F6 /* CelestialCharts.swift in Sources */,
@@ -1018,7 +1056,7 @@
 				4C31F7E52A0D6D6F00219A0D /* App.swift in Sources */,
 				4CCE78502A0ED3A200C0F5F6 /* Navigation.swift in Sources */,
 				4CCE78422A0EC9FF00C0F5F6 /* WeatherItem.swift in Sources */,
-				4CD61B2B2A1084CA00C3B608 /* SkyItemCell.swift in Sources */,
+				4CD61B2B2A1084CA00C3B608 /* ItemView.swift in Sources */,
 				4CCE78402A0EC93A00C0F5F6 /* Weather.swift in Sources */,
 				4C2FE3342A0D71BF00EEE28B /* SkyData.xcdatamodeld in Sources */,
 				4CCE78522A0ED4C900C0F5F6 /* MockData+Weather.swift in Sources */,
@@ -1041,7 +1079,9 @@
 				4C31F7E72A0D6D6F00219A0D /* SkyData.swift in Sources */,
 				4C2FE33D2A0D7C8B00EEE28B /* DebugService.swift in Sources */,
 				4CCE78622A0EEF3000C0F5F6 /* CelestialEvents.swift in Sources */,
+				4CAD86F62A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */,
 				4CCFCA832A101EDD00BB473F /* SkyItemDetailView.swift in Sources */,
+				4CAD86F12A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */,
 				4C2FE3572A0D922D00EEE28B /* NewSkyView.swift in Sources */,
 				4C2FE34C2A0D8B1400EEE28B /* Button+Extension.swift in Sources */,
 				4CCFCA792A101CA400BB473F /* Array+GradientStops.swift in Sources */,
@@ -1072,8 +1112,8 @@
 				4CCFCA8F2A10221500BB473F /* DetailDayScroll.swift in Sources */,
 				4CBB01DD2A0F412500262673 /* Weather.swift in Sources */,
 				4CBB021F2A0F423E00262673 /* WeatherProtocol.swift in Sources */,
-				4CCFCA712A10021100BB473F /* WeatherItemView.swift in Sources */,
 				4CCFCA7F2A101DCA00BB473F /* WeatherKit+Extension.swift in Sources */,
+				4CAD86FC2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */,
 				4CCFCA622A1001E100BB473F /* App.swift in Sources */,
 				4CBB02212A0F423E00262673 /* Events.swift in Sources */,
 				4CBB01D12A0F40CF00262673 /* SkyData.swift in Sources */,
@@ -1092,21 +1132,23 @@
 				4CBB01DE2A0F412500262673 /* Double+Extension.swift in Sources */,
 				4CCFCA742A10022000BB473F /* ItemHeader.swift in Sources */,
 				4CBB020D2A0F422A00262673 /* DebugService.swift in Sources */,
+				4CAD86F72A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */,
 				4CCFCA642A1001F100BB473F /* SkyContentView.swift in Sources */,
 				4CCFCA6E2A10021100BB473F /* ContentView.swift in Sources */,
 				4CCFCA9B2A1041EF00BB473F /* ChatView.swift in Sources */,
 				4CCFCA722A10021100BB473F /* ForecastView.swift in Sources */,
-				4CD61B2C2A1084CA00C3B608 /* SkyItemCell.swift in Sources */,
+				4CD61B2C2A1084CA00C3B608 /* ItemView.swift in Sources */,
 				4CBB020E2A0F422A00262673 /* MockData+Celestial.swift in Sources */,
 				4CCFCA632A1001EC00BB473F /* SkiesListView.swift in Sources */,
 				4CCFCA842A101EDD00BB473F /* SkyItemDetailView.swift in Sources */,
 				4CBB020A2A0F422A00262673 /* PreviewProvider.swift in Sources */,
 				4CBB021E2A0F423E00262673 /* CelestialService.swift in Sources */,
+				4CAD86F22A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */,
 				4CCFCA6D2A10021100BB473F /* Navigation.swift in Sources */,
 				4CBB01DB2A0F412400262673 /* Calendar+Extension.swift in Sources */,
 				4CBB02542A0F42DE00262673 /* WeatherEvents.swift in Sources */,
 				4CBB02092A0F422A00262673 /* MockData+Weather.swift in Sources */,
-				4CD61B272A10607000C3B608 /* SkyItem.swift in Sources */,
+				4CD61B272A10607000C3B608 /* Item.swift in Sources */,
 				4CCFCA662A1001FB00BB473F /* SkyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,20 +1159,24 @@
 			files = (
 				4CCFCA952A102F1100BB473F /* DetailChartView.swift in Sources */,
 				4CBB02552A0F42DE00262673 /* WeatherEvents.swift in Sources */,
+				4CAD86F82A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */,
 				4CBB01D52A0F40FB00262673 /* CelestialEvents.swift in Sources */,
 				4CBB01E82A0F412500262673 /* Date+Extension.swift in Sources */,
 				4CBB02262A0F423F00262673 /* CelestialService.swift in Sources */,
-				4CD61B2D2A1084CA00C3B608 /* SkyItemCell.swift in Sources */,
+				4CD61B2D2A1084CA00C3B608 /* ItemView.swift in Sources */,
 				4CBB01F92A0F418E00262673 /* WeatherProtocol.swift in Sources */,
+				4CAD86FD2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */,
 				4CCFCA682A1001FC00BB473F /* SkyCell.swift in Sources */,
 				4CBB01E72A0F412500262673 /* Button+Extension.swift in Sources */,
 				4CBB01E42A0F412500262673 /* Color+Extension.swift in Sources */,
 				4CBB01E62A0F412500262673 /* Double+Extension.swift in Sources */,
 				4CCFCA802A101DCA00BB473F /* WeatherKit+Extension.swift in Sources */,
 				4CBB02142A0F422A00262673 /* MockData+Celestial.swift in Sources */,
+				4CAD86F32A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */,
 				4CBB02122A0F422A00262673 /* SkyData+Preview.swift in Sources */,
 				4CBB02132A0F422A00262673 /* DebugService.swift in Sources */,
 				4CBB01E52A0F412500262673 /* Weather.swift in Sources */,
+				4CAD87052A12CE8E002FE5C2 /* WidgetIntentHandler.swift in Sources */,
 				4CCFCA852A101EDD00BB473F /* SkyItemDetailView.swift in Sources */,
 				4CBB02272A0F423F00262673 /* WeatherItem.swift in Sources */,
 				4CCFCA902A10221500BB473F /* DetailDayScroll.swift in Sources */,
@@ -1143,7 +1189,9 @@
 				4CBB01E32A0F412500262673 /* Calendar+Extension.swift in Sources */,
 				4CBB020F2A0F422A00262673 /* MockData+Weather.swift in Sources */,
 				4CD61B2F2A10905F00C3B608 /* ItemHeader.swift in Sources */,
-				4CBB01CA2A0F3DC900262673 /* Widgets.intentdefinition in Sources */,
+				4CAD87022A12CE5F002FE5C2 /* Widgets.intentdefinition in Sources */,
+				4CAD86FF2A12C77E002FE5C2 /* PlanetView.swift in Sources */,
+				4CAD87082A12DE33002FE5C2 /* StatusProvider.swift in Sources */,
 				4CCFCA692A1001FC00BB473F /* SkyTitle.swift in Sources */,
 				4CBB01A22A0F3D3B00262673 /* macOS_Widgets.swift in Sources */,
 				4CBB01E92A0F412500262673 /* CoreLocation+Extension.swift in Sources */,
@@ -1151,7 +1199,7 @@
 				4CBB02112A0F422A00262673 /* MockData+Sky.swift in Sources */,
 				4CCFCA9C2A1041EF00BB473F /* ChatView.swift in Sources */,
 				4CBB01D62A0F40FB00262673 /* Sky.swift in Sources */,
-				4CD61B282A10607000C3B608 /* SkyItem.swift in Sources */,
+				4CD61B282A10607000C3B608 /* Item.swift in Sources */,
 				4CBB01D72A0F40FB00262673 /* Events.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1160,9 +1208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CAD86FE2A12BF37002FE5C2 /* ItemViewLarge.swift in Sources */,
 				4CBB021A2A0F422B00262673 /* MockData+Celestial.swift in Sources */,
 				4CBB01F52A0F414A00262673 /* WeatherService.swift in Sources */,
-				4CBB01BD2A0F3D5400262673 /* iOS_Widgets.swift in Sources */,
+				4CBB01BD2A0F3D5400262673 /* StatusWidgets.swift in Sources */,
 				4CD61B302A10905F00C3B608 /* ItemHeader.swift in Sources */,
 				4CCFCA812A101DCA00BB473F /* WeatherKit+Extension.swift in Sources */,
 				4CBB01EC2A0F412500262673 /* Color+Extension.swift in Sources */,
@@ -1178,23 +1227,28 @@
 				4CBB01BB2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift in Sources */,
 				4CCFCA9D2A1041EF00BB473F /* ChatView.swift in Sources */,
 				4CBB02182A0F422B00262673 /* SkyData+Preview.swift in Sources */,
-				4CBB01C22A0F3D5400262673 /* Widgets.intentdefinition in Sources */,
 				4CCFCA912A10221500BB473F /* DetailDayScroll.swift in Sources */,
+				4CAD87092A12DE33002FE5C2 /* StatusProvider.swift in Sources */,
 				4CBB01EF2A0F412500262673 /* Button+Extension.swift in Sources */,
+				4CAD87002A12C77F002FE5C2 /* PlanetView.swift in Sources */,
 				4CBB02162A0F422B00262673 /* PreviewProvider.swift in Sources */,
 				4CBB02152A0F422B00262673 /* MockData+Weather.swift in Sources */,
 				4CBB01F22A0F412500262673 /* View+Extension.swift in Sources */,
 				4CBB02252A0F423F00262673 /* WeatherItem.swift in Sources */,
 				4CBB02562A0F42DE00262673 /* WeatherEvents.swift in Sources */,
 				4CBB01F12A0F412500262673 /* CoreLocation+Extension.swift in Sources */,
+				4CAD87062A12CE8E002FE5C2 /* WidgetIntentHandler.swift in Sources */,
+				4CAD87032A12CE5F002FE5C2 /* Widgets.intentdefinition in Sources */,
 				4CBB02242A0F423F00262673 /* CelestialService.swift in Sources */,
 				4CCFCA6A2A1001FC00BB473F /* SkyCell.swift in Sources */,
+				4CAD86F42A12BDF5002FE5C2 /* ItemSmallView.swift in Sources */,
 				4CBB01EE2A0F412500262673 /* Double+Extension.swift in Sources */,
-				4CD61B2E2A1084CA00C3B608 /* SkyItemCell.swift in Sources */,
+				4CD61B2E2A1084CA00C3B608 /* ItemView.swift in Sources */,
 				4CBB01D82A0F40FC00262673 /* CelestialEvents.swift in Sources */,
 				4CCFCA962A102F1100BB473F /* DetailChartView.swift in Sources */,
 				4CBB02192A0F422B00262673 /* DebugService.swift in Sources */,
-				4CD61B292A10607000C3B608 /* SkyItem.swift in Sources */,
+				4CD61B292A10607000C3B608 /* Item.swift in Sources */,
+				4CAD86F92A12BF09002FE5C2 /* ItemViewMedium.swift in Sources */,
 				4CBB01DA2A0F40FC00262673 /* Events.swift in Sources */,
 				4CBB01EB2A0F412500262673 /* Calendar+Extension.swift in Sources */,
 				4CBB01B92A0F3D5400262673 /* iOS_WidgetsBundle.swift in Sources */,

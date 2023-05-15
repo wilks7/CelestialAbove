@@ -8,8 +8,8 @@
 import Foundation
 import WeatherKit
 
-
 struct CloudItem: WeatherItem {
+    typealias ValueView = WeatherValueView<CloudItem>
     let hourly: [HourWeather]
     let condition: WeatherCondition?
     let coverage: Double?
@@ -26,12 +26,14 @@ struct CloudItem: WeatherItem {
     var label: String? { condition?.description }
     var subtitle: String? { label }
     static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(date: hour.date, value: hour.cloudCover)
+        WeatherChartData(reference: hour.date, value: hour.cloudCover)
     }
 
 }
 
 struct WindItem: WeatherItem {
+    typealias ValueView = WeatherValueView<WindItem>
+
     init(_ weather: Weather) {
         self.hourly = weather.hourly
         self.wind = weather.hour?.wind
@@ -55,14 +57,15 @@ struct WindItem: WeatherItem {
     }
     
     static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(date: hour.date, value: hour.wind.speed.value)
+        WeatherChartData(reference: hour.date, value: hour.wind.speed.value)
     }
     
 
 }
 
 struct TemperatureItem: WeatherItem {
-    
+    typealias ValueView = WeatherValueView<TemperatureItem>
+
     let hourly: [HourWeather]
     var temperature: Measurement<UnitTemperature>?
     var high: Measurement<UnitTemperature>?
@@ -97,13 +100,14 @@ struct TemperatureItem: WeatherItem {
     }
     
     static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(date: hour.date, value: hour.temperature.value)
+        WeatherChartData(reference: hour.date, value: hour.temperature.value)
     }
 }
 
 
 struct PrecipitationItem: WeatherItem {
-    
+    typealias ValueView = WeatherValueView<PrecipitationItem>
+
     init(_ weather: Weather) {
         self.hourly = weather.hourly
         self.precipitation = weather.hour?.precipitation
@@ -126,13 +130,14 @@ struct PrecipitationItem: WeatherItem {
     }
     
     static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(date: hour.date, value: hour.precipitationAmount.value)
+        WeatherChartData(reference: hour.date, value: hour.precipitationAmount.value)
     }
 }
 
 
 struct Visibility: WeatherItem {
-    
+    typealias ValueView = WeatherValueView<Visibility>
+
     init(_ weather: Weather) {
         self.hourly = weather.hourly
         self.visibility = weather.hour?.visibility
@@ -154,7 +159,7 @@ struct Visibility: WeatherItem {
     var subtitle: String? { "Good Visibility" }
     
     static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(date: hour.date, value: hour.visibility.value)
+        WeatherChartData(reference: hour.date, value: hour.visibility.value)
     }
 
 }
