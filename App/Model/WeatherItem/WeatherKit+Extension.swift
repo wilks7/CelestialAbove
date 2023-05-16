@@ -5,109 +5,97 @@
 //  Created by Michael Wilkowski on 5/13/23.
 //
 
-import Foundation
+import SwiftUI
 import WeatherKit
+import Charts
 
-struct CloudItem: WeatherItem {
-    typealias ValueView = WeatherValueView<CloudItem>
-    let hourly: [HourWeather]
-    let condition: WeatherCondition?
-    let coverage: Double?
-    
-    init(_ weather: Weather) {
-        self.hourly = weather.hourly
-        self.condition = weather.hour?.condition
-        self.coverage = weather.hour?.cloudCover
-    }
-
-    
-    var title: String { "Clouds" }
-    var symbolName: String { "cloud" }
-    var label: String? { condition?.description }
-    var subtitle: String? { label }
-    static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(reference: hour.date, value: hour.cloudCover)
-    }
-
-}
 
 struct WindItem: WeatherItem {
-    typealias ValueView = WeatherValueView<WindItem>
-
-    init(_ weather: Weather) {
-        self.hourly = weather.hourly
-        self.wind = weather.hour?.wind
-    }
     let hourly: [HourWeather]
-    let wind: Wind?
     
+    init(_ weather: Weather) { self.hourly = weather.hourly }
+
     var title: String { "Wind" }
     var symbolName: String { "wind" }
+        
     var label: String? {
-        guard let wind else {return nil}
+        guard let wind = now?.wind else {return nil}
         let measurementFormatter = MeasurementFormatter()
         measurementFormatter.unitStyle = .short
         measurementFormatter.numberFormatter.maximumFractionDigits = 0
         measurementFormatter.unitOptions = .providedUnit
-        
         return measurementFormatter.string(from: wind.speed)
     }
-    var subtitle: String? {
-        wind?.direction.description
-    }
     
-    static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(reference: hour.date, value: hour.wind.speed.value)
+    static func value(for hour: HourWeather) -> Double {
+        hour.wind.speed.value
     }
-    
-
 }
 
+
+struct CloudItem: WeatherItem {
+    let hourly: [HourWeather]
+    init(_ weather: Weather) { self.hourly = weather.hourly }
+
+    static func value(for hour: HourWeather) -> Double {
+        hour.cloudCover
+    }
+
+    var title: String { "Clouds" }
+    var symbolName: String { "cloud" }
+    var label: String? { now?.condition.description }
+}
+//
+//
+//
 struct TemperatureItem: WeatherItem {
-    typealias ValueView = WeatherValueView<TemperatureItem>
+    static func value(for hour: HourWeather) -> Double {
+        hour.temperature.value
+    }
+    
 
     let hourly: [HourWeather]
+    
     var temperature: Measurement<UnitTemperature>?
+    
     var high: Measurement<UnitTemperature>?
     var low: Measurement<UnitTemperature>?
-    
+
     init(_ weather: Weather) {
         self.hourly = weather.hourly
         self.temperature = weather.hour?.temperature
         self.high = weather.today?.highTemperature
         self.low = weather.today?.lowTemperature
     }
-    
 
-    
     let title = "Temperature"
     let symbolName = "thermometer.medium"
-    
+
     static let formatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
         fmt.unitStyle = .medium
         fmt.numberFormatter.maximumFractionDigits = 0
         return fmt
     }()
+    
     var label: String? {
         guard let high else {return nil}
         return Self.formatter.string(from: high)
     }
-    
+
     var subtitle: String? {
         guard let low, let high else {return nil}
         return "L: \(Self.formatter.string(from: low)) - H: \(Self.formatter.string(from: high))"
     }
-    
-    static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(reference: hour.date, value: hour.temperature.value)
-    }
+
 }
 
-
 struct PrecipitationItem: WeatherItem {
-    typealias ValueView = WeatherValueView<PrecipitationItem>
-
+    static func value(for hour: HourWeather) -> Double {
+        hour.precipitationAmount.value
+    }
+    
+    
     init(_ weather: Weather) {
         self.hourly = weather.hourly
         self.precipitation = weather.hour?.precipitation
@@ -118,7 +106,7 @@ struct PrecipitationItem: WeatherItem {
     let precipitation: WeatherKit.Precipitation?
     let chance: Double?
     let amount: Double?
-    
+
     let title = "Precipitation"
     var symbolName: String { "drop" }
 
@@ -128,15 +116,15 @@ struct PrecipitationItem: WeatherItem {
     var subtitle: String? {
         precipitation?.description
     }
-    
-    static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(reference: hour.date, value: hour.precipitationAmount.value)
-    }
+
 }
 
 
 struct Visibility: WeatherItem {
-    typealias ValueView = WeatherValueView<Visibility>
+    static func value(for hour: HourWeather) -> Double {
+        hour.visibility.value
+    }
+    
 
     init(_ weather: Weather) {
         self.hourly = weather.hourly
@@ -155,12 +143,8 @@ struct Visibility: WeatherItem {
 
         return measurementFormatter.string(from: visibility)
     }
-    
+
     var subtitle: String? { "Good Visibility" }
-    
-    static func data(for hour: HourWeather) -> WeatherChartData {
-        WeatherChartData(reference: hour.date, value: hour.visibility.value)
-    }
 
 }
-    
+

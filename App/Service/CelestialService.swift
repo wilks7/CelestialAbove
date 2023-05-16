@@ -60,7 +60,7 @@ class CelestialService {
             rise: riseTime,
             set: setTime,
             transit: transitTime,
-            data: locations
+            locations: locations
         )
     }
     

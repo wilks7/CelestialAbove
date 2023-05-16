@@ -36,15 +36,7 @@ extension Events {
         }
     }
     
-    var nextTime: String {
-        nextEvent.date?.time() ?? "--"
+    var nextTime: String? {
+        nextEvent.date?.time()
     }
 }
-
-extension Events {
-    var label: String? { self.nextEvent.type.rawValue.capitalized }
-    var subtitle: String? { nextEvent.date?.time() }
-    var symbolName: String {"circle"}
-}
-
-

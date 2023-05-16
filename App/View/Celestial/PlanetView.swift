@@ -17,21 +17,11 @@ struct PlanetView: View {
     #endif
     
     let celestial: String
-    let width: CGFloat
-    let height: CGFloat
     var interactions: Bool = false
     
-    init(celestial: String, width: CGFloat, height: CGFloat, interactions: Bool = true) {
+    init(celestial: String, interactions: Bool = true) {
         self.celestial = celestial
-//        if celestial == "Saturn" {
-//            self.width = width*2
-//            self.height = height*2
-//        } else {
-//            self.width = width
-//            self.height = height
-//        }
-        self.width = width
-        self.height = height
+
         self.interactions = interactions
     }
     
@@ -43,7 +33,7 @@ struct PlanetView: View {
             sceneView
             #endif
         }
-        .frame(width: width, height: height, alignment: .center)
+        .frame(alignment: .center)
     }
     
     @ViewBuilder
@@ -95,6 +85,7 @@ struct MySceneView: UIViewRepresentable {
 
 struct PlanetView_Previews: PreviewProvider {
     static var previews: some View {
-        PlanetView(celestial: "Mars", width: 100, height: 100)
+        PlanetView(celestial: "Mars")
+            .frame(width: 100, height: 100)
     }
 }

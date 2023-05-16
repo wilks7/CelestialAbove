@@ -17,7 +17,7 @@ struct ItemViewMedium<I:Item>: View {
         Group {
             if type == .detail {
                 HStack {
-                    I.ValueView(item: item)
+                    item.constant
                     Spacer()
                     VStack {
                         Text(item.label ?? "--")
@@ -25,7 +25,7 @@ struct ItemViewMedium<I:Item>: View {
                     }
                 }
             } else {
-                ItemChart(item: item)
+                Text("Charts")
             }
         }
         .onTapGesture {

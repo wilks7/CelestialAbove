@@ -32,3 +32,9 @@ extension Weather {
         return minuteForecast.forecast.filter{ Calendar.current.isDateInHour($0.date) }
     }
 }
+
+extension Array where Element == HourWeather {
+    var now: Element? {
+        first(where: { Calendar.current.isDateInHour($0.date) })
+    }
+}

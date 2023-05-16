@@ -19,14 +19,14 @@ struct ItemViewSmall<I:Item>: View {
                     Text(item.label ?? "--")
                         .font(.title2)
                         .fontWeight(.semibold)
-                    I.ValueView(item: item)
+                    item.constant
                     Text(item.subtitle ?? "--")
                         .font(.headline)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
             } else {
-                ItemChart(item: item)
+                item.chartView
             }
         }
         .onTapGesture {
