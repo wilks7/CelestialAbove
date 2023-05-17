@@ -9,6 +9,9 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var navigation: NavigationManager
     
@@ -18,11 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             #if os(iOS)
-            if let selected = navigation.selected {
-                SkiesTabView(skies: skies, selected: selected)
-            } else {
-                SkiesListView()
-            }
+            iOSView
             #else
             SkiesListView()
             #endif
@@ -38,7 +37,22 @@ struct ContentView: View {
             }
         }
     }
-
+    
+    #if os(iOS)
+    @ViewBuilder
+    var iOSView: some View {
+        if horizontalSizeClass == .compact {
+            if let selected = navigation.selected {
+                SkiesTabView(skies: skies, selected: selected)
+                    .background(selected.color)
+            } else {
+                SkiesListView()
+            }
+        } else {
+            SkiesListView()
+        }
+    }
+    #endif
 }
 
 

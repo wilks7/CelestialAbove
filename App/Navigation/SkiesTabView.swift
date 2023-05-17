@@ -20,7 +20,6 @@ struct SkiesTabView: View {
                         .tag(sky)
                 }
             }
-            .background(selected.color)
         #if !os(macOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .toolbar {
@@ -31,7 +30,19 @@ struct SkiesTabView: View {
                     .foregroundColor(.white)
                 }
                 ToolbarItem(placement: .status) {
-                    Dots(skies: skies.map{$0}, selected: selected)
+                    HStack(spacing: 10) {
+                        ForEach(skies) { sky in
+                            Group {
+                                if sky.currentLocation {
+                                    Image(systemName:"location.fill")
+                                        .font(.caption2)
+                                } else {
+                                    Circle().frame(width: 8, height: 8)
+                                }
+                            }
+                                .foregroundStyle(sky == selected ? .white : .white.opacity(0.5) )
+                        }
+                    }
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(systemName: "list.bullet") {
@@ -43,38 +54,6 @@ struct SkiesTabView: View {
         #endif
     }
     
-    struct Dots: View {
-        let skies: [Sky]
-        let selected: Sky?
-        
-        func color(for sky: Sky) -> Color {
-            if sky == selected {
-                return .white
-            } else {
-                return Color.white.opacity(0.5)
-            }
-        }
-        
-        
-        var body: some View {
-            HStack(spacing: 10) {
-                ForEach(skies, id: \.self) { sky in
-                    let color: Color = color(for: sky)
-
-                    if sky.currentLocation {
-                        Image(systemName: "location.fill")
-                            .font(.caption2)
-                            .offset(y: 0)
-                            .foregroundColor(color)
-                    } else {
-                        Circle().fill(color)
-                            .frame(width: 7, height: 7)
-                    }
-                }
-            }
-        }
-    }
-
 }
 
 

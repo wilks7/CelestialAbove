@@ -11,7 +11,6 @@ import WeatherKit
 import CoreLocation
 
 struct CelestialEvents: Events {
-    
     let planet: Planet.Type
     let location: CLLocation
     let rise: Date?
@@ -22,6 +21,7 @@ struct CelestialEvents: Events {
     var title: String { String(describing: planet) }
     var color: SwiftUI.Color { Color(planet.averageColor) }
     var celestial: CelestialBody.Type { planet }
+    
 
 }
 
@@ -40,15 +40,13 @@ extension CelestialEvents: Identifiable, Equatable, Hashable {
 
 extension CelestialEvents {
     
-    struct Location: ItemChartData {
+    struct Location {
         let date: Date
         let altitude: Double
         let azimuth: Double
         var aboveHorizon: Bool { altitude > 0 }
         var northBasedAzimuth: Double { return (Degree(azimuth) + 180).reduced.value }
-        
-        var reference: Date { date }
-        var value: Double { altitude }
+
     }
 }
 

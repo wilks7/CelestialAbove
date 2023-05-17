@@ -34,7 +34,7 @@ struct StatusWidgetView : View {
     }
 }
 
-struct iOS_Widgets: Widget {
+struct StatusWidgets: Widget {
     let kind: String = "Status"
 
     var body: some WidgetConfiguration {

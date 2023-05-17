@@ -11,6 +11,7 @@ class NavigationManager: ObservableObject {
     static let shared = NavigationManager()
     @Published var selected: Sky?
     @Published var showSettings = false
+    @Published var path = NavigationPath()
     
     @MainActor
     func navigate(to sky: Sky) {

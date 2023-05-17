@@ -8,10 +8,11 @@
 import SwiftUI
 import WeatherKit
 
-struct SkyItem<I:Item>: View {
-    @EnvironmentObject var sky: Sky
+struct SkyItemView<I:SkyItem>: View {
+//    @EnvironmentObject var sky: Sky
     enum Size: String, CaseIterable { case small, medium, large }
-    
+    enum ViewType { case detail, chart }
+
     let item: I
     @State var size: Size
     
@@ -23,9 +24,9 @@ struct SkyItem<I:Item>: View {
                 .onTapGesture(perform: showDetail)
             Group {
                 switch size {
-                case .small: ItemViewSmall(item: item)
-                case .medium: ItemViewMedium(item: item)
-                case .large: ItemViewLarge(item: item)
+                case .small: SmallView(item: item)
+                case .medium: MediumView(item: item)
+                case .large: LargeView(item: item)
                 }
             }
         }
@@ -33,11 +34,12 @@ struct SkyItem<I:Item>: View {
         .sheet(isPresented: $showSheet) {
             VStack{
                 Spacer()
-                Text("Hi Sheet")
+                Text("Hi")
                 Spacer()
             }
             .frame(maxWidth: .infinity)
         }
+        .transparent()
     }
     
     private func showDetail() {
@@ -45,15 +47,15 @@ struct SkyItem<I:Item>: View {
     }
 }
 
-extension SkyItem {
-    
-    init(_ item: I, _ size: Size = .small) {
+extension SkyItemView {
+
+    init(_ item: I, _ size: Size = .small) where I == CelestialEvents {
         self.item = item
         self._size = State(initialValue: size)
     }
-    
-    init(_ weather: Weather, _ size: Size = .small) where I: WeatherItem {
-        self.item = I(weather)
+
+    init(hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?, size: Size = .small) where I: WeatherItem {
+        self.item = I(hour: hour, hourly, day: day)
         self._size = State(initialValue: size)
     }
 
@@ -61,12 +63,9 @@ extension SkyItem {
 
 struct SkyItem_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            SkyItem(event)
-            SkyItem(event, .medium)
-            SkyItem(event, .large)
-        }
-            .environmentObject(sky)
+        SkyItemView(event)
+        SkyItemView(event, .medium)
+        SkyItemView(event, .large)
     }
 }
 

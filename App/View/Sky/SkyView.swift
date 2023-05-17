@@ -10,53 +10,22 @@ import SwiftUI
 struct SkyView: View {
     @EnvironmentObject var navigation: NavigationManager
     @ObservedObject var sky: Sky
-    
-    let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 8),
-        GridItem(.flexible(), spacing: 8)
-    ]
-    
+        
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 header
                 ForEach(sky.events) { events in
-                    SkyItem(events, .medium)
-                        .transparent()
+                    SkyItemView(events, .medium)
                 }
                 if let weather = sky.weather {
-                    LazyVGrid(columns: columns, spacing: 8) {
-                        SkyItem<CloudItem>(weather).transparent()
-                        SkyItem<WindItem>(weather).transparent()
-                        SkyItem<TemperatureItem>(weather).transparent()
-                        SkyItem<PrecipitationItem>(weather).transparent()
-                        SkyItem<Visibility>(weather).transparent()
-
-                    }
+                    WeatherCells(weather)
                 }
             }
             .padding(.horizontal)
         }
         .environmentObject(sky)
         .scrollContentBackground(.hidden)
-//            HStack {
-//                WeatherItemView(item: sky.weather?.today?.sun, timezone: sky.timezone)
-//                WeatherItemView(item: sky.weather?.today?.moon, timezone: sky.timezone)
-//            }
-
-
-//            CelestialCharts(events: sky.events, location: sky.location, weather: sky.weather)
-//            ForecastView(forecast: sky.weather?.hourly, timezone: sky.timezone)
-//            ForecastView(forecast: sky.weather?.daily, timezone: sky.timezone, alignment: .vertical)
-//            HStack {
-//                WeatherItemView(item: sky.weather?.today?.condition, timezone: sky.timezone)
-//                WeatherItemView(item: sky.weather?.today?.wind, timezone: sky.timezone)
-//            }
-//            HStack {
-//                WeatherItemView(item: sky.weather?.today?.temperatureItem, timezone: sky.timezone)
-//                WeatherItemView(item: sky.weather?.today?.precipitationItem, timezone: sky.timezone)
-//            }
-//        }
         .navigationTitle(sky.title)
 
     }
@@ -71,6 +40,8 @@ struct SkyView: View {
             }
         }
     }
+    
+
 }
 
 struct SkyView_Previews: PreviewProvider {

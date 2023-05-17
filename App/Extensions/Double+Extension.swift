@@ -7,12 +7,17 @@
 
 import Foundation
 
-extension Double {    
-    var percent: Int? {
+extension Double {
+    
+    var percentString: String? {
         let percentFormatter = NumberFormatter()
         percentFormatter.numberStyle = .percent
         percentFormatter.maximumFractionDigits = 0
-        if let string = percentFormatter.string(for: self) {
+        return percentFormatter.string(for: self)
+    }
+    
+    var percent: Int? {
+        if let string = percentString {
             return Int(string.dropLast(1))
         } else {
             return nil

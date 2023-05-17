@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ItemViewMedium<I:Item>: View {
+struct MediumView<I:SkyItem>: View {
     enum ViewType { case detail, chart }
 
     let item: I
@@ -18,6 +18,7 @@ struct ItemViewMedium<I:Item>: View {
             if type == .detail {
                 HStack {
                     item.constant
+                        .frame(width: 70, height: 70)
                     Spacer()
                     VStack {
                         Text(item.label ?? "--")
@@ -25,7 +26,7 @@ struct ItemViewMedium<I:Item>: View {
                     }
                 }
             } else {
-                Text("Charts")
+                ItemChartView(item: item)
             }
         }
         .onTapGesture {
@@ -38,6 +39,6 @@ struct ItemViewMedium<I:Item>: View {
 
 struct ItemViewMedium_Previews: PreviewProvider {
     static var previews: some View {
-        ItemViewMedium(item: event)
+        MediumView(item: event)
     }
 }

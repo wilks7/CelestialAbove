@@ -67,7 +67,6 @@ class CelestialService {
     private func fetchLocations(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone) -> [CelestialEvents.Location] {
         var locations: [CelestialEvents.Location] = []
         let start = Date.now.startOfDay(timezone)
-        
         for h in 1..<24 {
             let date = Calendar.current.date(byAdding: .hour, value: h, to: start)!
             let celestialLocation = celestialLocation(for: planet, at: location, at: date)

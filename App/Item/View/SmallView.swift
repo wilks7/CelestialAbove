@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct ItemViewSmall<I:Item>: View {
+struct SmallView<I:SkyItem>: View {
     enum ViewType { case detail, chart }
     let item: I
+    
     @State var type: ViewType = .detail
     
     var body: some View {
@@ -20,13 +21,14 @@ struct ItemViewSmall<I:Item>: View {
                         .font(.title2)
                         .fontWeight(.semibold)
                     item.constant
+                        .frame(width: 70, height: 70)
                     Text(item.subtitle ?? "--")
                         .font(.headline)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
             } else {
-                item.chartView
+                ItemChartView(item: item)
             }
         }
         .onTapGesture {
@@ -39,6 +41,6 @@ struct ItemViewSmall<I:Item>: View {
 
 struct ItemSmallView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemViewSmall(item: event)
+        SmallView(item: event)
     }
 }

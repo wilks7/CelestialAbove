@@ -9,6 +9,8 @@ import WeatherKit
 import Foundation
 
 extension Weather {
+    var date: Date { currentWeather.date }
+    
     var today: DayWeather? {
         dailyForecast.first{ Calendar.current.isDateInToday($0.date) }
     }
@@ -30,6 +32,40 @@ extension Weather {
     var minutely: [MinuteWeather] {
         guard let minuteForecast else {return []}
         return minuteForecast.forecast.filter{ Calendar.current.isDateInHour($0.date) }
+    }
+}
+
+// MARK: Items
+extension Weather {
+    
+    var percent: Percent? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
+    }
+    
+    var wind: Wind? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
+    }
+    
+    var clouds: Cloud? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
+    }
+    
+    var temperature: Temperature? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
+    }
+    
+    var precipitation: Precipitation? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
+    }
+    
+    var visibility: Visibility? {
+        guard let today, let hour else {return nil}
+        return .init(hour: hour, hourly, day: today)
     }
 }
 

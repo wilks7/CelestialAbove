@@ -19,10 +19,10 @@ struct SkiesListView: View {
                 ForEach(skies) { sky in
                     #if os(watchOS)
                     NavigationLink(destination: SkyView(sky: sky)) {
-                        SkyCell(sky: sky)
+                        SkyCellView<Percent, CelestialEvents, Cloud>(sky: sky)
                     }
                     #else
-                    SkyCell(sky: sky)
+                    SkyCellView<Percent, CelestialEvents, Cloud>(sky: sky)
                     .onTapGesture {
                         navigation.navigate(to: sky)
                     }
