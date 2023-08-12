@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AsyncButton<Label: View>: View {
-    var action: () async -> Void
     var actionOptions = Set(ActionOption.allCases)
+
+    var action: () async -> Void
     @ViewBuilder var label: () -> Label
 
     @State private var isDisabled = false

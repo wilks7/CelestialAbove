@@ -54,7 +54,7 @@
 		4C271D032A14598A00A9DFBA /* Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78552A0ED83D00C0F5F6 /* Transparent.swift */; };
 		4C271D042A14598B00A9DFBA /* Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78552A0ED83D00C0F5F6 /* Transparent.swift */; };
 		4C2FE3342A0D71BF00EEE28B /* SkyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3322A0D71BF00EEE28B /* SkyData.xcdatamodeld */; };
-		4C2FE3372A0D728A00EEE28B /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky.swift */; };
+		4C2FE3372A0D728A00EEE28B /* Sky_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky_old.swift */; };
 		4C2FE33B2A0D789E00EEE28B /* SkiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE33A2A0D789E00EEE28B /* SkiesListView.swift */; };
 		4C2FE33D2A0D7C8B00EEE28B /* DebugService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE33C2A0D7C8B00EEE28B /* DebugService.swift */; };
 		4C2FE3412A0D7F4400EEE28B /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3402A0D7F4400EEE28B /* WeatherService.swift */; };
@@ -73,6 +73,14 @@
 		4C7B2F072A0E1A490052B875 /* SkiesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */; };
 		4C7B2F092A0E1D000052B875 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F082A0E1D000052B875 /* Color+Extension.swift */; };
 		4C80AF082A0D6F07007DA427 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C80AF072A0D6F07007DA427 /* PreviewProvider.swift */; };
+		4C84B3FF2A86BA9A00F74351 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B3FE2A86BA9A00F74351 /* Sky.swift */; };
+		4C84B4002A86BA9A00F74351 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B3FE2A86BA9A00F74351 /* Sky.swift */; };
+		4C84B4012A86BA9A00F74351 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B3FE2A86BA9A00F74351 /* Sky.swift */; };
+		4C84B4022A86BA9A00F74351 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B3FE2A86BA9A00F74351 /* Sky.swift */; };
+		4C84B4042A86C4D800F74351 /* SkyDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */; };
+		4C84B4052A86C4D800F74351 /* SkyDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */; };
+		4C84B4062A86C4D800F74351 /* SkyDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */; };
+		4C84B4072A86C4D800F74351 /* SkyDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */; };
 		4CAD86F12A12BDF5002FE5C2 /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */; };
 		4CAD86F22A12BDF5002FE5C2 /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */; };
 		4CAD86F32A12BDF5002FE5C2 /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */; };
@@ -109,10 +117,10 @@
 		4CBB01D02A0F40C200262673 /* SkyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3322A0D71BF00EEE28B /* SkyData.xcdatamodeld */; };
 		4CBB01D12A0F40CF00262673 /* SkyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31F7E62A0D6D6F00219A0D /* SkyData.swift */; };
 		4CBB01D52A0F40FB00262673 /* CelestialEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78612A0EEF3000C0F5F6 /* CelestialEvents.swift */; };
-		4CBB01D62A0F40FB00262673 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky.swift */; };
+		4CBB01D62A0F40FB00262673 /* Sky_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky_old.swift */; };
 		4CBB01D72A0F40FB00262673 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78492A0ECF2900C0F5F6 /* Events.swift */; };
 		4CBB01D82A0F40FC00262673 /* CelestialEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78612A0EEF3000C0F5F6 /* CelestialEvents.swift */; };
-		4CBB01D92A0F40FC00262673 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky.swift */; };
+		4CBB01D92A0F40FC00262673 /* Sky_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky_old.swift */; };
 		4CBB01DA2A0F40FC00262673 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78492A0ECF2900C0F5F6 /* Events.swift */; };
 		4CBB01DB2A0F412400262673 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78362A0EB3CA00C0F5F6 /* Calendar+Extension.swift */; };
 		4CBB01DC2A0F412400262673 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F082A0E1D000052B875 /* Color+Extension.swift */; };
@@ -174,7 +182,7 @@
 		4CBB02202A0F423E00262673 /* WeatherItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */; };
 		4CBB02212A0F423E00262673 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78492A0ECF2900C0F5F6 /* Events.swift */; };
 		4CBB02222A0F423E00262673 /* CelestialEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78612A0EEF3000C0F5F6 /* CelestialEvents.swift */; };
-		4CBB02232A0F423E00262673 /* Sky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky.swift */; };
+		4CBB02232A0F423E00262673 /* Sky_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2FE3362A0D728A00EEE28B /* Sky_old.swift */; };
 		4CBB02242A0F423F00262673 /* CelestialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78632A0EEFC100C0F5F6 /* CelestialService.swift */; };
 		4CBB02252A0F423F00262673 /* WeatherItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78412A0EC9FF00C0F5F6 /* WeatherItem.swift */; };
 		4CBB02262A0F423F00262673 /* CelestialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78632A0EEFC100C0F5F6 /* CelestialService.swift */; };
@@ -429,7 +437,7 @@
 		4C271CF92A14544200A9DFBA /* ItemChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemChartView.swift; sourceTree = "<group>"; };
 		4C271CFE2A14575A00A9DFBA /* WeatherCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCells.swift; sourceTree = "<group>"; };
 		4C2FE3332A0D71BF00EEE28B /* SkyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkyData.xcdatamodel; sourceTree = "<group>"; };
-		4C2FE3362A0D728A00EEE28B /* Sky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sky.swift; sourceTree = "<group>"; };
+		4C2FE3362A0D728A00EEE28B /* Sky_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sky_old.swift; sourceTree = "<group>"; };
 		4C2FE33A2A0D789E00EEE28B /* SkiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiesListView.swift; sourceTree = "<group>"; };
 		4C2FE33C2A0D7C8B00EEE28B /* DebugService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugService.swift; sourceTree = "<group>"; };
 		4C2FE3402A0D7F4400EEE28B /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -450,6 +458,8 @@
 		4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiesTabView.swift; sourceTree = "<group>"; };
 		4C7B2F082A0E1D000052B875 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		4C80AF072A0D6F07007DA427 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		4C84B3FE2A86BA9A00F74351 /* Sky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sky.swift; path = ../../../Sky.swift; sourceTree = "<group>"; };
+		4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDataPreview.swift; sourceTree = "<group>"; };
 		4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 		4CAD86F52A12BF09002FE5C2 /* MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumView.swift; sourceTree = "<group>"; };
 		4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeView.swift; sourceTree = "<group>"; };
@@ -808,7 +818,8 @@
 		4CCE78692A0EF94100C0F5F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4C2FE3362A0D728A00EEE28B /* Sky.swift */,
+				4C2FE3362A0D728A00EEE28B /* Sky_old.swift */,
+				4C84B3FE2A86BA9A00F74351 /* Sky.swift */,
 				4CCE783F2A0EC93A00C0F5F6 /* Weather.swift */,
 				4CCE78492A0ECF2900C0F5F6 /* Events.swift */,
 				4C271CD52A12FAC800A9DFBA /* WeatherItem */,
@@ -862,6 +873,7 @@
 			isa = PBXGroup;
 			children = (
 				4C80AF072A0D6F07007DA427 /* PreviewProvider.swift */,
+				4C84B4032A86C4D800F74351 /* SkyDataPreview.swift */,
 				4CCE78532A0ED50600C0F5F6 /* SkyData+Preview.swift */,
 				4CCE78512A0ED4C900C0F5F6 /* MockData+Weather.swift */,
 				4CCE786C2A0EFA6B00C0F5F6 /* MockData+Sky.swift */,
@@ -1111,6 +1123,7 @@
 				4C271CE12A13525700A9DFBA /* Cloud.swift in Sources */,
 				4CCE78372A0EB3CA00C0F5F6 /* Calendar+Extension.swift in Sources */,
 				4C2FE3412A0D7F4400EEE28B /* WeatherService.swift in Sources */,
+				4C84B3FF2A86BA9A00F74351 /* Sky.swift in Sources */,
 				4CD61B262A10607000C3B608 /* SkyItem.swift in Sources */,
 				4CCE78582A0EDFE000C0F5F6 /* ItemHeader.swift in Sources */,
 				4C271CD72A12FB2300A9DFBA /* Wind.swift in Sources */,
@@ -1137,6 +1150,7 @@
 				4CD0032A2A149D9000CC185E /* SkyCellView.swift in Sources */,
 				4C271CE62A13559500A9DFBA /* Temperature.swift in Sources */,
 				4C2FE34E2A0D8B5A00EEE28B /* AsyncButton.swift in Sources */,
+				4C84B4042A86C4D800F74351 /* SkyDataPreview.swift in Sources */,
 				4C2FE34A2A0D8A1800EEE28B /* SkySearchView.swift in Sources */,
 				4CCE78712A0EFF5D00C0F5F6 /* PlanetView.swift in Sources */,
 				4C2FE3432A0D80B600EEE28B /* CoreLocation+Extension.swift in Sources */,
@@ -1164,7 +1178,7 @@
 				4C271CC02A12EED000A9DFBA /* CelestialChart_Old.swift in Sources */,
 				4C271CF52A135BB700A9DFBA /* CelestialChart.swift in Sources */,
 				4CCFCA792A101CA400BB473F /* Array+GradientStops.swift in Sources */,
-				4C2FE3372A0D728A00EEE28B /* Sky.swift in Sources */,
+				4C2FE3372A0D728A00EEE28B /* Sky_old.swift in Sources */,
 				4CF195A12A0E08D500B8AE32 /* Date+Extension.swift in Sources */,
 				4CCE784C2A0ED1CA00C0F5F6 /* Double+Extension.swift in Sources */,
 				4CCE78562A0ED83D00C0F5F6 /* Transparent.swift in Sources */,
@@ -1179,7 +1193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CD0032B2A149D9000CC185E /* SkyCellView.swift in Sources */,
-				4CBB02232A0F423E00262673 /* Sky.swift in Sources */,
+				4CBB02232A0F423E00262673 /* Sky_old.swift in Sources */,
 				4CCFCA7A2A101CA400BB473F /* Array+GradientStops.swift in Sources */,
 				4CBB01D02A0F40C200262673 /* SkyData.xcdatamodeld in Sources */,
 				4C271CE22A13525700A9DFBA /* Cloud.swift in Sources */,
@@ -1227,10 +1241,12 @@
 				4C271CFB2A14544200A9DFBA /* ItemChartView.swift in Sources */,
 				4CBB020A2A0F422A00262673 /* PreviewProvider.swift in Sources */,
 				4CBB021E2A0F423E00262673 /* CelestialService.swift in Sources */,
+				4C84B4052A86C4D800F74351 /* SkyDataPreview.swift in Sources */,
 				4C271CE72A13559500A9DFBA /* Temperature.swift in Sources */,
 				4CAD86F22A12BDF5002FE5C2 /* SmallView.swift in Sources */,
 				4C271CD82A12FB2300A9DFBA /* Wind.swift in Sources */,
 				4CCFCA6D2A10021100BB473F /* NavigationManager.swift in Sources */,
+				4C84B4002A86BA9A00F74351 /* Sky.swift in Sources */,
 				4C271CF12A135B2800A9DFBA /* WeatherChart.swift in Sources */,
 				4CBB01DB2A0F412400262673 /* Calendar+Extension.swift in Sources */,
 				4C271D002A14575A00A9DFBA /* WeatherCells.swift in Sources */,
@@ -1268,6 +1284,7 @@
 				4CBB02142A0F422A00262673 /* MockData+Celestial.swift in Sources */,
 				4CAD86F32A12BDF5002FE5C2 /* SmallView.swift in Sources */,
 				4CBB02122A0F422A00262673 /* SkyData+Preview.swift in Sources */,
+				4C84B4062A86C4D800F74351 /* SkyDataPreview.swift in Sources */,
 				4CBB02132A0F422A00262673 /* DebugService.swift in Sources */,
 				4C271CFC2A14544200A9DFBA /* ItemChartView.swift in Sources */,
 				4CBB01E52A0F412500262673 /* Weather.swift in Sources */,
@@ -1281,6 +1298,7 @@
 				4C271CD22A12F34500A9DFBA /* CelesitalEvents+Item.swift in Sources */,
 				4C271CDE2A1344D000A9DFBA /* Percent.swift in Sources */,
 				4C271CF22A135B2800A9DFBA /* WeatherChart.swift in Sources */,
+				4C84B4012A86BA9A00F74351 /* Sky.swift in Sources */,
 				4CBB01F42A0F414A00262673 /* WeatherService.swift in Sources */,
 				4CCFCA8A2A10203900BB473F /* PlanetDetailVIew.swift in Sources */,
 				4CCFCA972A102FBC00BB473F /* CelestialEventsChart.swift in Sources */,
@@ -1298,7 +1316,7 @@
 				4C271D012A14575A00A9DFBA /* WeatherCells.swift in Sources */,
 				4CBB01EA2A0F412500262673 /* View+Extension.swift in Sources */,
 				4CBB02112A0F422A00262673 /* MockData+Sky.swift in Sources */,
-				4CBB01D62A0F40FB00262673 /* Sky.swift in Sources */,
+				4CBB01D62A0F40FB00262673 /* Sky_old.swift in Sources */,
 				4CD61B282A10607000C3B608 /* SkyItem.swift in Sources */,
 				4CBB01D72A0F40FB00262673 /* Events.swift in Sources */,
 			);
@@ -1326,6 +1344,7 @@
 				4CBB01F72A0F416000262673 /* SkyData.swift in Sources */,
 				4C271CC32A12EED000A9DFBA /* CelestialChart_Old.swift in Sources */,
 				4CCFCA7C2A101CA400BB473F /* Array+GradientStops.swift in Sources */,
+				4C84B4022A86BA9A00F74351 /* Sky.swift in Sources */,
 				4CCFCA6B2A1001FC00BB473F /* SkyTitle.swift in Sources */,
 				4CBB02172A0F422B00262673 /* MockData+Sky.swift in Sources */,
 				4CBB01BB2A0F3D5400262673 /* iOS_WidgetsLiveActivity.swift in Sources */,
@@ -1353,6 +1372,7 @@
 				4CAD86F42A12BDF5002FE5C2 /* SmallView.swift in Sources */,
 				4C271CD32A12F34500A9DFBA /* CelesitalEvents+Item.swift in Sources */,
 				4CBB01EE2A0F412500262673 /* Double+Extension.swift in Sources */,
+				4C84B4072A86C4D800F74351 /* SkyDataPreview.swift in Sources */,
 				4CD61B2E2A1084CA00C3B608 /* SkyItemView.swift in Sources */,
 				4CBB01D82A0F40FC00262673 /* CelestialEvents.swift in Sources */,
 				4CCFCA962A102F1100BB473F /* DetailChartView.swift in Sources */,
@@ -1365,7 +1385,7 @@
 				4CBB01B92A0F3D5400262673 /* iOS_WidgetsBundle.swift in Sources */,
 				4C271D042A14598B00A9DFBA /* Transparent.swift in Sources */,
 				4CBB01FA2A0F418E00262673 /* WeatherProtocol.swift in Sources */,
-				4CBB01D92A0F40FC00262673 /* Sky.swift in Sources */,
+				4CBB01D92A0F40FC00262673 /* Sky_old.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,10 +1550,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.rifigy.CelestialAbove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1573,10 +1593,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.rifigy.CelestialAbove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1617,7 +1637,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -1649,7 +1669,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1672,7 +1692,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "app.rifigy.CelestialAbove.macOS-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1702,7 +1722,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "app.rifigy.CelestialAbove.macOS-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1725,7 +1745,7 @@
 				INFOPLIST_FILE = Widgets/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "iOS Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1754,7 +1774,7 @@
 				INFOPLIST_FILE = Widgets/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "iOS Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

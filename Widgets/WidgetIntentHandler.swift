@@ -21,10 +21,10 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: StatusIntentHandling {
     func provideSkyOptionsCollection(for intent: StatusIntent) async throws -> INObjectCollection<SkyID> {
-        let skies:[Sky] = SkyData.shared.skies()
+        let skies:[Sky] = SkyData.allSkies()
         
         let skyIDs = skies.map { sky in
-            SkyID(identifier: sky.id.uuidString, display: sky.title)
+            SkyID(identifier: sky.id, display: sky.title ?? "Title")
         }
         
         print("[Intent Handler] Fetched \(skyIDs.count) skies")
@@ -34,13 +34,13 @@ extension IntentHandler: StatusIntentHandling {
     
     
     func defaultSky(for intent: StatusIntent) -> SkyID? {
-        let skies:[Sky] = SkyData.shared.skies()
+        let skies:[Sky] = SkyData.allSkies()
         let id = intent.sky
 
-        if let currentLocation = skies.first(where: {$0.currentLocation}) {
-            return SkyID(identifier: currentLocation.id.uuidString, display: "Current Location")
-        } else if let first = skies.first(where: {$0.id.uuidString == id?.identifier}) {
-            return SkyID(identifier: first.id.uuidString, display: first.title)
+        if let currentLocation = skies.first(where: {$0.currentLocation ?? false}) {
+            return SkyID(identifier: currentLocation.id, display: "Current Location")
+        } else if let first = skies.first(where: {$0.id == id?.identifier}) {
+            return SkyID(identifier: first.id, display: first.title ?? "Title")
         } else {
             return nil
         }

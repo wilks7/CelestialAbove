@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SkyView: View {
     @EnvironmentObject var navigation: NavigationManager
-    @ObservedObject var sky: Sky
+    let sky: Sky
         
     var body: some View {
         ScrollView(.vertical) {
@@ -24,9 +24,8 @@ struct SkyView: View {
             }
             .padding(.horizontal)
         }
-        .environmentObject(sky)
         .scrollContentBackground(.hidden)
-        .navigationTitle(sky.title)
+        .navigationTitle(sky.title ?? "Title")
 
     }
     
@@ -44,8 +43,8 @@ struct SkyView: View {
 
 }
 
-struct SkyView_Previews: PreviewProvider {
-    static var previews: some View {
-        SkyView(sky: sky)
+#Preview {
+    ModelPreview {
+        SkyView(sky: $0)
     }
 }

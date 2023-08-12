@@ -12,7 +12,6 @@ extension View {
     func skySearchable() -> some View { modifier( SkySearchView() ) }
 }
 struct SkySearchView: ViewModifier {
-    @Environment(\.managedObjectContext) private var context
     @Environment(\.isSearching) private var isSearching: Bool
     
     @StateObject var model = SearchResults()
@@ -20,16 +19,27 @@ struct SkySearchView: ViewModifier {
     func body(content: Content) -> some View {
         content
         .searchable(text: $model.searchTerm, prompt: "Search for a city or coordinate") {
-            if let location = model.location, model.validCoordinate {
-                AsyncButton(action: {
-                    await model.tapped(location)
-                } ,actionOptions: [.disableButton]) {
-                    Text("Coordinate: " + location.id)
+            if model.results.isEmpty {
+                if let location = model.location {
+                    AsyncButton(actionOptions: [.disableButton]) {
+                        await model.tapped(location)
+                    } label: {
+                        Text("Coordinate: " + location.id)
+                    }
+                } else {
+                    ContentUnavailableView("No Results", 
+                        systemImage: "magnifyingglass",
+                        description: Text("No results matching '\(model.searchTerm)'")
+                    )
                 }
-            } else if model.results.isEmpty {
-                emptyResults
             } else {
-                results
+                ForEach(model.results, id: \.description) { result in
+                    AsyncButton(actionOptions: [.disableButton]) {
+                        await model.tapped(result)
+                    } label: {
+                        HighlightedText(result.title + " " + result.subtitle, matching: model.searchTerm)
+                    }
+                }
             }
         }
         .onChange(of: model.searchTerm) { value in
@@ -41,37 +51,15 @@ struct SkySearchView: ViewModifier {
                 model.searchAddress(value)
             }
         }
-        .sheet(item: $model.tappedSky) { searchSky in
-            NewSkyView(searchSky: searchSky)
-                .environmentObject(model)
-        }
-    }
-    
-    var results: some View {
-        ForEach(model.results, id: \.description) { result in
-            AsyncButton(action: {
-                await model.tapped(result)
-            },actionOptions: [.disableButton]) {
-                HighlightedText(result.title + " " + result.subtitle, matching: model.searchTerm)
+        .sheet(item: $model.tappedSky,
+            onDismiss: { model.tappedSky = nil },
+            content: { tappedSky in
+                NewSkyView(searchSky: tappedSky)
             }
-        }
+        )
+
     }
-    
-    var emptyResults: some View {
-        HStack {
-            Spacer()
-            VStack {
-                Image(systemName: "magnifyingglass")
-                    .font(.largeTitle)
-                    .foregroundStyle(.gray)
-                Text("No Results")
-                    .font(.title3.weight(.heavy))
-                Text("No results found for '\(model.searchTerm)' ")
-            }
-            .padding(.top, 64)
-            Spacer()
-        }
-    }
+
 }
 
 extension SkySearchView {
@@ -110,15 +98,11 @@ extension SkySearchView {
     }    
 }
 
-
-
-struct SkySearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            List {
-                Text("List")
-            }
-            .skySearchable()
+#Preview {
+    NavigationStack {
+        List {
+            Text("List")
         }
+        .skySearchable()
     }
 }

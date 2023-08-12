@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SkyCellView<TopTrailing: SkyItem, BottomLeading: SkyItem, BottomTrailing: SkyItem>: View {
-    @ObservedObject var sky: Sky
+    let sky: Sky
         
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0){
-                    SkyTitle(title: sky.title, isCurrent: sky.currentLocation)
+                    SkyTitle(title: sky.title ?? "Title", isCurrent: sky.currentLocation ?? false)
                     Text( Date.now.time(sky.timezone) )
                         .font(.footnote.weight(.semibold))
                 }

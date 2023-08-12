@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CelestialAboveApp: App {
-    let skyData = SkyData.shared
     @StateObject var navigation = NavigationManager.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(navigation)
-                .environment(\.managedObjectContext, skyData.container.viewContext)
+                .modelContainer(SkyData.container)
         }
         #if os(macOS)
         .defaultSize(width: 1000, height: 650)
@@ -26,7 +26,7 @@ struct CelestialAboveApp: App {
         MenuBarExtra {
             SkiesListView()
                 .environmentObject(navigation)
-                .environment(\.managedObjectContext, skyData.container.viewContext)
+                .modelContainer(SkyData.container)
         } label: {
             Label("Celestial Above", systemImage: "sunrise")
         }

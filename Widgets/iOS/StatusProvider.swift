@@ -43,11 +43,11 @@ struct StatusProvider: IntentTimelineProvider {
     }
     
     func getEntry(for configuration: StatusIntent = StatusIntent()) async -> StatusEntry {
-        if let uuidString = configuration.sky?.identifier, let uuid = UUID(uuidString: uuidString) {
-            let sky = try? SkyData.shared.findSky(withId: uuid)
+        if let uuidString = configuration.sky?.identifier {
+            let sky = SkyData.find(id: uuidString)
             return StatusEntry(date: .now, sky: sky, configuration: configuration)
         } else {
-            let skies:[Sky] = SkyData.shared.skies()
+            let skies:[Sky] = SkyData.allSkies()
             return StatusEntry(date: .now, sky: skies.first, configuration: configuration)
         }
     }

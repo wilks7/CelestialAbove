@@ -35,9 +35,8 @@ struct SkyTitle: View {
     }
 }
 
-struct SkyTitle_Previews: PreviewProvider {
-    static var previews: some View {
-        SkyTitle(title: sky.title, isCurrent: false)
-        SkyTitle(title: sky.title, isCurrent: true)
-    }
+#Preview {
+    SkyTitle(title: "New York, NY", isCurrent: false)
+//    SkyTitle(title: "Current Location", isCurrent: true)
 }
+

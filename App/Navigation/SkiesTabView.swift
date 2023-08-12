@@ -6,54 +6,61 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SkiesTabView: View {
     @EnvironmentObject var navigation: NavigationManager
-
-    let skies: FetchedResults<Sky>
-    @State var selected: Sky
+    @Query private var skies: [Sky]
     
     var body: some View {
-            TabView(selection: $selected) {
-                ForEach(skies){ sky in
-                    SkyView(sky: sky)
-                        .tag(sky)
-                }
+        TabView(selection: $navigation.selected) {
+            ForEach(skies){ sky in
+                SkyView(sky: sky)
+                    .tag(sky)
             }
+        }
         #if !os(macOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button(systemName: "map") {
-                        
-                    }
-                    .foregroundColor(.white)
+                    Button(systemName: "map") {}
+                        .foregroundColor(.white)
                 }
                 ToolbarItem(placement: .status) {
-                    HStack(spacing: 10) {
-                        ForEach(skies) { sky in
-                            Group {
-                                if sky.currentLocation {
-                                    Image(systemName:"location.fill")
-                                        .font(.caption2)
-                                } else {
-                                    Circle().frame(width: 8, height: 8)
-                                }
-                            }
-                                .foregroundStyle(sky == selected ? .white : .white.opacity(0.5) )
-                        }
-                    }
+                    TabIndexView(selected: navigation.selected, skies: skies)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(systemName: "list.bullet") {
                         navigation.navigateList()
                     }
-                    .foregroundColor(.white)
+                        .foregroundColor(.white)
                 }
             }
         #endif
     }
     
+}
+
+struct TabIndexView: View {
+    
+    let selected: Sky?
+    let skies: [Sky]
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            ForEach(skies) { sky in
+                Group {
+                    if (sky.currentLocation ?? false) {
+                        Image(systemName:"location.fill")
+                            .font(.caption2)
+                    } else {
+                        Circle().frame(width: 8, height: 8)
+                    }
+                }
+                .foregroundStyle(sky == selected ? .white : .white.opacity(0.5) )
+            }
+        }
+    }
 }
 
 

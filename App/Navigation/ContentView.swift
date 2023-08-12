@@ -6,30 +6,25 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct ContentView: View {
-    #if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    #endif
-    @Environment(\.managedObjectContext) private var viewContext
+
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var navigation: NavigationManager
     
-    @FetchRequest(fetchRequest: Sky.sorted, animation: .default)
-    private var skies: FetchedResults<Sky>
+    @Query private var skies: [Sky]
 
     var body: some View {
+                
         NavigationSplitView {
             #if os(iOS)
-            iOSView
+            iOSContentView()
             #else
             SkiesListView()
             #endif
         } detail: {
-            if let selected = navigation.selected {
-                SkyView(sky: selected)
-                    .background(selected.color)
-            }
+            detailView
         }
         .onAppear {
             for sky in skies {
@@ -38,28 +33,50 @@ struct ContentView: View {
         }
     }
     
-    #if os(iOS)
     @ViewBuilder
-    var iOSView: some View {
+    private var detailView: some View {
+        if let selected = navigation.selected {
+            SkyView(sky: selected)
+                .background(selected.color)
+        } else {
+            Text(skies.isEmpty ? "Add a Night Sky" : "Select a Sky")
+                .font(.largeTitle)
+        }
+    }
+}
+
+
+#if os(iOS)
+
+struct iOSContentView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var skies: [Sky]
+    @EnvironmentObject var navigation: NavigationManager
+
+    
+    var body: some View {
         if horizontalSizeClass == .compact {
             if let selected = navigation.selected {
-                SkiesTabView(skies: skies, selected: selected)
+                SkiesTabView()
                     .background(selected.color)
             } else {
                 SkiesListView()
             }
+
         } else {
             SkiesListView()
         }
     }
-    #endif
 }
+#endif
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, skyData.context)
+            .modelContainer(previewContainer)
             .environmentObject(NavigationManager.shared)
     }
 }

@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SkiesListView: View {
-    @Environment(\.managedObjectContext) private var context
+    @Environment(\.modelContext) private var context
     @EnvironmentObject var navigation: NavigationManager
-    
-    @FetchRequest(fetchRequest: Sky.sorted, animation: .default)
-    private var skies: FetchedResults<Sky>
+    @Query private var skies: [Sky]
 
     var body: some View {
             List {
@@ -28,7 +27,7 @@ struct SkiesListView: View {
                     }
                     #endif
                 }
-                .onDelete(perform: deleteSkies)
+                .onDelete(perform: delete)
             }
             .listStyle(.plain)
             #if !os(watchOS)
@@ -46,14 +45,12 @@ struct SkiesListView: View {
     }
 
     
-    private func deleteSkies(offsets: IndexSet) {
+    private func delete(_ indexSet: IndexSet) {
         withAnimation {
-            offsets.map { skies[$0] }.forEach(context.delete)
-            do {
-                try context.save()
-            } catch {
-                print(error)
+            indexSet.forEach { index in
+                context.delete(skies[index])
             }
+            try? context.save()
         }
     }
 
@@ -62,7 +59,7 @@ struct SkiesListView: View {
 struct SkiesListView_Previews: PreviewProvider {
     static var previews: some View {
         SkiesListView()
+            .modelContainer(previewContainer)
             .environmentObject(NavigationManager.shared)
-            .environment(\.managedObjectContext, skyData.context)
     }
 }

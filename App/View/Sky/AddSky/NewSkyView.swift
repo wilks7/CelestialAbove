@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct NewSkyView: View {
-    @Environment(\.managedObjectContext) private var context
-    @EnvironmentObject var model: SearchResults
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
-    let searchSky: SearchResults.Sky
+    let searchSky: SkyKey
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,11 +35,11 @@ struct NewSkyView: View {
     }
     
     private func add(){
-        let sky = Sky(context: context, title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
+        let sky = Sky(title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
         sky.fetchData()
-        withAnimation {
-            model.tappedSky = nil
-        }
+        context.insert(sky)
+        try? context.save()
+        dismiss()
     }
 }
 

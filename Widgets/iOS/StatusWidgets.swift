@@ -45,38 +45,38 @@ struct StatusWidgets: Widget {
         .description("This is an example widget.")
     }
 }
-
-struct StatusWidget_Previews: PreviewProvider {
-    
-    static var skyEntry: StatusEntry = .init(date: .now, sky: sky, configuration: StatusIntent())
-    
-    static var previews: some View {
-//        #if os(iOS)
-        Group {
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .accessoryInline))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        }
-//            .environment(\.managedObjectContext, coreData.context)
-//        #elseif os(macOS)
-        Group {
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
-            StatusWidgetView(entry: skyEntry)
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
-        }
-//            .environment(\.managedObjectContext, coreData.context)
-//        #endif
-    }
-}
+//
+//struct StatusWidget_Previews: PreviewProvider {
+//    
+//    static var skyEntry: StatusEntry = .init(date: .now, sky: sky, configuration: StatusIntent())
+//    
+//    static var previews: some View {
+////        #if os(iOS)
+//        Group {
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemLarge))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .accessoryInline))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+//        }
+////            .environment(\.managedObjectContext, coreData.context)
+////        #elseif os(macOS)
+//        Group {
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            StatusWidgetView(entry: skyEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemLarge))
+//        }
+////            .environment(\.managedObjectContext, coreData.context)
+////        #endif
+//    }
+//}

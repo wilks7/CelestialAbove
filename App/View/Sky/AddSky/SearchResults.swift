@@ -12,35 +12,18 @@ import MapKit
 import CoreLocation
 import CoreData
 
+struct SkyKey: Identifiable {
+    let id = UUID()
+    let title: String
+    let location: CLLocation
+    let timezone: TimeZone
+}
 
 class SearchResults: NSObject, ObservableObject {
-    
-    struct Sky: Identifiable {
-        let id = UUID()
-        let title: String
-        let location: CLLocation
-        let timezone: TimeZone
-    }
-    
+        
     @Published var results: [MKLocalSearchCompletion] = []
-    @Published var tappedSky: Sky?
+    @Published var tappedSky: SkyKey?
     @Published var searchTerm = ""
-    
-    var location: CLLocation? {
-        guard searchTerm.contains(",") else {return nil}
-        let seperated = searchTerm.components(separatedBy: ",")
-        guard let first = seperated.first, let last = seperated.last
-            else {return nil}
-        guard let latitude = Double(first), let longitude = Double(last)
-            else {return nil}
-        return CLLocation(latitude: latitude, longitude: longitude)
-    }
-    
-    var validCoordinate: Bool {
-        if let location {
-            return CLLocationCoordinate2DIsValid(location.coordinate)
-        } else {return false}
-    }
 
     private var searchCompleter = MKLocalSearchCompleter()
 
@@ -50,22 +33,34 @@ class SearchResults: NSObject, ObservableObject {
         searchCompleter.resultTypes = [.address]
     }
     
-//    private lazy var localSearchCompleter: MKLocalSearchCompleter = {
-//        let completer = MKLocalSearchCompleter()
-//
-//        return completer
-//    }()
-    
     func searchAddress(_ text: String) {
         guard text.isEmpty == false else { return }
         searchCompleter.queryFragment = text
     }
     
-    func clear(){
-        Task{@MainActor in
-            self.results = []
-            self.searchTerm = ""
-        }
+//    func clear(){
+//        Task{@MainActor in
+//            self.tappedSky = nil
+//            self.results = []
+//            self.searchTerm = ""
+//        }
+//    }
+}
+
+extension SearchResults {
+    
+    var location: CLLocation? {
+        guard searchTerm.contains(",") else {return nil}
+        let seperated = searchTerm.components(separatedBy: ",")
+        guard let first = seperated.first, let last = seperated.last
+            else {return nil}
+        guard let latitude = Double(first), let longitude = Double(last)
+            else {return nil}
+        
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        let isValid = CLLocationCoordinate2DIsValid(location.coordinate)
+        
+        return isValid ? location : nil
     }
 }
 
@@ -80,6 +75,9 @@ extension SearchResults: MKLocalSearchCompleterDelegate {
         print(error)
     }
     
+}
+
+extension SearchResults {
     func tapped(_ result: MKLocalSearchCompletion) async -> Void {
         
         let searchRequest = MKLocalSearch.Request(completion: result)
@@ -93,20 +91,20 @@ extension SearchResults: MKLocalSearchCompleterDelegate {
             
         let title = result.title.components(separatedBy: ",").first ?? placemark.administrativeArea ?? location.id
         Task{@MainActor in
-            let sky = Sky(title: title, location: location, timezone: timezone)
+            let sky = SkyKey(title: title, location: location, timezone: timezone)
             self.tappedSky = sky
         }
 
     }
     
     #warning("show error")
-    func tapped(_ location: CLLocation) async -> Void {
+    func tapped(_ location: CLLocation) async {
         let placemarks = try? await CLGeocoder().reverseGeocodeLocation(location)
         guard let placemark = placemarks?.first,let timezone = placemark.timeZone
             else { return }
 
         Task{@MainActor in
-            let sky = Sky(title: location.id, location: location, timezone: timezone)
+            let sky = SkyKey(title: location.id, location: location, timezone: timezone)
             self.tappedSky = sky
         }
 
