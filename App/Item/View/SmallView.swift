@@ -39,8 +39,7 @@ struct SmallView<I:SkyItem>: View {
     }
 }
 
-struct ItemSmallView_Previews: PreviewProvider {
-    static var previews: some View {
-        SmallView(item: event)
-    }
+#Preview {
+    SmallView(item: MockData.mars)
 }
+

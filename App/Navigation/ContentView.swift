@@ -59,8 +59,7 @@ struct iOSContentView: View {
     var body: some View {
         if horizontalSizeClass == .compact {
             if let selected = navigation.selected {
-                SkiesTabView()
-                    .background(selected.color)
+                SkiesTabView(selected: selected)
             } else {
                 SkiesListView()
             }

@@ -63,9 +63,9 @@ extension SkyItemView {
 
 struct SkyItem_Previews: PreviewProvider {
     static var previews: some View {
-        SkyItemView(event)
-        SkyItemView(event, .medium)
-        SkyItemView(event, .large)
+        SkyItemView(MockData.mars)
+        SkyItemView(MockData.mars, .medium)
+        SkyItemView(MockData.mars, .large)
     }
 }
 

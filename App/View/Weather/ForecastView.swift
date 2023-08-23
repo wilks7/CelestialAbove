@@ -158,7 +158,7 @@ extension ForecastView.Cell {
 
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
-        ForecastView(forecast: forecast, timezone: timezone)
+        ForecastView(forecast: MockData.forecast, timezone: MockData.timezoneNY)
 
     }
 }

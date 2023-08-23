@@ -23,9 +23,11 @@ struct MediumView<I:SkyItem>: View {
                     VStack {
                         Text(item.label ?? "--")
                         Text(item.subtitle ?? "--")
+                        Text(item.detail ?? "--")
                     }
                 }
-            } else {
+            }
+            else {
                 ItemChartView(item: item)
             }
         }
@@ -39,6 +41,6 @@ struct MediumView<I:SkyItem>: View {
 
 struct ItemViewMedium_Previews: PreviewProvider {
     static var previews: some View {
-        MediumView(item: event)
+        MediumView(item: MockData.mars)
     }
 }

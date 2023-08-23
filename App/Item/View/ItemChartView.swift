@@ -45,6 +45,6 @@ struct ItemChartView<I:SkyItem>: View {
 
 struct ItemChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemChartView(item: event)
+        ItemChartView(item: MockData.venus)
     }
 }

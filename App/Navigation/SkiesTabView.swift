@@ -12,8 +12,10 @@ struct SkiesTabView: View {
     @EnvironmentObject var navigation: NavigationManager
     @Query private var skies: [Sky]
     
+    @State var selected: Sky
+    
     var body: some View {
-        TabView(selection: $navigation.selected) {
+        TabView(selection: $selected) {
             ForEach(skies){ sky in
                 SkyView(sky: sky)
                     .tag(sky)
@@ -27,7 +29,7 @@ struct SkiesTabView: View {
                         .foregroundColor(.white)
                 }
                 ToolbarItem(placement: .status) {
-                    TabIndexView(selected: navigation.selected, skies: skies)
+                    TabIndexView(selected: selected, skies: skies)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(systemName: "list.bullet") {
@@ -37,6 +39,8 @@ struct SkiesTabView: View {
                 }
             }
         #endif
+        .background(selected.color)
+
     }
     
 }

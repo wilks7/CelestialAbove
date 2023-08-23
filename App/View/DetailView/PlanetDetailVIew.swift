@@ -17,6 +17,6 @@ struct PlanetDetailVIew: View {
 
 struct PlanetDetailVIew_Previews: PreviewProvider {
     static var previews: some View {
-        PlanetDetailVIew(event: event)
+        PlanetDetailVIew(event: MockData.mars)
     }
 }

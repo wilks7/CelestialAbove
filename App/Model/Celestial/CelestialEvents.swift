@@ -13,6 +13,7 @@ import CoreLocation
 struct CelestialEvents: Events {
     let planet: Planet.Type
     let location: CLLocation
+    let timezone: TimeZone
     let rise: Date?
     let set: Date?
     var transit: Date? = nil

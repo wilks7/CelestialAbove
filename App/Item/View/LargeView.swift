@@ -16,6 +16,6 @@ struct LargeView<I:SkyItem>: View {
 
 struct ItemViewLarge_Previews: PreviewProvider {
     static var previews: some View {
-        LargeView(item: event)
+        LargeView(item: MockData.mars)
     }
 }

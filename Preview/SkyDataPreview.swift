@@ -18,6 +18,7 @@ let previewContainer: ModelContainer = {
             let context = container.mainContext
             
             let ny = MockData.NY()
+            ny.events = MockData.events
             context.insert(ny)
         }
         
