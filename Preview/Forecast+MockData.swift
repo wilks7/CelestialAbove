@@ -9,7 +9,11 @@ import Foundation
 import WeatherKit
 import CoreData
 
+
 extension MockData {
+    
+    static var forecast: [MockWeather] { makeForecast(for: .day) }
+    
     struct MockWeather: WeatherProtocol {
         var date: Date
         
@@ -21,9 +25,9 @@ extension MockData {
         
     }
     
-    static func makeForecast(for component: Calendar.Component) -> [MockData.MockWeather] {
+    static func makeForecast(for component: Calendar.Component) -> [MockWeather] {
         let now = Date.now
-        var forecast: [MockData.MockWeather] = []
+        var forecast: [MockWeather] = []
         for i in 1..<11 {
             if let date = Calendar.current.date(byAdding: component, value: i, to: now) {
                 let weather = MockData.MockWeather(date: date, percent: 0.5, condition: .cloudy, symbolName: "circle")
@@ -33,5 +37,3 @@ extension MockData {
         return forecast
     }
 }
-
-

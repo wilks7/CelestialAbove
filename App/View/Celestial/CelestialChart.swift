@@ -39,6 +39,7 @@ struct CelestialChart: View {
                 .onChanged{_ in isDragging = true}
                 .onEnded{_ in isDragging = false }
         )
+        .chartYAxis(.hidden)
 
 //            RuleMark(x: .value("Time", sunrise))
 //                .foregroundStyle(.gray)

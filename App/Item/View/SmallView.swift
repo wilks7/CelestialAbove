@@ -7,36 +7,36 @@
 
 import SwiftUI
 
-struct SmallView<I:SkyItem>: View {
+struct SmallView<C:View>: View {
     enum ViewType { case detail, chart }
-    let item: I
+    let label: String?
+    let subtitle: String?
     
-    @State var type: ViewType = .detail
+    @ViewBuilder
+    var constant: C
     
     var body: some View {
-        Group {
-            if type == .detail {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(item.label ?? "--")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    item.constant
-                        .frame(width: 70, height: 70)
-                    Text(item.subtitle ?? "--")
-                        .font(.headline)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-            } else {
-                ItemChartView(item: item)
-            }
+        VStack(alignment: .leading, spacing: 10) {
+            Text(label ?? "--")
+                .font(.title2)
+                .fontWeight(.semibold)
+            constant
+                .frame(width: 70, height: 70)
+            Text(subtitle ?? "--")
+                .font(.headline)
         }
-        .onTapGesture {
-            withAnimation{
-                self.type = self.type == .detail ? .chart : .detail
-            }
-        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal)
     }
+}
+
+extension SmallView {
+    init<S:SkyItem>(item: S) where C == Image {
+        self.label = item.label
+        self.subtitle = item.subtitle
+        self.constant = Image(systemName: item.symbolName)
+    }
+    
 }
 
 #Preview {

@@ -15,17 +15,17 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             SkiesListView()
-                .navigationDestination(for: Sky.self) { sky in
-                    #if os(iOS)
-                    if horizontalSizeClass == .compact {
-                        SkiesTabView(selected: sky)
-                    } else {
-                        SkyView(sky: sky)
-                    }
-                    #else
+            .navigationDestination(for: Sky.self) { sky in
+                #if os(iOS)
+                if horizontalSizeClass == .compact {
+                    SkiesTabView(selected: sky)
+                } else {
                     SkyView(sky: sky)
-                    #endif
                 }
+                #else
+                SkyView(sky: sky)
+                #endif
+            }
         } detail: {
             ContentUnavailableView(
                 skies.isEmpty ? "Add a Night Sky" : "Select a Sky",

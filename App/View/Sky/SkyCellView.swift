@@ -14,7 +14,7 @@ struct SkyCellView<TopTrailing: SkyItem, BottomLeading: SkyItem, BottomTrailing:
         VStack(spacing: 0) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0){
-                    SkyTitle(title: sky.title ?? "Title", isCurrent: sky.currentLocation ?? false)
+                    SkyTitle(sky: sky)
                     Text( Date.now.time(sky.timezone) )
                         .font(.footnote.weight(.semibold))
                 }
@@ -37,6 +37,41 @@ struct SkyCellView<TopTrailing: SkyItem, BottomLeading: SkyItem, BottomTrailing:
         .padding(.vertical, 8)
         .background(sky.color)
         .cornerRadius(16)
+    }
+}
+
+extension SkyCellView {
+    struct SkyTitle: View {
+        
+        init(sky: Sky){
+            self.title = sky.title ?? sky.id
+            self.isCurrent = sky.currentLocation ?? false
+        }
+    
+        let title: String
+        let isCurrent: Bool
+        var font: Font? = nil
+        var weight: Font.Weight = .bold
+        var alignment: HorizontalAlignment = .leading
+    
+        var body: some View {
+            HStack(alignment: .top) {
+                if isCurrent && alignment == .trailing {
+                    image
+                }
+                Text(title)
+                if isCurrent && alignment == .leading {
+                    image
+                }
+            }
+            .font(font)
+            .fontWeight(weight)
+        }
+    
+        var image: some View {
+            Image(systemName: "location.fill")
+                .scaleEffect(0.8)
+        }
     }
 }
 

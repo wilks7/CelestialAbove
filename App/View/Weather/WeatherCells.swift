@@ -38,6 +38,10 @@ struct WeatherCells: View {
     }
 }
 
+#Preview {
+    Text("WeatherCells")
+}
+
 //struct WeatherCells_Previews: PreviewProvider {
 //    static var previews: some View {
 //        WeatherCells()

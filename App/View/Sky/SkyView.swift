@@ -11,9 +11,10 @@ import WeatherKit
 struct SkyView: View {
     let title: String
     let events: [CelestialEvents]
+    let timezone: TimeZone
     let weather: Weather?
-    let sunrise: Date
-    let sunset: Date
+    let sunEvents: SunEvents?
+    let moonEvents: MoonEvents?
     let color: SwiftUI.Color
     
         
@@ -21,9 +22,12 @@ struct SkyView: View {
         ScrollView(.vertical) {
             VStack {
                 header
+                SunMoonView(sunEvents: sunEvents, moonEvents: moonEvents)
+                ForecastView(forecast: weather?.hourly, timezone: timezone)
                 ForEach(events) { events in
-                    CelestialChartItem(event: events, sunrise: sunrise, sunset: sunset)
+                    CelestialChartItem(event: events, sunrise: sunEvents?.sunrise, sunset: sunEvents?.sunset)
                 }
+                ForecastView(forecast: weather?.daily, timezone: timezone, sunEvents: sunEvents, alignment: .vertical)
                 if let weather = weather {
                     WeatherCells(weather)
                 }
@@ -33,8 +37,6 @@ struct SkyView: View {
         .scrollContentBackground(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         .background(color)
-
-//        .navigationTitle(title ?? "Title")
     }
     
     var header: some View {
@@ -48,6 +50,7 @@ struct SkyView: View {
             }
         }
     }
+
 }
 
 extension SkyView {
@@ -55,27 +58,27 @@ extension SkyView {
         self.title = sky.title ?? sky.id
         self.events = sky.events
         self.weather = sky.weather
-        self.sunset = sky.weather?.today?.sun.sunset ?? Date.now
-        self.sunrise = sky.weather?.today?.sun.sunrise ?? Date.now
+        self.sunEvents = sky.weather?.today?.sun
+        self.moonEvents = sky.weather?.today?.moon
+        self.timezone = sky.timezone
         self.color = sky.color
     }
 }
 
-import CoreLocation
-import SwiftAA
-
 #Preview {
-    let locationNY: CLLocation = CLLocation(latitude: 40.7831, longitude: -73.9712)
-    var timezoneNY: TimeZone { TimeZone(identifier: "America/New_York")! }
-    let venus = CelestialService().createEvent(for: Venus.self, at: locationNY, in: timezoneNY)
-    let sunrise = Date.now.startOfDay().addingTimeInterval(60*60*7)
-    let sunset = Date.now.endOfDay().addingTimeInterval(-60*60*7)
-    
-    return SkyView(title: "Hi", events: MockData.events, weather: nil, sunrise: sunrise, sunset: sunset, color: .red)
+    ModelPreview { sky in
+        var sky:Sky = sky
+        sky.events = MockData.events
+        return SkyView(sky: sky)
+    }
 }
-
-//#Preview {
-//    ModelPreview {
-//        SkyView(sky: $0)
-//    }
-//}
+#Preview {
+    SkyView(title: "Title",
+            events: MockData.events,
+            timezone: MockData.timezoneNY,
+            weather: nil,
+            sunEvents: MockData.sunEvents,
+            moonEvents: MockData.moonEvents,
+            color: .blue
+    )
+}

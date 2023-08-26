@@ -8,27 +8,22 @@
 import SwiftUI
 import WeatherKit
 
-struct SkyItemView<I:SkyItem>: View {
-//    @EnvironmentObject var sky: Sky
-    enum Size: String, CaseIterable { case small, medium, large }
-    enum ViewType { case detail, chart }
 
-    let item: I
-    @State var size: Size
+struct SkyGridCell<V:View>: View {
+    let title: String
+    let symbolName: String
     
+    @ViewBuilder
+    var content: V
     @State private var showSheet = false
-    
-    var body: some View  {
+
+    var body: some View {
         VStack {
-            ItemHeader(title: item.title, symbolName: item.symbolName)
-                .onTapGesture(perform: showDetail)
-            Group {
-                switch size {
-                case .small: SmallView(item: item)
-                case .medium: MediumView(item: item)
-                case .large: LargeView(item: item)
+            ItemHeader(title: title, symbolName: symbolName)
+                .onTapGesture {
+                    showSheet = true
                 }
-            }
+            content
         }
         .padding(8)
         .sheet(isPresented: $showSheet) {
@@ -41,10 +36,45 @@ struct SkyItemView<I:SkyItem>: View {
         }
         .transparent()
     }
+}
+
+
+struct SkyItemView<I:SkyItem>: View {
+//    @EnvironmentObject var sky: Sky
+    enum Size: String, CaseIterable { case small, medium, large }
+    enum ViewType { case detail, chart }
+
+    let item: I
+    @State var size: Size
+    @State var type: ViewType = .detail
+
+    @State private var showSheet = false
     
-    private func showDetail() {
-        self.showSheet = true
+    var body: some View  {
+        SkyGridCell(title: item.title, symbolName: item.symbolName) {
+
+            Group {
+                switch size {
+                case .small: 
+                    Group {
+                        if type == .detail {
+                            SmallView(item: item)
+                        } else {
+                            ItemChartView(item: item)
+                        }
+                    }
+                        .onTapGesture {
+                            withAnimation{
+                                self.type = self.type == .detail ? .chart : .detail
+                            }
+                        }
+                case .medium: MediumView(item: item)
+                case .large: LargeView(item: item)
+                }
+            }
+        }
     }
+
 }
 
 extension SkyItemView {

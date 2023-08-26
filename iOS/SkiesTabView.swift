@@ -24,7 +24,7 @@ struct SkiesTabView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                Button(systemName: "map") {}
+                Button(systemName: "map", action: openMap)
             }
             ToolbarItem(placement: .status) {
                 TabIndexView(selected: selected, skies: skies)
@@ -37,6 +37,13 @@ struct SkiesTabView: View {
         }
         .foregroundColor(.white)
         .background(selected.color)
+    }
+    
+    private func openMap(){
+        guard let url = URL(string: "maps://?saddr=&daddr=\(selected.location.coordinate.latitude),\(selected.location.coordinate.longitude)") else {return}
+        if UIApplication.shared.canOpenURL(url) {
+              UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
 }
