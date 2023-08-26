@@ -17,25 +17,14 @@ protocol Events {
     var color: SwiftUI.Color {get}
 }
 
-enum EventType: String { case rise, set, transit }
+
 extension Events {
     var color: SwiftUI.Color { .white }
     
     var nextEvent: (date: Date?, type: EventType) {
-        if let sunrise = rise, let sunset = set {
-            let now = Date.now
-            if now < sunrise {
-                return (sunrise, .rise)
-            } else if now < sunset {
-                return (sunset, .set)
-            } else {
-                return (sunrise, .rise)
-            }
-        } else {
-            return (nil, .transit)
-        }
+        EventService().nextEvent(for: self, sunrise: rise, sunset: set)
     }
-    
+
     var nextTime: String? {
         nextEvent.date?.time()
     }

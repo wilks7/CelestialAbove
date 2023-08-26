@@ -16,8 +16,9 @@ class SkyData {
     
     static let container = try! ModelContainer(
         for: schema,
-        configurations: [ ModelConfiguration(inMemory: false) ]
+        configurations: [ ModelConfiguration(inMemory: false, groupContainer: .identifier("group.app.rifigy.CelestialAbove")) ]
     )
+
 }
 
 extension SkyData {

@@ -9,13 +9,12 @@ import SwiftUI
 import WeatherKit
 
 struct SkyView: View {
-    @EnvironmentObject var navigation: NavigationManager
-    
     let title: String
     let events: [CelestialEvents]
     let weather: Weather?
     let sunrise: Date
     let sunset: Date
+    let color: SwiftUI.Color
     
         
     var body: some View {
@@ -32,6 +31,9 @@ struct SkyView: View {
             .padding(.horizontal)
         }
         .scrollContentBackground(.hidden)
+        .toolbar(.hidden, for: .navigationBar)
+        .background(color)
+
 //        .navigationTitle(title ?? "Title")
     }
     
@@ -55,6 +57,7 @@ extension SkyView {
         self.weather = sky.weather
         self.sunset = sky.weather?.today?.sun.sunset ?? Date.now
         self.sunrise = sky.weather?.today?.sun.sunrise ?? Date.now
+        self.color = sky.color
     }
 }
 
@@ -68,7 +71,7 @@ import SwiftAA
     let sunrise = Date.now.startOfDay().addingTimeInterval(60*60*7)
     let sunset = Date.now.endOfDay().addingTimeInterval(-60*60*7)
     
-    return SkyView(title: "Hi", events: MockData.events, weather: nil, sunrise: sunrise, sunset: sunset)
+    return SkyView(title: "Hi", events: MockData.events, weather: nil, sunrise: sunrise, sunset: sunset, color: .red)
 }
 
 //#Preview {

@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct SkiesTabView: View {
-    @EnvironmentObject var navigation: NavigationManager
-    @Query private var skies: [Sky]
+    @Environment(\.dismiss) var dismiss
+    @Query var skies: [Sky]
     
     @State var selected: Sky
     
@@ -21,33 +21,29 @@ struct SkiesTabView: View {
                     .tag(sky)
             }
         }
-        #if !os(macOS)
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button(systemName: "map") {}
-                        .foregroundColor(.white)
-                }
-                ToolbarItem(placement: .status) {
-                    TabIndexView(selected: selected, skies: skies)
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Button(systemName: "list.bullet") {
-                        navigation.navigateList()
-                    }
-                        .foregroundColor(.white)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Button(systemName: "map") {}
+            }
+            ToolbarItem(placement: .status) {
+                TabIndexView(selected: selected, skies: skies)
+            }
+            ToolbarItem(placement: .bottomBar) {
+                Button(systemName: "list.bullet") {
+                    dismiss()
                 }
             }
-        #endif
+        }
+        .foregroundColor(.white)
         .background(selected.color)
-
     }
     
 }
 
 struct TabIndexView: View {
     
-    let selected: Sky?
+    let selected: Sky
     let skies: [Sky]
     
     var body: some View {

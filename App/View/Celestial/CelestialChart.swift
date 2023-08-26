@@ -16,6 +16,7 @@ struct CelestialChart: View {
     var sunset: Date
     
     @State var selected: CelestialEvents.Location?
+    @State var isDragging = false
     private let service = CelestialService()
 
     var body: some View {
@@ -30,49 +31,55 @@ struct CelestialChart: View {
                     y: .value("Altitude", $0.altitude)
                 )
                 .lineStyle(.init(lineWidth: 4))
-                .foregroundStyle(events.color)
+                .foregroundStyle(isDragging ? .red:.blue)
             }
+        }
+        .gesture(
+            DragGesture()
+                .onChanged{_ in isDragging = true}
+                .onEnded{_ in isDragging = false }
+        )
 
-            RuleMark(x: .value("Time", sunrise))
-                .foregroundStyle(.gray)
-                .annotation(position: .bottom, spacing: 0) {
-                    Image(systemName: "sunrise")
-//                    Text(events.locations.first?.date.formatted() ?? "First")
-                }
-            RuleMark(x: .value("Time", sunset))
-                .foregroundStyle(.gray)
-                .annotation(position: .bottom, spacing: 0) {
-                    Image(systemName: "sunset")
-                    Text(sunrise.formatted())
-                }
-            if let selected {
-                selected.point
-                .foregroundStyle(.white)
-            }
-            else {
-                PointMark(
-                    x: .value("Time", Date.now),
-                    y: .value("Value", value(for: Date.now).altitude)
-                )
-                .foregroundStyle(.white)
-            }
-            RuleMark(y: .value("Horizon", 0))
-                .foregroundStyle(.white)
-        }
-        .chartXAxis {
-            AxisMarks(format: .dateTime.hour(), values: [Date.now.startOfDay(), Date.now.endOfDay()])
-        }
-        .chartYAxis {
-            AxisMarks(values: [-100, -50, 50, 100])
-        }
-//        .chartBackground(content: { proxy in
-//            Color.red
-//        })
-        .chartPlotStyle { chartContent in
-            chartContent
-                .background(Color.red.opacity(0.2))
-//                .frame(height: 32)
-        }
+//            RuleMark(x: .value("Time", sunrise))
+//                .foregroundStyle(.gray)
+//                .annotation(position: .bottom, spacing: 0) {
+//                    Image(systemName: "sunrise")
+////                    Text(events.locations.first?.date.formatted() ?? "First")
+//                }
+//            RuleMark(x: .value("Time", sunset))
+//                .foregroundStyle(.gray)
+//                .annotation(position: .bottom, spacing: 0) {
+//                    Image(systemName: "sunset")
+//                    Text(sunrise.formatted())
+//                }
+//            if let selected {
+//                selected.point
+//                .foregroundStyle(.white)
+//            }
+//            else {
+//                PointMark(
+//                    x: .value("Time", Date.now),
+//                    y: .value("Value", value(for: Date.now).altitude)
+//                )
+//                .foregroundStyle(.white)
+//            }
+//            RuleMark(y: .value("Horizon", 0))
+//                .foregroundStyle(.white)
+//        }
+//        .chartXAxis {
+//            AxisMarks(format: .dateTime.hour(), values: [Date.now.startOfDay(), Date.now.endOfDay()])
+//        }
+//        .chartYAxis {
+//            AxisMarks(values: [-100, -50, 50, 100])
+//        }
+////        .chartBackground(content: { proxy in
+////            Color.red
+////        })
+//        .chartPlotStyle { chartContent in
+//            chartContent
+//                .background(Color.red.opacity(0.2))
+////                .frame(height: 32)
+//        }
     }
     
     

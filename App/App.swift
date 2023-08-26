@@ -10,12 +10,9 @@ import SwiftData
 
 @main
 struct CelestialAboveApp: App {
-    @StateObject var navigation = NavigationManager.shared
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(navigation)
                 .modelContainer(SkyData.container)
         }
         #if os(macOS)
@@ -23,14 +20,7 @@ struct CelestialAboveApp: App {
         #endif
         
         #if os(macOS)
-        MenuBarExtra {
-            SkiesListView()
-                .environmentObject(navigation)
-                .modelContainer(SkyData.container)
-        } label: {
-            Label("Celestial Above", systemImage: "sunrise")
-        }
-        .menuBarExtraStyle(.window)
+        SkyMenuBar()
         #endif
     }
 }
