@@ -10,22 +10,23 @@ import Charts
 import CoreLocation
 import SwiftAA
 
-struct CelestialChart: View {
-    let events: CelestialEvents
+struct CelestialChart<C:CelestialBody>: View {
+//    let events: CelestialEvents
+    var celestial: C.Type
+    let location: CLLocation
+    let timezone: TimeZone
     var sunrise: Date?
     var sunset: Date?
     
-    @State var selected: CelestialEvents.Location?
+    @State var selected: (date:Date, altitude:Double)?
     @State var isDragging = false
     private let service = CelestialService()
+    
+    let locations: [CelestialEvents.Location]
 
     var body: some View {
         Chart {
-            if let selected {
-                RuleMark(x: .value("Time", selected.date))
-                    .foregroundStyle(.gray)
-            }
-            ForEach(events.locations){
+            ForEach(locations){
                 LineMark(
                     x: .value("Time", $0.date),
                     y: .value("Altitude", $0.altitude)
@@ -33,13 +34,87 @@ struct CelestialChart: View {
                 .lineStyle(.init(lineWidth: 4))
                 .foregroundStyle(isDragging ? .red:.blue)
             }
+            RuleMark(y: .value("Average Sell", 0))
+                .foregroundStyle(.white)
+
+            if let selected {
+                RuleMark(x: .value("Time", selected.date))
+                    .foregroundStyle(.gray)
+                    .annotation(position: .overlay) {
+                        Text(selected.date.time(timezone))
+                            .font(.caption)
+                    }
+                PointMark(
+                    x: .value("Time", selected.date),
+                    y: .value("Value", selected.altitude)
+                )
+                .foregroundStyle(.white)
+            } else {
+                PointMark(
+                    x: .value("Time", Date.now),
+                    y: .value("Value", value(for: Date.now))
+                )
+                .foregroundStyle(.white)
+            }
         }
-        .gesture(
-            DragGesture()
-                .onChanged{_ in isDragging = true}
-                .onEnded{_ in isDragging = false }
-        )
+        .chartOverlay { proxy in
+            GeometryReader { geometry in
+                Rectangle().fill(.clear).contentShape(Rectangle())
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                // Convert the gesture location to the coordinate space of the plot area.
+                                guard let plotFrame = proxy.plotFrame else {return}
+                                let origin = geometry[plotFrame].origin
+                                let location = CGPoint(
+                                    x: value.location.x - origin.x,
+                                    y: value.location.y - origin.y
+                                )
+                                // Get the x (date) and y (price) value from the location.
+                                guard let (date, _) = proxy.value(at: location, as: (Date, Double).self) else {return}
+                                guard let first = locations.first?.date, let last = locations.last?.date else {return}
+                                if first < date, date < last {
+                                    let celestialLocation = service.celestialLocation(celestial: celestial, at: self.location, at: date)
+                                    self.selected = (date, celestialLocation.altitude)
+                                } else {
+                                    print(date.formatted())
+                                }
+
+                            }
+                            .onEnded{ _ in
+                                self.selected = nil
+                            }
+                    )
+            }
+        }
         .chartYAxis(.hidden)
+    }
+    
+    
+    
+    func value(for date: Date) -> Double {
+        let celestialLocation = service.celestialLocation(celestial: celestial, at: location, at: date)
+        return celestialLocation.altitude
+    }
+}
+
+extension CelestialChart {
+    init(events: CelestialEvents, sunrise: Date?, sunset: Date?) where C == Planet {
+        self.celestial = events.planet
+        self.sunrise = sunrise
+        self.sunset = sunset
+        self.location = events.location
+        self.timezone = events.timezone
+        self.locations = events.locations
+    }
+}
+
+#Preview {
+    CelestialChart(celestial: Mars.self, location: MockData.locationNY, timezone: MockData.timezoneNY, locations: MockData.mars.locations)
+}
+
+
+
 
 //            RuleMark(x: .value("Time", sunrise))
 //                .foregroundStyle(.gray)
@@ -81,21 +156,3 @@ struct CelestialChart: View {
 //                .background(Color.red.opacity(0.2))
 ////                .frame(height: 32)
 //        }
-    }
-    
-    
-    
-    func value(for date: Date) -> CelestialEvents.Location {
-        service.celestialLocation(for: events.planet, at: events.location, at: date)
-    }
-}
-
-struct CelestialChart_Previews: PreviewProvider {
-    static var previews: some View {
-        let sunrise = MockData.mars.locations.first!.date.startOfDay().addingTimeInterval(60*60*7)
-        let sunset = MockData.mars.locations.first!.date.endOfDay().addingTimeInterval(-60*60*7)
-
-        CelestialChart(events: MockData.mars, sunrise: sunrise, sunset: sunset)
-            .padding()
-    }
-}

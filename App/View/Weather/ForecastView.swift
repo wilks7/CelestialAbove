@@ -46,11 +46,28 @@ struct ForecastView<W:WeatherProtocol>: View {
                             }
                         }
                     } else {
-                        VStack(alignment: .leading, spacing: 5){
+                        Grid {
                             ForEach(forecastArray){ weather in
-                                ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
+                                GridRow {
+//                                    Text("Title")
+//                                        .font(.title3)
+//                                        .bold()
+//                                        .foregroundStyle(.white)
+//                                    Image(systemName: "cloud")
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .font(.title2)
+//                                        .symbolVariant(.fill)
+//                                        .symbolRenderingMode(.multicolor)
+//                                        .frame(height:30)
+                                    ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
+                                }
                             }
                         }
+//                        VStack(alignment: .leading, spacing: 5){
+//
+//                            }
+//                        }
                     }
                 }
             }

@@ -20,13 +20,16 @@ struct SmallView<C:View>: View {
             Text(label ?? "--")
                 .font(.title2)
                 .fontWeight(.semibold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
             constant
-                .frame(width: 70, height: 70)
+//                .frame(width: 70, height: 70)
             Text(subtitle ?? "--")
 //                .font(.headline)
                 .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
-        .frame(maxWidth: .infinity)
+//        .frame(maxWidth: .infinity)
         .padding(.horizontal)
     }
 }

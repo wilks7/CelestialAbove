@@ -24,8 +24,6 @@
 		4C1ACB2F2A99C52200500973 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1ACB2D2A99C52000500973 /* EventService.swift */; };
 		4C1ACB302A99C52300500973 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1ACB2D2A99C52000500973 /* EventService.swift */; };
 		4C1ACB312A99C52300500973 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1ACB2D2A99C52000500973 /* EventService.swift */; };
-		4C1F0FF02A9539DC00E5F66D /* CelestialChartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F0FEF2A9539DC00E5F66D /* CelestialChartItem.swift */; };
-		4C1F0FF12A9539DC00E5F66D /* CelestialChartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F0FEF2A9539DC00E5F66D /* CelestialChartItem.swift */; };
 		4C271CD02A12F34500A9DFBA /* CelesitalEvents+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CCF2A12F34500A9DFBA /* CelesitalEvents+Item.swift */; };
 		4C271CD12A12F34500A9DFBA /* CelesitalEvents+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CCF2A12F34500A9DFBA /* CelesitalEvents+Item.swift */; };
 		4C271CD22A12F34500A9DFBA /* CelesitalEvents+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CCF2A12F34500A9DFBA /* CelesitalEvents+Item.swift */; };
@@ -46,10 +44,10 @@
 		4C271CE72A13559500A9DFBA /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CE52A13559500A9DFBA /* Temperature.swift */; };
 		4C271CE82A13559500A9DFBA /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CE52A13559500A9DFBA /* Temperature.swift */; };
 		4C271CE92A13559500A9DFBA /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CE52A13559500A9DFBA /* Temperature.swift */; };
-		4C271CEB2A13569600A9DFBA /* PrecipitationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */; };
-		4C271CEC2A13569600A9DFBA /* PrecipitationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */; };
-		4C271CED2A13569600A9DFBA /* PrecipitationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */; };
-		4C271CEE2A13569600A9DFBA /* PrecipitationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */; };
+		4C271CEB2A13569600A9DFBA /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* Precipitation.swift */; };
+		4C271CEC2A13569600A9DFBA /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* Precipitation.swift */; };
+		4C271CED2A13569600A9DFBA /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* Precipitation.swift */; };
+		4C271CEE2A13569600A9DFBA /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEA2A13569600A9DFBA /* Precipitation.swift */; };
 		4C271CF02A135B2800A9DFBA /* WeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEF2A135B2800A9DFBA /* WeatherChart.swift */; };
 		4C271CF12A135B2800A9DFBA /* WeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEF2A135B2800A9DFBA /* WeatherChart.swift */; };
 		4C271CF22A135B2800A9DFBA /* WeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C271CEF2A135B2800A9DFBA /* WeatherChart.swift */; };
@@ -83,6 +81,10 @@
 		4C31F7E72A0D6D6F00219A0D /* SkyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31F7E62A0D6D6F00219A0D /* SkyData.swift */; };
 		4C31F7EC2A0D6D6F00219A0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31F7EB2A0D6D6F00219A0D /* ContentView.swift */; };
 		4C31F7EE2A0D6D7000219A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C31F7ED2A0D6D7000219A0D /* Assets.xcassets */; };
+		4C426A3E2A9BC3C10099B709 /* SkyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */; };
+		4C426A3F2A9BC3C10099B709 /* SkyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */; };
+		4C426A402A9BC3C10099B709 /* SkyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */; };
+		4C426A412A9BC3C10099B709 /* SkyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */; };
 		4C7B2F072A0E1A490052B875 /* SkiesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */; };
 		4C7B2F092A0E1D000052B875 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B2F082A0E1D000052B875 /* Color+Extension.swift */; };
 		4C80AF082A0D6F07007DA427 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C80AF072A0D6F07007DA427 /* MockData.swift */; };
@@ -102,10 +104,6 @@
 		4CAD86F72A12BF09002FE5C2 /* MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* MediumView.swift */; };
 		4CAD86F82A12BF09002FE5C2 /* MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* MediumView.swift */; };
 		4CAD86F92A12BF09002FE5C2 /* MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86F52A12BF09002FE5C2 /* MediumView.swift */; };
-		4CAD86FB2A12BF37002FE5C2 /* LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */; };
-		4CAD86FC2A12BF37002FE5C2 /* LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */; };
-		4CAD86FD2A12BF37002FE5C2 /* LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */; };
-		4CAD86FE2A12BF37002FE5C2 /* LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */; };
 		4CAD86FF2A12C77E002FE5C2 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78702A0EFF5D00C0F5F6 /* PlanetView.swift */; };
 		4CAD87002A12C77F002FE5C2 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE78702A0EFF5D00C0F5F6 /* PlanetView.swift */; };
 		4CAD87022A12CE5F002FE5C2 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */; };
@@ -3615,13 +3613,12 @@
 		4C18DFCF2A9A8C34007AEDED /* SunMoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunMoonView.swift; sourceTree = "<group>"; };
 		4C1ACB2B2A99B43900500973 /* SkyMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMenuBar.swift; sourceTree = "<group>"; };
 		4C1ACB2D2A99C52000500973 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
-		4C1F0FEF2A9539DC00E5F66D /* CelestialChartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelestialChartItem.swift; sourceTree = "<group>"; };
 		4C271CCF2A12F34500A9DFBA /* CelesitalEvents+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CelesitalEvents+Item.swift"; sourceTree = "<group>"; };
 		4C271CD62A12FB2300A9DFBA /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		4C271CDB2A1344D000A9DFBA /* Percent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Percent.swift; sourceTree = "<group>"; };
 		4C271CE02A13525700A9DFBA /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		4C271CE52A13559500A9DFBA /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
-		4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationItem.swift; sourceTree = "<group>"; };
+		4C271CEA2A13569600A9DFBA /* Precipitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precipitation.swift; sourceTree = "<group>"; };
 		4C271CEF2A135B2800A9DFBA /* WeatherChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherChart.swift; sourceTree = "<group>"; };
 		4C271CF42A135BB700A9DFBA /* CelestialChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelestialChart.swift; sourceTree = "<group>"; };
 		4C271CF92A14544200A9DFBA /* ItemChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemChartView.swift; sourceTree = "<group>"; };
@@ -3643,6 +3640,7 @@
 		4C31F7EB2A0D6D6F00219A0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4C31F7ED2A0D6D7000219A0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C31F7EF2A0D6D7000219A0D /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyGridItem.swift; sourceTree = "<group>"; };
 		4C7B2F062A0E1A490052B875 /* SkiesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiesTabView.swift; sourceTree = "<group>"; };
 		4C7B2F082A0E1D000052B875 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		4C80AF072A0D6F07007DA427 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -3650,7 +3648,6 @@
 		4C84B4032A86C4D800F74351 /* SkyData+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkyData+Preview.swift"; sourceTree = "<group>"; };
 		4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 		4CAD86F52A12BF09002FE5C2 /* MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumView.swift; sourceTree = "<group>"; };
-		4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeView.swift; sourceTree = "<group>"; };
 		4CAD87012A12CE5F002FE5C2 /* Widgets.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
 		4CAD87042A12CE8E002FE5C2 /* WidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntentHandler.swift; sourceTree = "<group>"; };
 		4CAD87072A12DE33002FE5C2 /* StatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProvider.swift; sourceTree = "<group>"; };
@@ -6972,7 +6969,7 @@
 				4C271CD62A12FB2300A9DFBA /* Wind.swift */,
 				4C271CE02A13525700A9DFBA /* Cloud.swift */,
 				4C271CE52A13559500A9DFBA /* Temperature.swift */,
-				4C271CEA2A13569600A9DFBA /* PrecipitationItem.swift */,
+				4C271CEA2A13569600A9DFBA /* Precipitation.swift */,
 				4CCFCA7D2A101DCA00BB473F /* Visibility.swift */,
 			);
 			path = Weather;
@@ -7070,6 +7067,7 @@
 			isa = PBXGroup;
 			children = (
 				4CD61B252A10607000C3B608 /* SkyItem.swift */,
+				4C426A3D2A9BC3C10099B709 /* SkyGridItem.swift */,
 				4C271CD52A12FAC800A9DFBA /* Weather */,
 				4C271CCF2A12F34500A9DFBA /* CelesitalEvents+Item.swift */,
 				4CAD86EF2A12BDE5002FE5C2 /* View */,
@@ -7080,13 +7078,10 @@
 		4CAD86EF2A12BDE5002FE5C2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4CD61B2A2A1084CA00C3B608 /* SkyGridCell.swift */,
-				4C1F0FEF2A9539DC00E5F66D /* CelestialChartItem.swift */,
 				4C271CEF2A135B2800A9DFBA /* WeatherChart.swift */,
 				4C271CF92A14544200A9DFBA /* ItemChartView.swift */,
 				4CAD86F02A12BDF5002FE5C2 /* SmallView.swift */,
 				4CAD86F52A12BF09002FE5C2 /* MediumView.swift */,
-				4CAD86FA2A12BF37002FE5C2 /* LargeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7146,6 +7141,8 @@
 		4CBB01FC2A0F41C800262673 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CD61B2A2A1084CA00C3B608 /* SkyGridCell.swift */,
+				4CC354C22A9B045400C7CA5F /* Light Pollution */,
 				4CCE78382A0EB9AF00C0F5F6 /* Sky */,
 				4CCFCA8C2A1021EF00BB473F /* DetailView */,
 				4CCE783B2A0EB9DA00C0F5F6 /* Weather */,
@@ -10372,7 +10369,6 @@
 			children = (
 				4C2FE33A2A0D789E00EEE28B /* SkiesListView.swift */,
 				4C2FE3442A0D828700EEE28B /* SkyView.swift */,
-				4CC354C22A9B045400C7CA5F /* Light Pollution */,
 				4C0390F12A9AF5230044906A /* SkyGridView.swift */,
 				4CD003292A149D9000CC185E /* SkyCellView.swift */,
 				4C2FE3482A0D89F300EEE28B /* AddSky */,
@@ -10384,8 +10380,8 @@
 			isa = PBXGroup;
 			children = (
 				4CCE78392A0EB9C100C0F5F6 /* ForecastView.swift */,
-				4C18DFCF2A9A8C34007AEDED /* SunMoonView.swift */,
 				4CD5478A2A9A72DB00634599 /* ForecastCell.swift */,
+				4C18DFCF2A9A8C34007AEDED /* SunMoonView.swift */,
 				4C271CFE2A14575A00A9DFBA /* WeatherCells.swift */,
 			);
 			path = Weather;
@@ -13912,13 +13908,12 @@
 				4C271CFA2A14544200A9DFBA /* ItemChartView.swift in Sources */,
 				4C7B2F072A0E1A490052B875 /* SkiesTabView.swift in Sources */,
 				4CCFCA8E2A10221500BB473F /* DetailDayScroll.swift in Sources */,
-				4CAD86FB2A12BF37002FE5C2 /* LargeView.swift in Sources */,
 				4C80AF082A0D6F07007DA427 /* MockData.swift in Sources */,
-				4C271CEB2A13569600A9DFBA /* PrecipitationItem.swift in Sources */,
+				4C271CEB2A13569600A9DFBA /* Precipitation.swift in Sources */,
 				4CCE786F2A0EFAB500C0F5F6 /* Celestial+MockData.swift in Sources */,
+				4C426A3E2A9BC3C10099B709 /* SkyGridItem.swift in Sources */,
 				4C31F7E52A0D6D6F00219A0D /* App.swift in Sources */,
 				4CCE78422A0EC9FF00C0F5F6 /* WeatherItem.swift in Sources */,
-				4C1F0FF02A9539DC00E5F66D /* CelestialChartItem.swift in Sources */,
 				4CD61B2B2A1084CA00C3B608 /* SkyGridCell.swift in Sources */,
 				4CCE78402A0EC93A00C0F5F6 /* Weather.swift in Sources */,
 				4C2FE3342A0D71BF00EEE28B /* SkyData.xcdatamodeld in Sources */,
@@ -13988,7 +13983,6 @@
 				4CBB01DD2A0F412500262673 /* Weather.swift in Sources */,
 				4CBB021F2A0F423E00262673 /* WeatherProtocol.swift in Sources */,
 				4CCFCA7F2A101DCA00BB473F /* Visibility.swift in Sources */,
-				4CAD86FC2A12BF37002FE5C2 /* LargeView.swift in Sources */,
 				4CCFCA622A1001E100BB473F /* App.swift in Sources */,
 				4CBB02212A0F423E00262673 /* Events.swift in Sources */,
 				4CBB01D12A0F40CF00262673 /* SkyData.swift in Sources */,
@@ -13998,7 +13992,7 @@
 				4CCFCA652A1001F500BB473F /* SkyView.swift in Sources */,
 				4CCFCA942A102F1100BB473F /* DetailChartView.swift in Sources */,
 				4CBB01E22A0F412500262673 /* View+Extension.swift in Sources */,
-				4C271CEC2A13569600A9DFBA /* PrecipitationItem.swift in Sources */,
+				4C271CEC2A13569600A9DFBA /* Precipitation.swift in Sources */,
 				4CBB01E12A0F412500262673 /* CoreLocation+Extension.swift in Sources */,
 				4CBB021D2A0F423E00262673 /* WeatherService.swift in Sources */,
 				4CCFCA6F2A10021100BB473F /* PlanetView.swift in Sources */,
@@ -14011,10 +14005,10 @@
 				4C271CDD2A1344D000A9DFBA /* Percent.swift in Sources */,
 				4CCFCA6E2A10021100BB473F /* ContentView.swift in Sources */,
 				4C1ACB2F2A99C52200500973 /* EventService.swift in Sources */,
+				4C426A3F2A9BC3C10099B709 /* SkyGridItem.swift in Sources */,
 				4CCFCA722A10021100BB473F /* ForecastView.swift in Sources */,
 				4CD61B2C2A1084CA00C3B608 /* SkyGridCell.swift in Sources */,
 				4CBB020E2A0F422A00262673 /* Celestial+MockData.swift in Sources */,
-				4C1F0FF12A9539DC00E5F66D /* CelestialChartItem.swift in Sources */,
 				4CCFCA632A1001EC00BB473F /* SkiesListView.swift in Sources */,
 				4CCFCA842A101EDD00BB473F /* SkyItemDetailView.swift in Sources */,
 				4C18DFC72A9A80F9007AEDED /* SunEvents+MockData.swift in Sources */,
@@ -14043,14 +14037,14 @@
 				4CCFCA952A102F1100BB473F /* DetailChartView.swift in Sources */,
 				4C271CE82A13559500A9DFBA /* Temperature.swift in Sources */,
 				4C18DFCD2A9A8139007AEDED /* MoonEvents+MockData.swift in Sources */,
-				4C271CED2A13569600A9DFBA /* PrecipitationItem.swift in Sources */,
+				4C271CED2A13569600A9DFBA /* Precipitation.swift in Sources */,
 				4C271CF72A135BB700A9DFBA /* CelestialChart.swift in Sources */,
 				4CAD86F82A12BF09002FE5C2 /* MediumView.swift in Sources */,
 				4CBB01D52A0F40FB00262673 /* CelestialEvents.swift in Sources */,
 				4CBB01E82A0F412500262673 /* Date+Extension.swift in Sources */,
+				4C426A402A9BC3C10099B709 /* SkyGridItem.swift in Sources */,
 				4CBB02262A0F423F00262673 /* CelestialService.swift in Sources */,
 				4CBB01F92A0F418E00262673 /* WeatherProtocol.swift in Sources */,
-				4CAD86FD2A12BF37002FE5C2 /* LargeView.swift in Sources */,
 				4C271CD92A12FB2300A9DFBA /* Wind.swift in Sources */,
 				4CBB01E72A0F412500262673 /* Button+Extension.swift in Sources */,
 				4CBB01E42A0F412500262673 /* Color+Extension.swift in Sources */,
@@ -14100,7 +14094,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C271D022A14575A00A9DFBA /* WeatherCells.swift in Sources */,
-				4CAD86FE2A12BF37002FE5C2 /* LargeView.swift in Sources */,
 				4CBB021A2A0F422B00262673 /* Celestial+MockData.swift in Sources */,
 				4CBB01F52A0F414A00262673 /* WeatherService.swift in Sources */,
 				4CBB01BD2A0F3D5400262673 /* StatusWidgets.swift in Sources */,
@@ -14125,11 +14118,12 @@
 				4CBB01EF2A0F412500262673 /* Button+Extension.swift in Sources */,
 				4CD5478E2A9A72DB00634599 /* ForecastCell.swift in Sources */,
 				4C271CDF2A1344D000A9DFBA /* Percent.swift in Sources */,
-				4C271CEE2A13569600A9DFBA /* PrecipitationItem.swift in Sources */,
+				4C271CEE2A13569600A9DFBA /* Precipitation.swift in Sources */,
 				4CAD87002A12C77F002FE5C2 /* PlanetView.swift in Sources */,
 				4CBB02162A0F422B00262673 /* MockData.swift in Sources */,
 				4C271CF82A135BB700A9DFBA /* CelestialChart.swift in Sources */,
 				4CBB02152A0F422B00262673 /* Forecast+MockData.swift in Sources */,
+				4C426A412A9BC3C10099B709 /* SkyGridItem.swift in Sources */,
 				4CBB01F22A0F412500262673 /* View+Extension.swift in Sources */,
 				4CBB02252A0F423F00262673 /* WeatherItem.swift in Sources */,
 				4C271CE42A13525700A9DFBA /* Cloud.swift in Sources */,

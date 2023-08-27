@@ -25,5 +25,9 @@ struct Wind: WeatherItem {
         measurementFormatter.unitOptions = .providedUnit
         return measurementFormatter.string(from: wind.speed)
     }
+    
+    var subtitle: String? {
+        wind.compassDirection.description
+    }
 
 }

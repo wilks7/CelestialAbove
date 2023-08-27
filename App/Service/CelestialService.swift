@@ -30,6 +30,16 @@ class CelestialService {
         return events
     }
     
+    /// Calculates the celestial location for a specific celestial on a given date and location.
+    /// - Parameters:
+    ///   - celestial: The celestial body to determine the location for.
+    ///   - location: The geographical location.
+    ///   - date: The date of interest.
+    /// - Returns: The celestial location of the planet.
+    func celestialLocation(celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> CelestialEvents.Location {
+        return calculateCelestialLocation(for: celestial, at: location, at: date)
+    }
+    
     /// Calculates the celestial location for a specific planet on a given date and location.
     /// - Parameters:
     ///   - planet: The celestial body to determine the location for.
@@ -101,6 +111,22 @@ class CelestialService {
                 return nil
             }
             return self.celestialLocation(for: planet, at: location, at: date)
+        }
+    }
+    
+    /// Fetches the celestial locations for a specific planet throughout a day.
+    /// - Parameters:
+    ///   - planet: The celestial body to fetch locations for.
+    ///   - location: The geographical location.
+    ///   - timezone: The timezone for date calculations.
+    /// - Returns: An array of celestial locations over a 24-hour period.
+    func fetchLocations(celestial: CelestialBody.Type, at location: CLLocation, in timezone: TimeZone) -> [CelestialEvents.Location] {
+        let start = Date.now.startOfDay(timezone)
+        return (0...24).compactMap { hour -> CelestialEvents.Location? in
+            guard let date = Calendar.current.date(byAdding: .hour, value: hour, to: start) else {
+                return nil
+            }
+            return self.celestialLocation(celestial: celestial, at: location, at: date)
         }
     }
 }

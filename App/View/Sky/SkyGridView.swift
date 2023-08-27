@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WeatherKit
+import CoreLocation
 
 struct SkyGridView: View {
     let title: String
@@ -16,6 +17,7 @@ struct SkyGridView: View {
     let sunEvents: SunEvents?
     let moonEvents: MoonEvents?
     let color: SwiftUI.Color
+    let location: CLLocation
     
     @State var mapImage: UIImage?
     @State var mapTapped = false
@@ -24,7 +26,7 @@ struct SkyGridView: View {
             header
             Grid {
                 GridRow {
-                    SunMoonView(sunEvents: sunEvents, moonEvents: moonEvents)
+                    SunMoonView(location: location, timezone: timezone, sunEvents: sunEvents, moonEvents: moonEvents)
                 }
                 GridRow {
                     ForecastView(forecast: weather?.hourly, timezone: timezone)
@@ -37,8 +39,11 @@ struct SkyGridView: View {
                 .gridCellColumns(2)
                 #if !os(watchOS)
                 GridRow {
-                    SkyGridCell(title: "Light Pollution", symbolName: "map") {
+                    SkyGridCell(title: "Light Pollution", symbolName: "map"){
                         LightPollutionView(location: MockData.locationNY)
+                            .padding(8)
+                    } chart: {
+                        EmptyView()
                     }
                 }
                 .gridCellColumns(2)
@@ -63,8 +68,20 @@ struct SkyGridView: View {
     var celestialCharts: some View {
         ForEach(events) { event in
             GridRow {
-                SkyGridCell(title: event.title, symbolName: event.symbolName) {
+                SkyGridCell(title: event.title, symbolName: event.symbolName, viewType: .chart) {
+                    HStack {
+                        event.constant
+                            .frame(width: 70, height: 70)
+                        Spacer()
+                        VStack {
+                            Text(event.label ?? "--")
+                            Text(event.subtitle ?? "--")
+                            Text(event.detail ?? "--")
+                        }
+                    }
+                } chart: {
                     CelestialChart(events: event, sunrise: sunEvents?.sunrise, sunset: sunEvents?.sunset)
+
                 }
             }
             .gridCellColumns(2)
@@ -99,6 +116,7 @@ extension SkyGridView {
         self.moonEvents = sky.weather?.today?.moon
         self.timezone = sky.timezone
         self.color = sky.color
+        self.location = sky.location
     }
 }
 
@@ -116,6 +134,7 @@ extension SkyGridView {
             weather: nil,
             sunEvents: MockData.sunEvents,
             moonEvents: MockData.moonEvents,
-            color: .blue
+            color: .blue,
+            location: MockData.locationNY
     )
 }

@@ -11,14 +11,14 @@ import WeatherKit
 struct Precipitation: WeatherItem {
     
     let precipitation: WeatherKit.Precipitation
-    let chance: Double
+    let chance: Double?
     let amount: Measurement<UnitLength>
     var value: Double { amount.value }
     let chartData: [WeatherChartData]
 
     init(hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?) {
         self.precipitation = hour.precipitation
-        self.chance = hour.precipitationChance
+        self.chance = day?.precipitationChance
         self.amount = hour.precipitationAmount
         self.chartData = hourly.map{ .init(reference: $0.date, value: $0.precipitationAmount.value) }
     }
@@ -27,7 +27,11 @@ struct Precipitation: WeatherItem {
     var symbolName: String { "drop" }
 
     var label: String? {
-        value.percent?.description
+        if let rainChance = chance?.percentString {
+            return rainChance + " Chance"
+        } else {
+            return nil
+        }
     }
     var subtitle: String? {
         precipitation.description

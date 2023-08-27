@@ -20,10 +20,10 @@ struct ContentView: View {
                 if horizontalSizeClass == .compact {
                     SkiesTabView(selected: sky)
                 } else {
-                    SkyView(sky: sky)
+                    SkyGridView(sky: sky)
                 }
                 #else
-                SkyView(sky: sky)
+                SkyGridView(sky: sky)
                 #endif
             }
         } detail: {

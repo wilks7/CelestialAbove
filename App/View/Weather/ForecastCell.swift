@@ -21,38 +21,36 @@ struct ForecastCell<W:WeatherProtocol>: View {
         }
     }
     
+    @ViewBuilder
     var vertical: some View {
-        HStack(spacing: 10){
-            Text(title)
-                .font(.title3)
-                .bold()
-                .foregroundStyle(.white)
-            Spacer()
-            Image(systemName: weather.symbolName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .font(.title2)
-                .symbolVariant(.fill)
-                .symbolRenderingMode(.multicolor)
-                .frame(height:30)
-            Spacer()
-            ZStack(alignment: .leading) {
+        Text(title)
+            .font(.title3)
+            .bold()
+            .foregroundStyle(.white)
+            .gridColumnAlignment(.leading)
+        Spacer()
+        Image(systemName: weather.symbolName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .font(.title2)
+            .symbolVariant(.fill)
+            .symbolRenderingMode(.multicolor)
+            .frame(height:30)
+        Spacer()
+        ZStack(alignment: .leading) {
+            Capsule()
+                .fill(.tertiary)
+            GeometryReader { proxy in
                 Capsule()
-                    .fill(.tertiary)
-                    .foregroundStyle(.white)
-                GeometryReader{proxy in
-                    Capsule()
-                        .fill(.linearGradient(.init(colors: [.white, .blue, .indigo]), startPoint: .leading, endPoint: .trailing))
-                        .frame(width: (weather.percent / 140) * proxy.size.width)
-                }
+                    .fill(LinearGradient(colors: [.white, .blue, .indigo], startPoint: .leading, endPoint: .trailing))
+                    .frame(width: weather.percent * proxy.size.width)
             }
-            .frame(width: 140, height: 4)
-            Spacer()
-            Text(Int(weather.percent).description)
-                .font(.system(size: 16, weight: .bold))
-                .padding(.top, 5)
         }
-        .foregroundStyle(.white)
+        .frame(width: 140, height: 4)
+        Spacer()
+        Text(weather.percent.percentString ?? "0")
+            .font(.system(size: 16, weight: .bold))
+            .padding(.top, 5)
     }
     
     var horizontal: some View {
@@ -69,7 +67,7 @@ struct ForecastCell<W:WeatherProtocol>: View {
                 .symbolVariant(.fill)
                 .symbolRenderingMode(.multicolor)
                 .frame(height:30)
-            Text(Int(weather.percent).description)
+            Text(weather.percent.percentString ?? "0")
                 .font(.system(size: 16, weight: .bold))
                 .padding(.top, 5)
         }

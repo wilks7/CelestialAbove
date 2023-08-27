@@ -9,11 +9,9 @@ import WeatherKit
 import SwiftUI
 import Charts
 
-
 struct WeatherChartData: ChartData {
     let reference: Date
     let value: Double
-    
 }
 
 struct WeatherParam {

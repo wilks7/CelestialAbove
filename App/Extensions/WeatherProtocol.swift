@@ -21,7 +21,7 @@ extension DayWeather: WeatherProtocol {
     var percent: Double { precipitationChance }
 }
 extension HourWeather: WeatherProtocol {
-    var percent: Double { (cloudCover + precipitationChance) / 2 }
+    var percent: Double { cloudCover }
 }
 
 extension CurrentWeather: WeatherProtocol {

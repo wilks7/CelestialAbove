@@ -23,7 +23,7 @@ extension MockData {
             "civilDusk": startOfDay.adding(hours: 19),
             "nauticalDusk": startOfDay.adding(hours: 19, minutes: 30),
             "astronomicalDusk": startOfDay.adding(hours: 20),
-            "solarMidnight": nil
+            "solarMidnight": startOfDay.adding(hours: 23, minutes: 30)
         ]
 
         let encoder = JSONEncoder()

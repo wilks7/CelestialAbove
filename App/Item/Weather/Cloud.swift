@@ -20,4 +20,11 @@ struct Cloud: WeatherItem {
     }
     var label: String? { condition.description }
     var value: Double { cover }
+    var subtitle: String? {
+        if let converage = cover.percentString {
+            return converage + " Coverage"
+        } else {
+            return nil
+        }
+    }
 }
