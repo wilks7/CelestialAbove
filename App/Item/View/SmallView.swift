@@ -23,7 +23,8 @@ struct SmallView<C:View>: View {
             constant
                 .frame(width: 70, height: 70)
             Text(subtitle ?? "--")
-                .font(.headline)
+//                .font(.headline)
+                .lineLimit(1)
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal)
@@ -31,10 +32,10 @@ struct SmallView<C:View>: View {
 }
 
 extension SmallView {
-    init<S:SkyItem>(item: S) where C == Image {
+    init<S:SkyItem>(item: S) where C == S.Constant {
         self.label = item.label
         self.subtitle = item.subtitle
-        self.constant = Image(systemName: item.symbolName)
+        self.constant = item.constant
     }
     
 }

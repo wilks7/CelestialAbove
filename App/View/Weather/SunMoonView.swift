@@ -13,19 +13,14 @@ struct SunMoonView: View {
     let moonEvents: MoonEvents?
     
     var body: some View {
-        if let sunEvents, let moonEvents {
-            HStack {
-                SkyGridCell(title: sunEvents.title, symbolName: "sunrise") {
-                    SmallView(label: sunEvents.title, subtitle: sunEvents.nextTime) {
-                        Image(systemName: "sunrise")
-                    }
-                }
-                
-                SkyGridCell(title: moonEvents.title, symbolName: "moon.stars") {
-                    SmallView(label: moonEvents.title, subtitle: moonEvents.nextTime) {
-                        Image(systemName: "sunrise")
-                    }
-                }
+        SkyGridCell(title: sunEvents?.title ?? "Sun", symbolName: "sunrise") {
+            SmallView(label: sunEvents?.title, subtitle: sunEvents?.nextTime) {
+                Image(systemName: "sunrise")
+            }
+        }
+        SkyGridCell(title: moonEvents?.title ?? "Moon", symbolName: "sunrise") {
+            SmallView(label: moonEvents?.title, subtitle: moonEvents?.nextTime) {
+                Image(systemName: "moon.stars")
             }
         }
     }

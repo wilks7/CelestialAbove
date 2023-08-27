@@ -17,7 +17,7 @@ struct SkiesTabView: View {
     var body: some View {
         TabView(selection: $selected) {
             ForEach(skies){ sky in
-                SkyView(sky: sky)
+                SkyGridView(sky: sky)
                     .tag(sky)
             }
         }

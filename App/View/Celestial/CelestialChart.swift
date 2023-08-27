@@ -12,8 +12,8 @@ import SwiftAA
 
 struct CelestialChart: View {
     let events: CelestialEvents
-    var sunrise: Date
-    var sunset: Date
+    var sunrise: Date?
+    var sunset: Date?
     
     @State var selected: CelestialEvents.Location?
     @State var isDragging = false

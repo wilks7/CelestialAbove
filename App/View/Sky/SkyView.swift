@@ -28,9 +28,9 @@ struct SkyView: View {
                     CelestialChartItem(event: events, sunrise: sunEvents?.sunrise, sunset: sunEvents?.sunset)
                 }
                 ForecastView(forecast: weather?.daily, timezone: timezone, sunEvents: sunEvents, alignment: .vertical)
-                if let weather = weather {
-                    WeatherCells(weather)
-                }
+//                if let weather = weather {
+//                    WeatherCells(weather)
+//                }
             }
             .padding(.horizontal)
         }
