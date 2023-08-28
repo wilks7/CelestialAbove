@@ -25,25 +25,15 @@ protocol SkyItem {
         
     var constant: Constant { get }
     func compact(_ alignment: HorizontalAlignment) -> Compact
-    
-    func point(for date: Date) -> Data?
-    
+        
     init?(_ param: Sky)
 }
 extension SkyItem {
-    
     public var id: String { title }
-    var title: String { String(describing: Self.self) }
-    var label: String? {symbolName}
-    var subtitle: String? {symbolName}
-    var detail: String? {symbolName}
-    var detailSubtitle: String? {symbolName}
     
-    var constant: some View {
-        Text(label ?? "--").font(.title)
-    }
-    
-
+    var subtitle: String? {nil}
+    var detail: String? {nil}
+    var detailSubtitle: String? {nil}
 }
 
 protocol ChartData: Identifiable {
@@ -56,34 +46,11 @@ protocol ChartData: Identifiable {
     var reference: X {get}
     var value: Y {get}
     
-    };extension ChartData {
-    
+}
+extension ChartData {
     public var id: X {reference}
     var xRange: ClosedRange<X>? { nil }
     var yRange: ClosedRange<Y>? { nil }
+    var xAxis: String {"Time"}
+    var yAxis: String {"Value"}
 }
-
-extension ChartData {
-    var point: PointMark {
-        PointMark(
-            x: .value("Time", self.reference),
-            y: .value("Value", self.value)
-        )
-    }
-    
-    var linemark: LineMark {
-        LineMark(
-            x: .value("Time", self.reference),
-            y: .value("Value", self.value),
-            series: .value("Alt", "A")
-        )
-    }
-    
-    var rulemark: RuleMark {
-        RuleMark(x: .value("Time", self.reference))
-    }
-}
-
-
-
-

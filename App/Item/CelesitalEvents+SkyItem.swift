@@ -38,6 +38,8 @@ extension CelestialEvents: SkyItem {
             Text(nextTime ?? "--")
         }
     }
+    
+
 
 
 }

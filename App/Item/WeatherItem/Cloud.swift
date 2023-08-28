@@ -13,11 +13,7 @@ struct Cloud: WeatherItem {
     let cover: Double
     let chartData: [WeatherChartData]
     
-    init(hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?) {
-        self.condition = hour.condition
-        self.cover = hour.cloudCover
-        self.chartData = hourly.map{ .init(reference: $0.date, value: $0.cloudCover) }
-    }
+
     var label: String? { condition.description }
     var value: Double { cover }
     var subtitle: String? {
@@ -26,5 +22,13 @@ struct Cloud: WeatherItem {
         } else {
             return nil
         }
+    }
+}
+
+extension Cloud {
+    init(hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?) {
+        self.condition = hour.condition
+        self.cover = hour.cloudCover
+        self.chartData = hourly.map{ .init(reference: $0.date, value: $0.cloudCover) }
     }
 }
