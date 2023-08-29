@@ -10,17 +10,21 @@ import WeatherKit
 
 enum ViewType { case detail, chart }
 
-struct SkyGridCell<D:View, C:View>: View {
+struct SkyGridCell<Cell:View, C:View, S:View>: View {
     let title: String
     let symbolName: String
-    @State var viewType: ViewType = .detail
 
+    @State var viewType: ViewType = .detail
+    
     @ViewBuilder
-    var detail: D
+    var cell: Cell
     
     @ViewBuilder
     var chart: C
     
+    @ViewBuilder
+    var sheet: S
+        
     @State private var showSheet = false
     
     private var hasChart: Bool {
@@ -33,7 +37,7 @@ struct SkyGridCell<D:View, C:View>: View {
             if viewType == .chart, hasChart {
                 chart
             } else {
-                detail
+                cell
             }
         }
         .gesture(
@@ -53,24 +57,31 @@ struct SkyGridCell<D:View, C:View>: View {
 
         .padding(8)
         .sheet(isPresented: $showSheet) {
-            Text("Hi")
+            sheet
         }
         .transparent()
     }
 }
 
 extension SkyGridCell {
-    
-    init<I:WeatherItem>(_ type: I.Type, hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?)
-        where D == SmallView<I.Constant>, 
-            C == ItemChart<I.Data> {
-            
-        let item = I(hour: hour, hourly, day: day)
-        self.title = item.title
-        self.symbolName = item.symbolName
-        self.detail = SmallView(item: item)
-                self.chart = ItemChart<I.Data>(chartPoints: item.chartData, now: .init(reference: .now, value: item.value))
-        self.viewType = .detail
+    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == W.Small, C == W.Chart, S == SkyItemDetailView<W> {
+        let item = W(weather: weather)
+        self.init(item: item) {item.small}
 
     }
+    
+    init(event: CelestialEvents) where Cell == CelestialEvents.Medium, C == CelestialEvents.Chart, S == SkyItemDetailView<CelestialEvents> {
+        self.init(item: event) { event.medium }
+        self._viewType = State(initialValue: .chart)
+    }
+    
+    init<I:SkyItem>(item: I, @ViewBuilder cell: ()->Cell) where C == I.Chart, S == SkyItemDetailView<I> {
+        self.title = item.symbolName.capitalized
+        self.symbolName = item.symbolName
+        self.chart = item.chart
+        self.cell = cell()
+        self.sheet = SkyItemDetailView(item: item)
+    }
 }
+
+

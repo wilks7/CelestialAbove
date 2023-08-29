@@ -8,22 +8,23 @@
 import SwiftUI
 import Charts
 
-struct ItemChart<C:ChartData>: View {
-    typealias PointFor = (C.X) -> C.Y
-
-    var chartPoints: [C]
-    var now: C? = nil
+struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Hashable, X:Comparable, Y:Comparable {
+    typealias PointFor = (X) -> Y
+    typealias ChartPoint = (X,Y)
+    
+    var chartPoints: [(X,Y)]
+    var now: ChartPoint? = nil
     var showZero = false
     var pointFor: PointFor? = nil
     
-    @State var selected: (reference:C.X, value:C.Y)?
+    @State var selected: ChartPoint?
 
     var body: some View {
         Chart {
-            ForEach(chartPoints){
+            ForEach(chartPoints, id: \.self.0){
                 LineMark(
-                    x: .value("Time", $0.reference),
-                    y: .value("Value", $0.value)
+                    x: .value("Time", $0.0),
+                    y: .value("Value", $0.1)
                 )
                 .lineStyle(.init(lineWidth: 4))
             }
@@ -32,23 +33,23 @@ struct ItemChart<C:ChartData>: View {
                     .foregroundStyle(.white)
             }
             if let selected {
-                RuleMark(x: .value("Time", selected.reference))
+                RuleMark(x: .value("Time", selected.0))
                     .foregroundStyle(.gray)
                     .annotation(position: .overlay) {
-                        if let date = selected.reference as? Date {
+                        if let date = selected.0 as? Date {
                             Text(date.time())
                                 .font(.caption)
                         }
                     }
                 PointMark(
-                    x: .value("Time", selected.reference),
-                    y: .value("Value", selected.value)
+                    x: .value("Time", selected.0),
+                    y: .value("Value", selected.1)
                 )
                 .foregroundStyle(.white)
             } else if let now {
                 PointMark(
-                    x: .value("Time", now.reference),
-                    y: .value("Value", now.value)
+                    x: .value("Time", now.0),
+                    y: .value("Value", now.1)
                 )
                 .foregroundStyle(.white)
             }
@@ -67,6 +68,8 @@ struct ItemChart<C:ChartData>: View {
                     )
             }
         }
+        .chartYAxis(.hidden)
+
     }
     
     private func selectedValue(proxy: ChartProxy, geometry: GeometryProxy, value: DragGesture.Value) {
@@ -80,13 +83,13 @@ struct ItemChart<C:ChartData>: View {
         )
         let point = proxy.value(
             at: location,
-            as: (C.X, C.Y).self
+            as: (X, Y).self
         )
 
         guard
             let reference = point?.0,
-            let first = chartPoints.first?.reference,
-            let last = chartPoints.last?.reference,
+            let first = chartPoints.first?.0,
+            let last = chartPoints.last?.0,
             reference >= first && reference <= last
         else {
             return
@@ -102,12 +105,4 @@ struct ItemChart<C:ChartData>: View {
     }
 
 }
-
-
-#Preview {
-//    ItemChart(chartPoints: MockData.mars.chartData, showZero: true)
-//    { xValue in
-//        MockData.mars.point(for: xValue)?.altitude ?? 0
-//    }
-    return ItemChart<Cloud.Data>(chartPoints: MockData.clouds.chartData)
-}
+ 

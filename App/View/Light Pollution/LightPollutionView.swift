@@ -9,33 +9,35 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
-struct LightPollutionView: View {
+struct LightPollutionCell: View {
     @State var location: CLLocation
     var height: CGFloat = 250
 
-    @State private var showMap = false
-
     var body: some View {
-        VStack {
-            LightPollutionMap(location: location)
-                .frame(height: height)
-                .cornerRadius(8)
+        SkyGridCell(title: "Light Pollution", symbolName: "map"){
+            VStack {
+                LightPollutionMap(location: location)
+                    .frame(height: height)
+                    .cornerRadius(8)
+            }
+            .padding(8)
+        } chart: {
+            EmptyView()
+        } sheet: {
+            ZStack(alignment: .topLeading) {
+                LightPollutionMap(location: location, userIteractions: true)
+                    .ignoresSafeArea(edges: .bottom)
+                MapButtonsOverlay(location: $location)
+            }
         }
-        .onTapGesture { showMap = true }
-        .fullScreenCover(isPresented: $showMap) { sheet }
-    }
-    var sheet: some View {
-        ZStack(alignment: .topLeading) {
-            LightPollutionMap(location: location, userIteractions: true)
-                .ignoresSafeArea(edges: .bottom)
-            MapButtonsOverlay(showMap: $showMap, location: $location)
-        }
+        
+
     }
 }
 
 
 
 #Preview {
-    LightPollutionView(location: MockData.locationNY)
+    LightPollutionCell(location: MockData.locationNY)
 }
     

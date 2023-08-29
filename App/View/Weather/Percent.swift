@@ -9,26 +9,30 @@ import SwiftUI
 import WeatherKit
 
 struct Percent: WeatherItem {
-    let percent: Double
-    var value: Double { percent }
-    let sunEvents: SunEvents?
-    
-    let chartData: [WeatherChartData]
-    
-    init(hour: HourWeather, _ hourly: [HourWeather], day: DayWeather?) {
-        self.percent = hour.percent
-        self.sunEvents = day?.sun
-        self.chartData = hourly.map{ .init(reference: $0.date, value: $0.percent) }
+    let weather: Weather
+    static var systemName: String { "moon.stars" }
+
+    var percent: Double? {
+        weather.hour?.percent ?? 0.6
+    }
+    var sunEvents: SunEvents? {
+        weather.today?.sun
     }
     
-    var symbolName: String = "percent"
-    var label: String? { sunEvents?.nextTime }
-    
-    func compact(_ alignment: HorizontalAlignment) -> some View {
-        VStack(alignment: alignment) {
-            PercentView(percent: percent, size: 42)
-        }
+    var label: String {
+        sunEvents?.nextTime ?? "--"
     }
+    
+    var detail: String? { nil }
+    
+    var compact: some View {
+        PercentView(percent: percent ?? 0, size: 42)
+    }
+    
+    func data(for hour: HourWeather) -> (Date,Double) {
+        (hour.date, hour.percent)
+    }
+
 }
 
 

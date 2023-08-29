@@ -8,20 +8,27 @@
 import Foundation
 import WeatherKit
 
+
 extension MockData {
-    static var clouds: Cloud {
-        Cloud(condition: .cloudy, cover: 0.4, chartData: makeClouds())
+    static var weather: Weather {
+        loadJSON(file: "WeatherMockData")!
     }
-    
-    static func makeClouds(for component: Calendar.Component = .hour) -> [WeatherChartData] {
-        let now = Date.now
-        var chartData: [WeatherChartData] = []
-        for i in 1..<11 {
-            if let date = Calendar.current.date(byAdding: component, value: i, to: now) {
-                let weather = WeatherChartData(reference: date, value: Double.random(in: 0...1.0))
-                chartData.append(weather)
-            }
+}
+
+extension MockData {
+    static func loadJSON<T:Decodable>(file: String) -> T? {
+        guard let path = Bundle.main.path(forResource: file, ofType: "json") else {
+            print("No File")
+            return nil
         }
-        return chartData
+        
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+            let object = try JSONDecoder().decode(T.self, from: data)
+            return object
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }

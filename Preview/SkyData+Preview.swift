@@ -29,33 +29,43 @@ let previewContainer: ModelContainer = {
     }
 }()
 
+struct SkyPreview<Content:View>:View {
+    var content: (Sky) -> Content
+    var body: some View {
+        PreviewContentView<Sky, Content>(content: content)
+            .modelContainer(previewContainer)
+    }
+}
+
 struct ModelPreview<Model: PersistentModel, Content: View>: View {
     
     var content: (Model) -> Content
     
     var body: some View {
-        PreviewContentView(content: content)
+        PreviewContentView<Model, Content>(content: content)
             .modelContainer(previewContainer)
     }
     
-    struct PreviewContentView: View {
-        @Query private var models: [Model]
-        @State private var delayedPreview = false
-        var content: (Model) -> Content
 
-        var body: some View {
-            if let model = models.first {
-                content(model)
-            } else {
-                ContentUnavailableView("Could not load model for previews", systemImage: "xmark")
-                    .opacity(delayedPreview ? 1 : 0 )
-                    .task {
-                        Task {
-                            try await Task.sleep(for: .seconds(1))
-                            delayedPreview = true
-                        }
+}
+
+struct PreviewContentView<Model:PersistentModel, Content: View>: View {
+    @Query private var models: [Model]
+    @State private var delayedPreview = false
+    var content: (Model) -> Content
+
+    var body: some View {
+        if let model = models.first {
+            content(model)
+        } else {
+            ContentUnavailableView("Could not load model for previews", systemImage: "xmark")
+                .opacity(delayedPreview ? 1 : 0 )
+                .task {
+                    Task {
+                        try await Task.sleep(for: .seconds(1))
+                        delayedPreview = true
                     }
-            }
+                }
         }
     }
 }

@@ -36,37 +36,48 @@ struct SunMoonView: View {
             return ""
         }
     }
+    
+    struct OffsetContent: View {
+        let label: String?
+        let subtitle: String
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(label ?? "")
+                    .font(.largeTitle)
+                    .padding(.bottom, 4)
+                Text(subtitle)
+                    .offset(y: 6)
+            }
+//            VStack(alignment: .leading) {
+//                Text(sunEvents?.nextTime ?? "")
+//                    .font(.largeTitle)
+//                    .padding(.bottom, 4)
+//                Image(systemName: moonEvents?.phase.symbolName ?? "moon")
+//                    .offset(y: 6)
+//            }
+        }
+    }
 
     
     var body: some View {
         SkyGridCell(title: "Sun", symbolName: "sunrise"){
-            SmallView(label: sunTitle, subtitle: solarMidnight) {
-                VStack(alignment: .leading) {
-                    Text(sunEvents?.nextTime ?? "")
-                        .font(.largeTitle)
-                        .padding(.bottom, 4)
-                    Text("Solar Midnight")
-                        .offset(y: 6)
-                }
-            }
+            SmallView(title: sunTitle, detail: solarMidnight, constant: OffsetContent(label: sunEvents?.nextTime, subtitle: "Solar Midnight"))
         } chart: {
             let locations = CelestialService().fetchLocations(celestial: Sun.self, at: location, in: timezone)
-            CelestialChart(celestial: Sun.self, location: location, timezone: timezone, locations: locations)
+            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
+        } sheet: {
+            Text("Sun Sheet")
         }
         SkyGridCell(title: "Moon", symbolName: "moon"){
-            SmallView(label: moonTitle, subtitle: moonEvents?.phase.description.capitalized) {
-                VStack(alignment: .leading) {
-                    Text(sunEvents?.nextTime ?? "")
-                        .font(.largeTitle)
-                        .padding(.bottom, 4)
-                    Image(systemName: moonEvents?.phase.symbolName ?? "moon")
-                        .offset(y: 6)
-                }
-            }
+            SmallView(title: moonTitle, detail: moonEvents?.phase.description.capitalized, constant: OffsetContent(label: moonEvents?.nextTime, subtitle: ""))
         } chart: {
             let locations = CelestialService().fetchLocations(celestial: Moon.self, at: location, in: timezone)
+            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
 
-            CelestialChart(celestial: Moon.self, location: location, timezone: timezone, locations: locations)
+        } sheet: {
+            Text("Moon Sheet")
+
         }
     }
 }

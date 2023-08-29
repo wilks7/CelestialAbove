@@ -41,7 +41,8 @@ extension CelestialEvents: Identifiable, Equatable, Hashable {
 
 extension CelestialEvents {
     
-    struct Location {
+    struct Location: Identifiable {
+        var id: Date {date}
         let date: Date
         let altitude: Double
         let azimuth: Double
@@ -52,19 +53,61 @@ extension CelestialEvents {
 }
 
 
-extension SunEvents: Events {
+extension SunEvents: Events, SkyItem {
     var celestial: CelestialBody.Type { Sun.self }
     var title: String { "Sun" }
     var rise: Date? { sunrise }
     var set: Date? { sunset }
     var transit: Date? { solarNoon }
+    
+    var glyph: some View {
+        PlanetView(celestial: title)
+    }
+    
+    var compact: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            glyph
+                .frame(width: 30, height: 30)
+            Text(nextTime ?? "--")
+        }
+    }
+    
+    var chart: some View {
+        let points = data()
+        return ItemChart(chartPoints: points, showZero: true)
+    }
+    
+    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
+        []
+    }
 }
 
-extension MoonEvents: Events {
+extension MoonEvents: Events, SkyItem {
     var celestial: CelestialBody.Type { Moon.self }
     var title: String { "Moon" }
     var rise: Date? { moonrise }
     var set: Date? { moonset }
     var transit: Date? {nil}
+    
+    var glyph: some View {
+        PlanetView(celestial: title)
+    }
+    
+    var compact: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            glyph
+                .frame(width: 30, height: 30)
+            Text(nextTime ?? "--")
+        }
+    }
+    
+    var chart: some View {
+        let points = data()
+        return ItemChart(chartPoints: points, showZero: true)
+    }
+    
+    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
+        []
+    }
 
 }

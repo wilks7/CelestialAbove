@@ -19,7 +19,27 @@ struct SkiesListView: View {
                     NavigationLink(value: sky) {
                         EmptyView()
                     }.opacity(0.0)
-                    SkyCellView<Percent, CelestialEvents, Cloud>(sky: sky)
+                    SkyCellView(title: sky.title ?? sky.id, timezone: sky.timezone) {
+                        VStack(alignment: .trailing) {
+                            PercentView(percent: sky.weather?.today?.percent ?? 0, size: 42)
+                        }
+                    } bottomTrailing: {
+                        VStack(alignment: .trailing, spacing: 0) {
+                            PlanetView(celestial: sky.events.first?.title ?? "Mars")
+                                .frame(width: 30, height: 30)
+                            Text(sky.events.first?.nextTime ?? "--")
+                        }
+                    } bottomLeading: {
+                        VStack{
+                            VStack(alignment: .leading) {
+                                Image(systemName: sky.weather?.hour?.symbolName ?? "cloud")
+                                Text("--")
+                                    .shadow(color: .red, radius: 20)
+                            }
+                        }
+                    }
+
+//                    SkyCellView<Percent, CelestialEvents, Cloud>(sky: sky)
                 }
 //                SkyCellView<Percent, CelestialEvents, Cloud>(sky: sky)
 //                .onTapGesture {

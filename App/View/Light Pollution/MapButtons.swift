@@ -10,7 +10,8 @@ import CoreLocation
 import SwiftData
 
 struct MapButtonsOverlay: View {
-    @Binding var showMap: Bool
+    @Environment(\.dismiss) var dismiss
+    
     @Binding var location: CLLocation
     @State private var showSkies = false
 
@@ -18,7 +19,7 @@ struct MapButtonsOverlay: View {
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 10) {
-                Button { showMap = false} label: {
+                Button { dismiss() } label: {
                     Text("Done")
                         .fontWeight(.semibold)
                         .padding(.vertical, 4)

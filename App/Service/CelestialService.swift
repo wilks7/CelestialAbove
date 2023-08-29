@@ -129,6 +129,31 @@ class CelestialService {
             return self.celestialLocation(celestial: celestial, at: location, at: date)
         }
     }
+    
+    func fetchLocations(
+        celestial: CelestialBody.Type,
+        at location: CLLocation,
+        within dateRange: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(),
+        by component: Calendar.Component = .hour) -> [CelestialEvents.Location] {
+        
+        // Extract the start date from the range
+        let startDate = dateRange.lowerBound
+        
+        // Calculate the number of components between the start and end dates
+        let difference = Calendar.current.dateComponents([component], from: startDate, to: dateRange.upperBound)
+        guard let stepCount = difference.value(for: component) else {
+            return []
+        }
+
+        // Generate celestial locations for each step within the range
+        return (0...stepCount).compactMap { step -> CelestialEvents.Location? in
+            guard let date = Calendar.current.date(byAdding: component, value: step, to: startDate) else {
+                return nil
+            }
+            return self.celestialLocation(celestial: celestial, at: location, at: date)
+        }
+    }
+
 }
 
 /// A helper structure to package multiple parameters for celestial calculations.

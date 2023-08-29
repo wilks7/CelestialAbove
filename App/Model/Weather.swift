@@ -36,38 +36,38 @@ extension Weather {
 }
 
 // MARK: Items
-extension Weather {
-    
-    var percent: Percent? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-    
-    var wind: Wind? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-    
-    var clouds: Cloud? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-    
-    var temperature: Temperature? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-    
-    var precipitation: Precipitation? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-    
-    var visibility: Visibility? {
-        guard let today, let hour else {return nil}
-        return .init(hour: hour, hourly, day: today)
-    }
-}
+//extension Weather {
+//    
+//    var percent: Percent? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//    
+//    var wind: Wind? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//    
+//    var clouds: Cloud? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//    
+//    var temperature: Temperature? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//    
+//    var precipitation: Precipitation? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//    
+//    var visibility: Visibility? {
+//        guard let today, let hour else {return nil}
+//        return .init(hour: hour, hourly, day: today)
+//    }
+//}
 
 extension Array where Element == HourWeather {
     var now: Element? {

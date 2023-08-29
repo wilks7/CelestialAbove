@@ -7,49 +7,56 @@
 
 import SwiftUI
 
-struct SkyCellView<TopTrailing: SkyItem, BottomLeading: SkyItem, BottomTrailing: SkyItem>: View {
-    let sky: Sky
+struct SkyCellView<TopTrailing: View, BottomLeading: View, BottomTrailing: View>: View {
+    let title: String
+    let timezone: TimeZone
+    
+    @ViewBuilder
+    var topTrailing: TopTrailing
+    
+    @ViewBuilder
+    var bottomTrailing: BottomTrailing
+    
+    @ViewBuilder
+    var bottomLeading: BottomLeading
         
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0){
-                    SkyTitle(sky: sky)
-                    Text( Date.now.time(sky.timezone) )
+                    SkyTitle(title: title)
+                    Text( Date.now.time(timezone) )
                         .font(.footnote.weight(.semibold))
                 }
                 Spacer()
-                TopTrailing(sky)?.compact(.trailing)
+                topTrailing
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
             .padding(.bottom)
             HStack(alignment: .bottom) {
-                BottomLeading(sky)?.compact(.leading)
+                bottomLeading
                     .font(.subheadline)
                     .fontWeight(.medium)
                 Spacer()
-                BottomTrailing(sky)?.compact(.trailing)
+                bottomTrailing
             }
         }
         .foregroundColor(.white.opacity(0.9))
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .background(sky.color)
-        .cornerRadius(16)
     }
 }
 
 extension SkyCellView {
-    struct SkyTitle: View {
-        
-        init(sky: Sky){
-            self.title = sky.title ?? sky.id
-            self.isCurrent = sky.currentLocation ?? false
-        }
     
+}
+
+extension SkyCellView {
+    struct SkyTitle: View {
+            
         let title: String
-        let isCurrent: Bool
+        var isCurrent: Bool = false
         var font: Font? = nil
         var weight: Font.Weight = .bold
         var alignment: HorizontalAlignment = .leading
@@ -72,6 +79,15 @@ extension SkyCellView {
             Image(systemName: "location.fill")
                 .scaleEffect(0.8)
         }
+    }
+    
+
+}
+
+extension SkyCellView.SkyTitle {
+    init(sky: Sky){
+        self.title = sky.title ?? sky.id
+        self.isCurrent = sky.currentLocation ?? false
     }
 }
 

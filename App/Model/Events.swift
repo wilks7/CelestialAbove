@@ -18,6 +18,8 @@ protocol Events {
 }
 
 
+
+
 extension Events {
     var color: SwiftUI.Color { .white }
     
@@ -27,5 +29,23 @@ extension Events {
 
     var nextTime: String? {
         nextEvent.date?.time()
+    }
+    
+}
+
+import CoreLocation
+extension Events {
+    var symbolName: String {"circle"}
+    
+    var label: String {
+        nextEvent.type.rawValue.capitalized
+    }
+    
+    var detail: String? {
+        nextTime
+    }
+    
+    func point(for date: Date, at location: CLLocation) -> Double {
+        CelestialService().celestialLocation(celestial:celestial, at: location, at: date).altitude
     }
 }

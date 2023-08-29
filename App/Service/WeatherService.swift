@@ -49,6 +49,27 @@ extension WeatherService {
         case valid
     }
     
+    private func print(weather: Weather?) {
+        guard let weather else {return}
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted  // To get a nicely formatted JSON string
+        if let jsonData = try? encoder.encode(weather) {
+            
+            // Convert JSON data to a JSON string
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("\n\n\n")
+                print(jsonString)
+                print("\n\n\n")
+
+            } else {
+                print("Error: Couldn't convert JSON data to a string.")
+            }
+            
+        } else {
+            print("Error: Couldn't convert HourWeather to JSON data.")
+        }
+    }
+    
 }
 
 extension WeatherService: DebugPrint {
