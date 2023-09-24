@@ -61,24 +61,25 @@ struct SunMoonView: View {
 
     
     var body: some View {
-        SkyGridCell(title: "Sun", symbolName: "sunrise"){
-            SmallView(title: sunTitle, detail: solarMidnight, constant: OffsetContent(label: sunEvents?.nextTime, subtitle: "Solar Midnight"))
-        } chart: {
-            let locations = CelestialService().fetchLocations(celestial: Sun.self, at: location, in: timezone)
-            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
-        } sheet: {
-            Text("Sun Sheet")
-        }
-        SkyGridCell(title: "Moon", symbolName: "moon"){
-            SmallView(title: moonTitle, detail: moonEvents?.phase.description.capitalized, constant: OffsetContent(label: moonEvents?.nextTime, subtitle: ""))
-        } chart: {
-            let locations = CelestialService().fetchLocations(celestial: Moon.self, at: location, in: timezone)
-            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
-
-        } sheet: {
-            Text("Moon Sheet")
-
-        }
+        ZStack{}
+//        SkyGridCell(title: "Sun", symbolName: "sunrise"){
+//            SmallView(title: sunTitle, detail: solarMidnight, glyph: OffsetContent(label: sunEvents?.nextTime, subtitle: "Solar Midnight"))
+//        } chart: {
+//            let locations = CelestialService().fetchLocations(celestial: Sun.self, at: location, in: timezone)
+//            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
+//        } sheet: {
+//            Text("Sun Sheet")
+//        }
+//        SkyGridCell(title: "Moon", symbolName: "moon"){
+//            SmallView(title: moonTitle, detail: moonEvents?.phase.description.capitalized, glyph: OffsetContent(label: moonEvents?.nextTime, subtitle: ""))
+//        } chart: {
+//            let locations = CelestialService().fetchLocations(celestial: Moon.self, at: location, in: timezone)
+//            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
+//
+//        } sheet: {
+//            Text("Moon Sheet")
+//
+//        }
     }
 }
 

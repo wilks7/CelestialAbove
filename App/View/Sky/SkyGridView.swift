@@ -11,9 +11,11 @@ import CoreLocation
 
 struct SkyGridView: View {
     let sky: Sky
-    
     var weather: Weather? { sky.weather }
-    var timezone: TimeZone { sky.timezone }
+        
+    var events: [CelestialEvents] {
+        CelestialService().fetchPlanetEvents(at: sky.location, in: sky.timezone, title: sky.title)
+    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -21,12 +23,12 @@ struct SkyGridView: View {
             Grid {
                 sunMoon
                 GridRow {
-                    ForecastView(forecast: weather?.hourly, timezone: timezone)
+                    ForecastView(forecast: weather?.hourly, timezone: sky.timezone)
                         .gridCellColumns(2)
                 }
                 planetEvents
                 GridRow {
-                    ForecastView(forecast: weather?.daily, timezone: timezone, alignment: .vertical)
+                    ForecastView(forecast: weather?.daily, timezone: sky.timezone, alignment: .vertical)
                         .gridCellColumns(2)
                 }
                 #if !os(watchOS)
@@ -44,7 +46,7 @@ struct SkyGridView: View {
     
     var header: some View {
         VStack {
-            Text(sky.title ?? sky.id)
+            Text(sky.title)
                 .font(.largeTitle)
             Text("90%")
                 .font(.system(size: 82))
@@ -55,7 +57,7 @@ struct SkyGridView: View {
     var sunMoon: some View {
         GridRow {
             SunMoonView(location: sky.location,
-                        timezone: timezone,
+                        timezone: sky.timezone,
                         sunEvents: weather?.today?.sun,
                         moonEvents: weather?.today?.moon
             )
@@ -63,9 +65,15 @@ struct SkyGridView: View {
     }
     
     var planetEvents: some View {
-        ForEach(sky.events) { event in
+        ForEach(events) { event in
             GridRow {
-                SkyGridCell(event: event)
+                SkyGridCell(title: event.title, symbolName: event.symbolName) {
+                    
+                } chart: {
+                    ItemChart()
+                } sheet: {
+                    Text("Detail")
+                }
                     .gridCellColumns(2)
             }
         }
@@ -95,9 +103,15 @@ struct SkyGridView: View {
 #Preview {
     ModelPreview { sky in
         var sky:Sky = sky
-        sky.events = MockData.events
-        sky.weather = MockData.weather
+//        sky.events = MockData.events
+//        sky.weather = MockData.weather
         return SkyGridView(sky: sky)
     }
 }
 
+
+struct ItemChart: View {
+    var body: some View {
+        VStack{}
+    }
+}

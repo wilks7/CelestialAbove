@@ -21,8 +21,10 @@ struct SkySearchView: ViewModifier {
         .searchable(text: $model.searchTerm, prompt: "Search for a city or coordinate") {
             if model.results.isEmpty {
                 if let location = model.location {
-                    AsyncButton(actionOptions: [.disableButton]) {
-                        await model.tapped(location)
+                    Button {
+                        Task {
+                            await model.tapped(location)
+                        }
                     } label: {
                         Text("Coordinate: " + location.id)
                     }
@@ -34,15 +36,17 @@ struct SkySearchView: ViewModifier {
                 }
             } else {
                 ForEach(model.results, id: \.description) { result in
-                    AsyncButton(actionOptions: [.disableButton]) {
-                        await model.tapped(result)
+                    Button {
+                        Task {
+                            await model.tapped(result)
+                        }
                     } label: {
                         HighlightedText(result.title + " " + result.subtitle, matching: model.searchTerm)
                     }
                 }
             }
         }
-        .onChange(of: model.searchTerm) { value in
+        .onChange(of: model.searchTerm) { _, value in
             if value.isEmpty && !isSearching {
                 Task{@MainActor in
                     model.results = []

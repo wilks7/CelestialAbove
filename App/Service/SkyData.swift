@@ -18,7 +18,8 @@ class SkyData {
         for: schema,
         configurations: [ 
             ModelConfiguration(
-            inMemory: false)
+                isStoredInMemoryOnly: false
+            )
 //            groupContainer: .identifier("group.app.rifigy.CelestialAbove")
 //            )
         ]

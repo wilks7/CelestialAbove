@@ -49,3 +49,4 @@ extension Events {
         CelestialService().celestialLocation(celestial:celestial, at: location, at: date).altitude
     }
 }
+

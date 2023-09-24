@@ -12,13 +12,13 @@ import SwiftUI
 
 let previewContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Sky.self, ModelConfiguration(inMemory: true))
+        let container = try ModelContainer(for: SkyData.schema, configurations: [ModelConfiguration(isStoredInMemoryOnly: true)])
             
         Task {@MainActor in
             let context = container.mainContext
             
             let ny = MockData.NY()
-            ny.events = MockData.events
+//            ny.events = MockData.events
             context.insert(ny)
         }
         

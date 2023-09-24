@@ -15,12 +15,5 @@ extension Double {
         percentFormatter.maximumFractionDigits = 0
         return percentFormatter.string(for: self)
     }
-    
-    var percent: Int? {
-        if let string = percentString {
-            return Int(string.dropLast(1))
-        } else {
-            return nil
-        }
-    }
+
 }

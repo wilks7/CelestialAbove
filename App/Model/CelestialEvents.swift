@@ -53,7 +53,7 @@ extension CelestialEvents {
 }
 
 
-extension SunEvents: Events, SkyItem {
+extension SunEvents: Events {
     var celestial: CelestialBody.Type { Sun.self }
     var title: String { "Sun" }
     var rise: Date? { sunrise }
@@ -72,17 +72,17 @@ extension SunEvents: Events, SkyItem {
         }
     }
     
-    var chart: some View {
-        let points = data()
-        return ItemChart(chartPoints: points, showZero: true)
-    }
+//    var chart: some View {
+//        let points = data()
+//        return MultiItem.ItemChart(
+//    }
     
-    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
-        []
-    }
+//    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
+//        []
+//    }
 }
 
-extension MoonEvents: Events, SkyItem {
+extension MoonEvents: Events {
     var celestial: CelestialBody.Type { Moon.self }
     var title: String { "Moon" }
     var rise: Date? { moonrise }
@@ -100,14 +100,14 @@ extension MoonEvents: Events, SkyItem {
             Text(nextTime ?? "--")
         }
     }
+//    
+//    var chart: some View {
+//        let points = data()
+//        return ItemChart(chartPoints: points, showZero: true)
+//    }
     
-    var chart: some View {
-        let points = data()
-        return ItemChart(chartPoints: points, showZero: true)
-    }
-    
-    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
-        []
-    }
+//    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
+//        []
+//    }
 
 }

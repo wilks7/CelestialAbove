@@ -37,7 +37,8 @@ struct ForecastView<W:WeatherProtocol>: View {
     var body: some View {
         if !forecastArray.isEmpty {
             VStack {
-                ItemHeader(title: title, symbolName: "cloud")
+                #warning("Add Header")
+//                ItemHeader(title: title, symbolName: "cloud")
                 ScrollView(alignment, showsIndicators: false) {
                     if alignment == .horizontal {
                         LazyHStack(spacing: 10){

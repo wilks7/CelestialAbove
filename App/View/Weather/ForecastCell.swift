@@ -102,6 +102,27 @@ extension ForecastCell {
     }
 }
 
+protocol WeatherProtocol: Codable, Equatable, Identifiable {
+    var date: Date {get}
+    var percent: Double {get}
+    var condition: WeatherCondition {get}
+    var symbolName: String {get}
+}
+
+extension WeatherProtocol { public var id: Date { date } }
+
+extension DayWeather: WeatherProtocol {
+    var percent: Double { precipitationChance }
+}
+extension HourWeather: WeatherProtocol {
+    var percent: Double { cloudCover }
+}
+
+extension CurrentWeather: WeatherProtocol {
+    var percent: Double { (cloudCover + humidity) / 2 }
+}
+
+
 
 #Preview {
     ForecastCell(weather: MockData.forecast.first!, sunEvents: nil, alignment: .horizontal)

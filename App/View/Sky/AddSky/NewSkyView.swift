@@ -36,7 +36,7 @@ struct NewSkyView: View {
     
     private func add(){
         let sky = Sky(title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
-        sky.fetchData()
+        #warning("Fetch Data")
         context.insert(sky)
         try? context.save()
         dismiss()

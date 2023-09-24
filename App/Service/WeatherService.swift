@@ -9,15 +9,33 @@ import CoreLocation
 import WeatherKit
 
 extension WeatherService {
+
+     func fetchWeather(for sky: Sky) async throws -> Weather {
+        let defaults = UserDefaults.standard
+        let service = WeatherService()
+
+        if let data = defaults.data(forKey: sky.id),
+           let weather = try? JSONDecoder().decode(Weather.self, from: data),
+           Date().timeIntervalSince(weather.currentWeather.date) < 86400 { // 86400 seconds = 1 day
+            print("💿 [Cache] Fetched \(sky.title) - \(weather.currentWeather.date.formatted(date: .abbreviated, time: .shortened)) - \(weather.daily.count) Daily")
+            return weather
+        } else {
+            let weather = try await service.fetchWeather(for: sky.location, title: sky.title)
+            if let encoded = try? JSONEncoder().encode(weather) {
+                defaults.set(encoded, forKey: sky.id)
+            }
+            return weather
+        }
+    }
     
     func fetchWeather(for location: CLLocation, title: String? = nil, stored: Weather? = nil) async throws -> Weather {
-        let status = check(weather: stored)
+//        let status = check(weather: stored)
         let name = title ?? location.id
         
-        guard status != .valid else {
-            print("[\(name)] has weather for \(Date.now.formatted(date: .numeric, time: .omitted))")
-            throw Error.valid
-        }
+//        guard status != .valid else {
+//            print("[\(name)] has weather for \(Date.now.formatted(date: .numeric, time: .omitted))")
+//            throw Error.valid
+//        }
         do {
             let result = try await weather(for: location)
             print("Fetched \(name)")
@@ -28,18 +46,39 @@ extension WeatherService {
         }
     }
     
-    private func check(weather: Weather?) -> WeatherStatus {
-        if let weather {
-            let fetchedDay = weather.currentWeather.date
-            if Calendar.current.isDateInToday(fetchedDay) {
-                return .valid
-            } else {
-                return .old
-            }
-        } else {
-            return .none
+
+    func setWeather(_ weather: Weather, forKey key: String) {
+        let defaults = UserDefaults.standard
+        if let encoded = try? JSONEncoder().encode(weather) {
+            defaults.set(encoded, forKey: key)
         }
     }
+
+//    
+//    func weather(forKey key: String) -> Weather? {
+//        let defaults = UserDefaults.standard
+//
+//        if let data = defaults.data(forKey: key),
+//           let decodedWeather = try? JSONDecoder().decode(Weather.self, from: data),
+//           Date().timeIntervalSince(decodedWeather.date) < 86400 { // 86400 seconds = 1 day
+//            return decodedWeather
+//        }
+//        return nil
+//    }
+    
+    
+//    private func check(weather: Weather?) -> WeatherStatus {
+//        if let weather {
+//            let fetchedDay = weather.currentWeather.date
+//            if Calendar.current.isDateInToday(fetchedDay) {
+//                return .valid
+//            } else {
+//                return .old
+//            }
+//        } else {
+//            return .none
+//        }
+//    }
     
     enum WeatherStatus {
         case none, old, valid
