@@ -9,36 +9,36 @@ import SwiftUI
 import WeatherKit
 
 struct SkyCellView: View {
+    
     let sky: Sky
+    
     var weather: Weather? { sky.weather }
+    
     var events: [CelestialEvents] {
         CelestialService().fetchPlanetEvents(at: sky.location, in: sky.timezone, title: sky.title)
     }
         
     var body: some View {
-        ZStack {
-            NavigationLink(value: sky) {
-                EmptyView()
-            }.opacity(0.0)
-            HStack {
-                Text(sky.title)
-                    .font(.title)
-            }
-//            if let weather = weather, let event = events.first {
-//                MediumView(title: sky.title, timezone: sky.timezone,
-//                            topTrailing: Percent(weather: weather),
-//                            bottomLeading: event,
-//                            bottomTrailing: Cloud(weather: weather))
-//
-//            } else if let first = events.first, let last = events.last {
-//                MediumView(title: sky.title, timezone: sky.timezone,
-//                            topTrailing: first,
-//                            bottomLeading: first,
-//                            bottomTrailing: last)
-//            }
+        HStack {
+            Text(sky.title)
+                .font(.largeTitle)
+            Spacer()
+            Text(sky.weather?.today?.date.formatted() ?? "")
         }
-        .background(sky.color)
-        .cornerRadius(16)
+        .padding()
+//        if let weather = weather, let event = events.first {
+//            MediumView(title: sky.title, timezone: sky.timezone,
+//                        topTrailing: Percent(weather: weather),
+//                        bottomLeading: event,
+//                        bottomTrailing: Cloud(weather: weather))
+//
+//        } else if let first = events.first, let last = events.last {
+//            MediumView(title: sky.title, timezone: sky.timezone,
+//                        topTrailing: first,
+//                        bottomLeading: first,
+//                        bottomTrailing: last)
+//        }
+
     }
     
     struct MediumView<TopTrailing: View, BottomLeading: View, BottomTrailing: View>: View {

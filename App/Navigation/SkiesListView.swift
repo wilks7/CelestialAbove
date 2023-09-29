@@ -10,12 +10,24 @@ import SwiftData
 
 struct SkiesListView: View {
     @Environment(\.modelContext) private var context
-    var skies: [Sky]
+    let skies: [Sky]
+
+    @Binding var selected: Sky?
+    var animationNamespace: Namespace.ID
 
     var body: some View {
         List {
             ForEach(skies) { sky in
                 SkyCellView(sky: sky)
+                .background(
+                    sky.color
+
+                )
+                .matchedGeometryEffect(id: sky.id, in: animationNamespace)
+                .cornerRadius(16)
+                .onTapGesture {
+                    select(sky)
+                }
             }
             .onDelete(perform: delete)
         }
@@ -32,9 +44,16 @@ struct SkiesListView: View {
         #endif
 
         .navigationTitle("Night Skies")
+        .clipped(antialiased: false)
+
+    }
+    
+    private func select(_ sky: Sky) {
+        withAnimation {
+            self.selected = sky
+        }
     }
 
-    
     private func delete(_ indexSet: IndexSet) {
         withAnimation {
             indexSet.forEach { index in
@@ -48,7 +67,7 @@ struct SkiesListView: View {
 
 #Preview {
     ModelPreview {
-        SkiesListView(skies: [$0])
+        SkiesListView(skies: [$0], selected: .constant(nil), animationNamespace: Namespace().wrappedValue)
     }
 //    SkiesListView()
 //        .modelContainer(previewContainer)

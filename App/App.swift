@@ -12,7 +12,8 @@ import SwiftData
 struct CelestialAboveApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            HeroContentView()
                 .modelContainer(SkyData.container)
         }
         #if os(macOS)

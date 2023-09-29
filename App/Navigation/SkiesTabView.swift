@@ -13,6 +13,10 @@ struct SkiesTabView: View {
     @Query var skies: [Sky]
     
     @State var selected: Sky
+    @Binding var dismissSky: Sky?
+
+    var animationNamespace: Namespace.ID
+
     @State private var showScene = false
     
     var body: some View {
@@ -34,12 +38,19 @@ struct SkiesTabView: View {
             }
             ToolbarItem(placement: .bottomBar) {
                 Button(systemName: "list.bullet") {
-                    dismiss()
+                    withAnimation{
+                        self.dismissSky = nil
+                    }
+//                    dismiss()
                 }
             }
         }
         .foregroundColor(.white)
         .background(selected.color)
+        .clipped(antialiased: false)
+
+        .matchedGeometryEffect(id: selected.id, in: animationNamespace)
+
     }
     
     
