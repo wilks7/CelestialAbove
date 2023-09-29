@@ -14,39 +14,40 @@ protocol Events {
     var rise: Date? {get}
     var set: Date? {get}
     var transit: Date? {get}
-    var color: SwiftUI.Color {get}
 }
 
+enum EventType: String { case rise, set, transit }
 
-
-
-extension Events {
-    var color: SwiftUI.Color { .white }
-    
-    var nextEvent: (date: Date?, type: EventType) {
-        EventService().nextEvent(for: self, sunrise: rise, sunset: set)
-    }
-
-    var nextTime: String? {
-        nextEvent.date?.time()
-    }
-    
-}
-
-import CoreLocation
-extension Events {
-    var symbolName: String {"circle"}
-    
-    var label: String {
-        nextEvent.type.rawValue.capitalized
-    }
-    
-    var detail: String? {
-        nextTime
-    }
-    
-    func point(for date: Date, at location: CLLocation) -> Double {
-        CelestialService().celestialLocation(celestial:celestial, at: location, at: date).altitude
+func nextEvent(date now: Date = .now, rise: Date?, set: Date?, transit: Date?) -> (date: Date?, type: EventType) {
+    if let rise, let set {
+        if now < rise {
+            return (rise, .rise)
+        } else if now < set {
+            return (set, .set)
+        } else {
+            return (rise, .rise)
+        }
+    } else {
+        return (nil, .transit)
     }
 }
+
+//
+//
+//import CoreLocation
+//extension Events {
+//    var symbolName: String {"circle"}
+//    
+//    var label: String {
+//        nextEvent.type.rawValue.capitalized
+//    }
+//    
+//    var detail: String? {
+//        nextTime
+//    }
+//    
+//    func point(for date: Date, at location: CLLocation) -> Double {
+//        CelestialService().celestialLocation(celestial:celestial, at: location, at: date).altitude
+//    }
+//}
 

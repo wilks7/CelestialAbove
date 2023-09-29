@@ -26,7 +26,7 @@ class CelestialService {
             let event = createEvent(for: planet, at: location, in: timezone, date: date)
             events.append(event)
         }
-        print("[\(title ?? location.id)] \(events.count) events")
+        logger.notice("[\(title ?? location.id)] \(events.count) events")
         return events
     }
     
@@ -169,6 +169,6 @@ extension CelestialService {
 }
 
 /// Provides a debugging representation for `CelestialService`.
-extension CelestialService: DebugPrint {
+extension CelestialService: DebugLog {
     static let emoji = "🪐"
 }

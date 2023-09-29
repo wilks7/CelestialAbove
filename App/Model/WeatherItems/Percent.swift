@@ -20,7 +20,7 @@ struct Percent: WeatherItem {
     }
     
     var label: String {
-        sunEvents?.nextTime ?? "--"
+        nextEvent(rise: sunEvents?.sunrise, set: sunEvents?.sunset, transit: sunEvents?.solarNoon).date?.time() ?? "--"
     }
     
     var detail: String? { nil }
@@ -46,23 +46,18 @@ struct PercentView: View {
     
     var symbolSize: CGFloat { size / ( size < 30 ? 1.75 : 2.5) }
     
+    
     var body: some View {
-        Group {
-            if let string = percent.percentString?.dropLast(1) {
-                HStack(alignment: .top, spacing: 0) {
-                    Text(string)
-                        .font(.system(size: size, weight: weight))
-                    Text("%")
-                        .padding(.top, size/10)
-                        .font(.system(size: symbolSize, weight: .semibold))
-                }
-                .offset(y: -4)
-                .offset(x: symbolSize/4)
-            } else {
-                Text("--")
-                    .font(.system(size: size))
-            }
+        HStack(alignment: .top, spacing: 0) {
+            Text(percent, format: .percent)
+                .font(.system(size: size, weight: weight))
+            Text("%")
+                .padding(.top, size/10)
+                .font(.system(size: symbolSize, weight: .semibold))
         }
+        .offset(y: -4)
+        .offset(x: symbolSize/4)
+
     }
     
     struct Gauge: View {

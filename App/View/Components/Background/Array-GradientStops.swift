@@ -1,8 +1,8 @@
 //
-//  Array+GradientStops.swift
-//  CelestialAbove
+//  Array-GradientStops.swift
+//  SkyAbove
 //
-//  Created by Michael Wilkowski on 5/13/23.
+//  Created by Michael on 7/7/22.
 //
 
 import SwiftUI

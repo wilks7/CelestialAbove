@@ -10,7 +10,7 @@ import SwiftAA
 import WeatherKit
 import CoreLocation
 
-struct CelestialEvents: Events {
+struct CelestialEvents {
     let planet: Planet.Type
     let location: CLLocation
     let timezone: TimeZone
@@ -53,7 +53,7 @@ extension CelestialEvents {
 }
 
 
-extension SunEvents: Events {
+extension SunEvents {
     var celestial: CelestialBody.Type { Sun.self }
     var title: String { "Sun" }
     var rise: Date? { sunrise }
@@ -64,14 +64,14 @@ extension SunEvents: Events {
         PlanetView(celestial: title)
     }
     
-    var compact: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            glyph
-                .frame(width: 30, height: 30)
-            Text(nextTime ?? "--")
-        }
-    }
-    
+//    var compact: some View {
+//        VStack(alignment: .leading, spacing: 0) {
+//            glyph
+//                .frame(width: 30, height: 30)
+//            Text(nextTime ?? "--")
+//        }
+//    }
+//    
 //    var chart: some View {
 //        let points = data()
 //        return MultiItem.ItemChart(
@@ -82,7 +82,7 @@ extension SunEvents: Events {
 //    }
 }
 
-extension MoonEvents: Events {
+extension MoonEvents {
     var celestial: CelestialBody.Type { Moon.self }
     var title: String { "Moon" }
     var rise: Date? { moonrise }
@@ -93,13 +93,13 @@ extension MoonEvents: Events {
         PlanetView(celestial: title)
     }
     
-    var compact: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            glyph
-                .frame(width: 30, height: 30)
-            Text(nextTime ?? "--")
-        }
-    }
+//    var compact: some View {
+//        VStack(alignment: .leading, spacing: 0) {
+//            glyph
+//                .frame(width: 30, height: 30)
+//            Text(nextTime ?? "--")
+//        }
+//    }
 //    
 //    var chart: some View {
 //        let points = data()

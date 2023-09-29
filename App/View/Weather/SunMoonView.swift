@@ -18,11 +18,9 @@ struct SunMoonView: View {
     let moonEvents: MoonEvents?
     
     var sunTitle: String {
-        if let type = sunEvents?.nextEvent.type {
-            return "Sun" + type.rawValue
-        } else {
-            return ""
-        }
+        let type = nextEvent(rise: sunEvents?.sunrise, set: sunEvents?.sunset, transit: sunEvents?.solarNoon).type
+        return "Sun" + type.rawValue
+
     }
     
     var solarMidnight: String {
@@ -30,11 +28,9 @@ struct SunMoonView: View {
     }
     
     var moonTitle: String {
-        if let type = sunEvents?.nextEvent.type {
-            return "Moon" + type.rawValue
-        } else {
-            return ""
-        }
+        let type = nextEvent(rise: moonEvents?.moonrise, set: moonEvents?.moonset, transit: nil).type
+        return "Moon" + type.rawValue
+
     }
     
     struct OffsetContent: View {

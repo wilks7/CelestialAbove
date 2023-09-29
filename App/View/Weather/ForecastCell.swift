@@ -48,7 +48,8 @@ struct ForecastCell<W:WeatherProtocol>: View {
         }
         .frame(width: 140, height: 4)
         Spacer()
-        Text(weather.percent.percentString ?? "0")
+        Text(weather.percent, format: .percent)
+//        Text(weather.percent.percentString ?? "0")
             .font(.system(size: 16, weight: .bold))
             .padding(.top, 5)
     }
@@ -67,7 +68,7 @@ struct ForecastCell<W:WeatherProtocol>: View {
                 .symbolVariant(.fill)
                 .symbolRenderingMode(.multicolor)
                 .frame(height:30)
-            Text(weather.percent.percentString ?? "0")
+            Text(weather.percent, format: .percent)
                 .font(.system(size: 16, weight: .bold))
                 .padding(.top, 5)
         }

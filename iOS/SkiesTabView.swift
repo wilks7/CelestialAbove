@@ -10,12 +10,10 @@ import SwiftData
 
 struct SkiesTabView: View {
     @Environment(\.dismiss) var dismiss
-    @Query var skies: [Sky]
-    
+    let skies: [Sky]
     @State var selected: Sky
-    @Binding var dismissSky: Sky?
+//    @Binding var dismissSky: Sky?
 
-    var animationNamespace: Namespace.ID
 
     @State private var showScene = false
     
@@ -38,19 +36,15 @@ struct SkiesTabView: View {
             }
             ToolbarItem(placement: .bottomBar) {
                 Button(systemName: "list.bullet") {
-                    withAnimation{
-                        self.dismissSky = nil
-                    }
-//                    dismiss()
+//                    withAnimation{
+//                        self.dismissSky = nil
+//                    }
+                    dismiss()
                 }
             }
         }
         .foregroundColor(.white)
-        .background(selected.color)
-        .clipped(antialiased: false)
-
-        .matchedGeometryEffect(id: selected.id, in: animationNamespace)
-
+        .background(sun: selected.weather?.today?.sun, timezone: selected.timezone, time: .now)
     }
     
     

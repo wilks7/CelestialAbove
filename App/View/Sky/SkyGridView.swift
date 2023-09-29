@@ -21,15 +21,45 @@ struct SkyGridView: View {
         ScrollView(showsIndicators: false) {
             header
             Grid {
-                sunMoon
                 GridRow {
-                    ForecastView(forecast: weather?.hourly, timezone: sky.timezone)
-                        .gridCellColumns(2)
+                    SunMoonView(location: sky.location,
+                                timezone: sky.timezone,
+                                sunEvents: weather?.today?.sun,
+                                moonEvents: weather?.today?.moon
+                    )
                 }
-                planetEvents
                 GridRow {
-                    ForecastView(forecast: weather?.daily, timezone: sky.timezone, alignment: .vertical)
-                        .gridCellColumns(2)
+                    SkyGridCell(title: "Hourly", symbolName: "circle") {
+                        ForecastView(forecast: weather?.hourly, timezone: sky.timezone, alignment: .horizontal)
+
+                    } sheet: {
+                        
+                    }
+                    .gridCellColumns(2)
+
+                }
+                ForEach(events) { event in
+                    GridRow {
+                        SkyGridCell(title: event.title, symbolName: "circle", viewType: .chart) {
+                            
+                        } chart: {
+                            CelestialChart(chartPoints: event.points)
+                        } sheet: {
+                            Text("Detail")
+                        }
+                            .gridCellColumns(2)
+                    }
+                }
+                GridRow {
+                    SkyGridCell(title: "Daily", symbolName: "circle") {
+                        ForecastView(forecast: weather?.daily, timezone: sky.timezone, alignment: .vertical)
+
+                    } sheet: {
+                        
+                    }
+                    .gridCellColumns(2)
+
+
                 }
                 #if !os(watchOS)
                 GridRow {
@@ -37,7 +67,7 @@ struct SkyGridView: View {
                         .gridCellColumns(2)
                 }
                 #endif
-                weatherItems
+                WeatherItems(weather: weather)
             }
             .padding()
         }
@@ -53,49 +83,27 @@ struct SkyGridView: View {
             
         }
     }
-    
-    var sunMoon: some View {
-        GridRow {
-            SunMoonView(location: sky.location,
-                        timezone: sky.timezone,
-                        sunEvents: weather?.today?.sun,
-                        moonEvents: weather?.today?.moon
-            )
-        }
-    }
-    
-    var planetEvents: some View {
-        ForEach(events) { event in
-            GridRow {
-                SkyGridCell(title: event.title, symbolName: event.symbolName) {
-                    
-                } chart: {
-                    ItemChart()
-                } sheet: {
-                    Text("Detail")
+
+    struct WeatherItems: View {
+        let weather: Weather?
+        var body: some View {
+            if let weather {
+                GridRow {
+                    SkyGridCell(Cloud.self, weather: weather)
+                    SkyGridCell(Wind.self, weather: weather)
                 }
-                    .gridCellColumns(2)
+                GridRow {
+                    SkyGridCell(Precipitation.self, weather: weather)
+                    SkyGridCell(Temperature.self, weather: weather)
+                }
+                GridRow {
+                    SkyGridCell(Visibility.self, weather: weather)
+                    SkyGridCell(Percent.self, weather: weather)
+                }
             }
         }
     }
-    
-    @ViewBuilder
-    var weatherItems: some View {
-        if let weather {
-            GridRow {
-                SkyGridCell(Cloud.self, weather: weather)
-                SkyGridCell(Wind.self, weather: weather)
-            }
-            GridRow {
-                SkyGridCell(Precipitation.self, weather: weather)
-                SkyGridCell(Temperature.self, weather: weather)
-            }
-            GridRow {
-                SkyGridCell(Visibility.self, weather: weather)
-                SkyGridCell(Percent.self, weather: weather)
-            }
-        }
-    }
+
 
 }
 

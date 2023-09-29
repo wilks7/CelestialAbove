@@ -27,14 +27,7 @@ extension CelestialEvents {
 //        point(for: date, at: location)
 //    }
     
-    var compact: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            glyph
-                .frame(width: 30, height: 30)
-            Text(nextTime ?? "--")
-        }
-    }
-    
+
 //    var chart: some View {
 //        let points = locations.map{($0.date, $0.altitude)}
 //        return ItemChart(chartPoints: points, showZero: true, pointFor: point(for:) )

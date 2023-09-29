@@ -72,8 +72,8 @@ struct ForecastView<W:WeatherProtocol>: View {
                     }
                 }
             }
-            .padding()
-            .transparent()
+//            .padding()
+//            .transparent()
         }
     }
 }

@@ -81,6 +81,15 @@ struct SkyGridCell<Cell:View, Chart:View, Sheet:View>: View {
 }
 
 extension SkyGridCell {
+    
+    init(title: String, symbolName: String, @ViewBuilder cell: () -> Cell, @ViewBuilder sheet: () -> Sheet) where Chart == EmptyView {
+        self.title = title
+        self.symbolName = symbolName
+        self.cell = cell()
+        self.sheet = sheet()
+        self.chart = EmptyView()
+    }
+    
     init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == Text, Chart == ItemChart, Sheet == Text {
         let item = W(weather: weather)
         self.init(title: item.symbolName, symbolName: item.symbolName) {
