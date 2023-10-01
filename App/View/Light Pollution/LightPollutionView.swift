@@ -14,15 +14,13 @@ struct LightPollutionCell: View {
     var height: CGFloat = 250
 
     var body: some View {
-        SkyGridCell(title: "Light Pollution", symbolName: "map"){
+        SkyGridRow(title: "Light Pollution", symbolName: "map"){
             VStack {
                 LightPollutionMap(location: location)
                     .frame(height: height)
                     .cornerRadius(8)
             }
             .padding(8)
-        } chart: {
-            EmptyView()
         } sheet: {
             ZStack(alignment: .topLeading) {
                 LightPollutionMap(location: location, userIteractions: true)

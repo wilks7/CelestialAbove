@@ -7,8 +7,11 @@
 
 import SwiftUI
 import SwiftAA
+import WeatherKit
 
-protocol Events {
+enum EventType: String { case rise, set, transit }
+
+protocol CelestialEvents {
     var celestial: CelestialBody.Type {get}
     var title: String {get}
     var rise: Date? {get}
@@ -16,7 +19,12 @@ protocol Events {
     var transit: Date? {get}
 }
 
-enum EventType: String { case rise, set, transit }
+extension CelestialEvents {
+    var detail: String? {
+        nil
+    }
+}
+
 
 func nextEvent(date now: Date = .now, rise: Date?, set: Date?, transit: Date?) -> (date: Date?, type: EventType) {
     if let rise, let set {
@@ -32,22 +40,26 @@ func nextEvent(date now: Date = .now, rise: Date?, set: Date?, transit: Date?) -
     }
 }
 
-//
-//
-//import CoreLocation
-//extension Events {
-//    var symbolName: String {"circle"}
-//    
-//    var label: String {
-//        nextEvent.type.rawValue.capitalized
-//    }
-//    
-//    var detail: String? {
-//        nextTime
-//    }
-//    
-//    func point(for date: Date, at location: CLLocation) -> Double {
-//        CelestialService().celestialLocation(celestial:celestial, at: location, at: date).altitude
-//    }
-//}
+extension MoonEvents: CelestialEvents {
+    var celestial: CelestialBody.Type { Moon.self }
+    var title: String { "Moon" }
+    var rise: Date? { moonrise }
+    var set: Date? { moonset }
+    var transit: Date? {nil}
+    
+    var glyph: some View {
+        PlanetView(celestial: title)
+    }
+}
 
+extension SunEvents: CelestialEvents {
+    var celestial: CelestialBody.Type { Sun.self }
+    var title: String { "Sun" }
+    var rise: Date? { sunrise }
+    var set: Date? { sunset }
+    var transit: Date? { solarNoon }
+    
+    var glyph: some View {
+        PlanetView(celestial: title)
+    }
+}

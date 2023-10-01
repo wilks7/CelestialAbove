@@ -18,8 +18,8 @@ extension MockData {
     
     static var events: [CelestialEvents] { [saturn, mars, jupiter, venus] }
     
-    static func simulateMars(for date: Date) -> [CelestialEvents.Location] {
-        var locations: [CelestialEvents.Location] = []
+    static func simulateMars(for date: Date) -> [PlanetEvents.Location] {
+        var locations: [PlanetEvents.Location] = []
         
         for hour in 0..<24 {
             let currentDate = Calendar.current.date(byAdding: .hour, value: hour, to: date)!
@@ -28,7 +28,7 @@ extension MockData {
             let altitude: Double = (hour <= 12) ? Double(hour) * 15.0 : (24 - Double(hour)) * 15.0
             let azimuth: Double = 90.0 + Double(hour) * (180.0 / 12.0)
             
-            let location = CelestialEvents.Location(
+            let location = PlanetEvents.Location(
                 date: currentDate,
                 altitude: altitude,
                 azimuth: azimuth

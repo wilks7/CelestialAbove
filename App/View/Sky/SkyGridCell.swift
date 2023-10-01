@@ -10,7 +10,7 @@ import WeatherKit
 
 enum ViewType { case detail, chart }
 
-struct SkyGridCell<Cell:View, Chart:View, Sheet:View>: View {
+struct SkyGridRow<Cell:View, Chart:View, Sheet:View>: View {
     let title: String
     let symbolName: String
 
@@ -29,6 +29,10 @@ struct SkyGridCell<Cell:View, Chart:View, Sheet:View>: View {
     
     private var hasChart: Bool {
         !(Chart.self is EmptyView.Type)
+    }
+    
+    private var hasSheet: Bool {
+        !(Sheet.self is EmptyView.Type)
     }
 
     var body: some View {
@@ -51,8 +55,11 @@ struct SkyGridCell<Cell:View, Chart:View, Sheet:View>: View {
                 }
                 .exclusively(before: TapGesture(count: 1)
                     .onEnded { _ in
-                        showSheet = true
-                    })
+                        if hasSheet {
+                            showSheet = true
+                        }
+                    }
+                )
         )
 
         .padding(8)
@@ -80,7 +87,7 @@ struct SkyGridCell<Cell:View, Chart:View, Sheet:View>: View {
     }
 }
 
-extension SkyGridCell {
+extension SkyGridRow {
     
     init(title: String, symbolName: String, @ViewBuilder cell: () -> Cell, @ViewBuilder sheet: () -> Sheet) where Chart == EmptyView {
         self.title = title
@@ -90,12 +97,44 @@ extension SkyGridCell {
         self.chart = EmptyView()
     }
     
-    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == Text, Chart == ItemChart, Sheet == Text {
+    init(title: String, symbolName: String, @ViewBuilder cell: () -> Cell) where Chart == EmptyView, Sheet == EmptyView {
+        self.title = title
+        self.symbolName = symbolName
+        self.cell = cell()
+        self.sheet = EmptyView()
+        self.chart = EmptyView()
+    }
+}
+
+import CoreLocation
+extension SkyGridRow {
+    
+    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == ItemCell<W.Glyph>, Chart == WeatherChartView<W>, Sheet == Text {
         let item = W(weather: weather)
-        self.init(title: item.symbolName, symbolName: item.symbolName) {
-            Text(item.symbolName)
+        self.init(title: W.title, symbolName: item.symbolName) {
+            ItemCell(label: item.label, detail: item.detail, glyph: item.glyph)
+
         } chart: {
-            ItemChart()
+            WeatherChartView(item: item)
+        } sheet: {
+            Text("Sheet")
+        }
+        
+    }
+    
+    init(event: PlanetEvents, observer: CLLocation, timezone: TimeZone) where Cell == ItemCell<PlanetView>, Chart == CelestialChart, Sheet == Text {
+        self.init(title: event.title, symbolName: "circle", viewType: .chart) {
+            ItemCell(label: event.title, detail: event.title) {
+                PlanetView(celestial: event.title)
+//                    .frame(width: 100, height: 100)
+            }
+        } chart: {
+            CelestialChart(
+                celestial: event.celestial,
+                locations: event.locations,
+                observer: observer,
+                timezone: timezone
+            )
         } sheet: {
             Text("Sheet")
         }

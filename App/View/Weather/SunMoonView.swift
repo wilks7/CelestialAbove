@@ -45,37 +45,39 @@ struct SunMoonView: View {
                 Text(subtitle)
                     .offset(y: 6)
             }
-//            VStack(alignment: .leading) {
-//                Text(sunEvents?.nextTime ?? "")
-//                    .font(.largeTitle)
-//                    .padding(.bottom, 4)
-//                Image(systemName: moonEvents?.phase.symbolName ?? "moon")
-//                    .offset(y: 6)
-//            }
         }
     }
 
     
     var body: some View {
-        ZStack{}
-//        SkyGridCell(title: "Sun", symbolName: "sunrise"){
-//            SmallView(title: sunTitle, detail: solarMidnight, glyph: OffsetContent(label: sunEvents?.nextTime, subtitle: "Solar Midnight"))
-//        } chart: {
-//            let locations = CelestialService().fetchLocations(celestial: Sun.self, at: location, in: timezone)
-//            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
-//        } sheet: {
-//            Text("Sun Sheet")
-//        }
-//        SkyGridCell(title: "Moon", symbolName: "moon"){
-//            SmallView(title: moonTitle, detail: moonEvents?.phase.description.capitalized, glyph: OffsetContent(label: moonEvents?.nextTime, subtitle: ""))
-//        } chart: {
-//            let locations = CelestialService().fetchLocations(celestial: Moon.self, at: location, in: timezone)
-//            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
-//
-//        } sheet: {
-//            Text("Moon Sheet")
-//
-//        }
+        SkyGridRow(title: "Sun", symbolName: "sunrise"){
+            ItemCell(label: sunTitle, detail: solarMidnight) {
+                OffsetContent(label: "Time", subtitle: "Solar Midnight")
+            }
+        } chart: {
+            let locations = CelestialService().fetchLocations(celestial: Sun.self, at: location, in: timezone)
+            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
+        } sheet: {
+            Text("Sun Sheet")
+        }
+        SkyGridRow(title: "Moon", symbolName: "moon"){
+            ItemCell(label: sunTitle, detail: solarMidnight) {
+                OffsetContent(label: "Time", subtitle: "")
+            }
+        } chart: {
+            let locations = CelestialService().fetchLocations(celestial: Moon.self, at: location, in: timezone)
+            ItemChart(chartPoints: locations.map{ ($0.date, $0.altitude) })
+
+        } sheet: {
+            Text("Moon Sheet")
+
+        }
+    }
+}
+
+extension SunMoonView {
+    init(sky: Sky){
+        self.init(location: sky.location, timezone: sky.timezone, sunEvents: sky.weather?.today?.sun, moonEvents: sky.weather?.today?.moon)
     }
 }
 

@@ -10,16 +10,17 @@ import SwiftUI
 import WeatherKit
 import Charts
 
-protocol SkyItem {}
-
-//protocol WeatherItem: SkyItem where DataY == Double {
 protocol WeatherItem {
-    associatedtype DataY: Hashable, Comparable
+//    associatedtype DataY: Hashable, Comparable
+    associatedtype Glyph: View
     var weather: Weather {get}
-    func data(for hour: HourWeather) -> (Date,DataY)
+    var label: String {get}
+    var detail: String? {get}
+    func data(for hour: HourWeather) -> (Date,Double)
     init(weather: Weather)
     //    static var title: String { get }
     static var systemName: String {get}
+    var glyph: Glyph {get}
     
 }
 
@@ -30,7 +31,20 @@ extension WeatherItem {
         Self.systemName
     }
     
-    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,DataY)] {
+    var glyph: some View {
+        Image(systemName: symbolName)
+            .font(.largeTitle)
+    }
+    
+    func data(from date: Date) -> Double {
+        if let hour = weather.hourlyForecast.first{ Calendar.current.isDateInHour($0.date) } {
+            return data(for: hour).1
+        } else {
+            return 0
+        }
+    }
+    
+    func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
         var hourly = weather.hourlyForecast
         let calendarComponents: Set<Calendar.Component> = {
             switch component {
