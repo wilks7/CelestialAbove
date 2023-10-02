@@ -33,10 +33,7 @@ struct SkyGridView: View {
 
                 }
                 ForEach(events) { event in
-                    GridRow {
-                        SkyGridRow(event: event, observer: sky.location, timezone: sky.timezone)
-                            .gridCellColumns(2)
-                    }
+                    CelestialGridRow(event: event, location: sky.location, timezone: sky.timezone)
                 }
                 GridRow {
                     SkyGridRow(title: "Daily", symbolName: "circle") {

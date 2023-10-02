@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ItemCell<G:View>: View {
+struct ItemSmall<G:View>: View {
     let label: String
     var detail: String? = nil
     let glyph: G
@@ -31,11 +31,10 @@ struct ItemCell<G:View>: View {
             }
 
         }
-        .padding(.horizontal)
     }
 }
 
-extension ItemCell {
+extension ItemSmall {
     init(label:String, detail: String? = nil, @ViewBuilder glyph: ()->G) {
         self.label = label
         self.detail = detail

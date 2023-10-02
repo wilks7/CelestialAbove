@@ -11,8 +11,20 @@ struct WeatherChartView<Item: WeatherItem>: View {
     let item: Item
     typealias ChartPoint = (Date, Double)
 
+    @State private var selected: ChartPoint? = nil
     var points: [ChartPoint] {
         item.data()
+    }
+    func checkFor(_ date: Date) -> Bool {
+
+        #warning("better guard")
+        if let first = points.first?.0,
+           let last = points.last?.0 {
+            
+            return date >= first && date <= last
+        } else {
+            return false
+        }
     }
     
     var now: ChartPoint? {
@@ -20,12 +32,11 @@ struct WeatherChartView<Item: WeatherItem>: View {
     }
     
     var body: some View {
-        ItemChart(
-            chartPoints: item.data(),
-            now: now,
-            pointFor: item.data(from:),
-            showZero: false
-        )
+        ItemChart(chartPoints: points, selected: $selected)
+            .selectOverlay(selected: $selected,
+                           pointFor: item.data(from:),
+                           checkFor: checkFor
+            )
     }
 }
 

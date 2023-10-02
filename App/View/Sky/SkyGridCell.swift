@@ -36,12 +36,13 @@ struct SkyGridRow<Cell:View, Chart:View, Sheet:View>: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             ItemHeader(title: title, symbolName: symbolName)
             if viewType == .chart, hasChart {
                 chart
             } else {
                 cell
+                    .padding(4)
             }
         }
         .gesture(
@@ -61,7 +62,6 @@ struct SkyGridRow<Cell:View, Chart:View, Sheet:View>: View {
                     }
                 )
         )
-
         .padding(8)
         .sheet(isPresented: $showSheet) {
             sheet
@@ -108,33 +108,14 @@ extension SkyGridRow {
 
 import CoreLocation
 extension SkyGridRow {
+
     
-    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == ItemCell<W.Glyph>, Chart == WeatherChartView<W>, Sheet == Text {
+    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == ItemSmall<W.Glyph>, Chart == WeatherChartView<W>, Sheet == Text {
         let item = W(weather: weather)
         self.init(title: W.title, symbolName: item.symbolName) {
-            ItemCell(label: item.label, detail: item.detail, glyph: item.glyph)
-
+            ItemSmall(label: item.label, detail: item.detail, glyph: item.glyph)
         } chart: {
             WeatherChartView(item: item)
-        } sheet: {
-            Text("Sheet")
-        }
-        
-    }
-    
-    init(event: PlanetEvents, observer: CLLocation, timezone: TimeZone) where Cell == ItemCell<PlanetView>, Chart == CelestialChart, Sheet == Text {
-        self.init(title: event.title, symbolName: "circle", viewType: .chart) {
-            ItemCell(label: event.title, detail: event.title) {
-                PlanetView(celestial: event.title)
-//                    .frame(width: 100, height: 100)
-            }
-        } chart: {
-            CelestialChart(
-                celestial: event.celestial,
-                locations: event.locations,
-                observer: observer,
-                timezone: timezone
-            )
         } sheet: {
             Text("Sheet")
         }

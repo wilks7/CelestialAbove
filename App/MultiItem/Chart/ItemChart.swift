@@ -3,15 +3,18 @@ import SwiftUI
 import Charts
 
 public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Hashable, X:Comparable, Y:Comparable {
+    
     public typealias PointFor = (X) -> Y
     public typealias ChartPoint = (X,Y)
     
     public var chartPoints: [(X,Y)]
+    
     public var now: ChartPoint? = nil
-    public var pointFor: PointFor? = nil
     public var showZero = false
+    @Binding var selected: ChartPoint?
 
-    @State private var selected: ChartPoint? = nil
+    
+
 
     public var body: some View {
         Chart {
@@ -40,7 +43,8 @@ public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Ha
                     y: .value("Value", selected.1)
                 )
                 .foregroundStyle(.white)
-            } else if let now {
+            } 
+            else if let now {
                 PointMark(
                     x: .value("Time", now.0),
                     y: .value("Value", now.1)
@@ -49,18 +53,17 @@ public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Ha
             }
         }
         .chartYAxis(.hidden)
-        .selectOverlay(selected: $selected, pointFor: pointFor, checkFor: check(reference:))
 
     }
     
-    func check(reference: X) -> Bool{
-        #warning("better guard")
-        if let first = chartPoints.first?.0,
-           let last = chartPoints.last?.0 {
-            
-            return reference >= first && reference <= last
-        } else {
-            return false
-        }
+
+}
+
+extension ItemChart {
+    init(points: [ChartPoint], showZero: Bool = false, now: ChartPoint? = nil){
+        self.chartPoints = points
+        self.showZero = showZero
+        self._selected = .constant(now)
     }
+    
 }

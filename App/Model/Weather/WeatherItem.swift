@@ -10,16 +10,20 @@ import SwiftUI
 import WeatherKit
 import Charts
 
+
 protocol WeatherItem {
-//    associatedtype DataY: Hashable, Comparable
     associatedtype Glyph: View
+    
     var weather: Weather {get}
     var label: String {get}
     var detail: String? {get}
+    
     func data(for hour: HourWeather) -> (Date,Double)
+    
     init(weather: Weather)
-    //    static var title: String { get }
+    
     static var systemName: String {get}
+    
     var glyph: Glyph {get}
     
 }
@@ -37,15 +41,18 @@ extension WeatherItem {
     }
     
     func data(from date: Date) -> Double {
-        if let hour = weather.hourlyForecast.first{ Calendar.current.isDateInHour($0.date) } {
+        if let hour = weather.hourlyForecast.first(where: { Calendar.current.isDateInHour($0.date) }) {
             return data(for: hour).1
         } else {
             return 0
         }
     }
+}
+
+extension WeatherItem {
     
     func data(for range: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(), component: Calendar.Component = .hour) -> [(Date,Double)] {
-        var hourly = weather.hourlyForecast
+        let hourly = weather.hourlyForecast
         let calendarComponents: Set<Calendar.Component> = {
             switch component {
             case .minute:

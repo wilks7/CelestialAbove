@@ -67,6 +67,13 @@ class CelestialService {
         return PlanetEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
     }
     
+    func makeHorizontalCoordinates(for celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> HorizontalCoordinates {
+        let object = celestial.init(julianDay: .init(date), highPrecision: true)
+        let geographic = GeographicCoordinates(location)
+        return object.makeHorizontalCoordinates(with: geographic)
+        
+    }
+    
     /// Creates a celestial event for a specific planet.
     /// - Parameters:
     ///   - planet: The celestial body to create an event for.

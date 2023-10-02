@@ -9,26 +9,39 @@ import SwiftUI
 import Charts
 
 struct SelectChartOverlay<X:Plottable,Y:Plottable>:ViewModifier {
+    
     public typealias PointFor = (X) -> Y
     public typealias ChartPoint = (X,Y)
         
     @Binding var selected: ChartPoint?
-    let pointFor: PointFor?
+    
+    let pointFor: PointFor
+    
     let check: (X)->Bool
+    
+    @State private var longPressed = false
 
     func body(content: Content) -> some View {
         content.chartOverlay { proxy in
             GeometryReader { geometry in
-                Rectangle().fill(.clear).contentShape(Rectangle())
+                    Rectangle().fill(.clear).contentShape(Rectangle())
                     .gesture(
+                        LongPressGesture(minimumDuration: 0.2)
+                            .onEnded { _ in
+                                self.longPressed = true
+                            }
+                    )
+                    .simultaneousGesture(
+                        longPressed ?
                         DragGesture()
                             .onChanged { drag in
                                 handleDrag(on: proxy, with: geometry, from: drag)
-                                
                             }
-                            .onEnded{ _ in
+                            .onEnded { _ in
+                                self.longPressed = false
                                 self.selected = nil
                             }
+                        : nil
                     )
             }
         }
@@ -40,7 +53,7 @@ struct SelectChartOverlay<X:Plottable,Y:Plottable>:ViewModifier {
         
         let reference = point.0
         
-        if let pointFor, check(reference) {
+        if check(reference) {
             let value = pointFor(reference)
             self.selected = (reference, value)
         }
@@ -69,11 +82,11 @@ extension View {
 
     public func selectOverlay<X:Plottable,Y:Plottable>(
         selected: Binding<(X,Y)?>,
-        pointFor: ((X) -> Y)?,
+        pointFor: @escaping((X) -> Y),
         checkFor: @escaping (X)->Bool
     ) -> some View  {
         self
-            .modifier(SelectChartOverlay(selected: selected, pointFor: pointFor, check: checkFor))
+        .modifier(SelectChartOverlay(selected: selected, pointFor: pointFor, check: checkFor))
     }
 
 }

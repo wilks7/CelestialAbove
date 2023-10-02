@@ -10,21 +10,22 @@ import Charts
 import CoreLocation
 import SwiftAA
 
+
 struct CelestialChart: View {
-    
-    typealias CharPoint = (Date, Double)
+    typealias ChartPoint = (Date, Double)
     
     let celestial: CelestialBody.Type
     
     let locations: [PlanetEvents.Location]
     let observer: CLLocation
-    let timezone: TimeZone
     
-    var chartPoints: [CharPoint] {
+    @State private var selected: ChartPoint? = nil
+    
+    var chartPoints: [(Date, Double)] {
         locations.map{ ($0.date, $0.altitude) }
     }
     
-    var now: CharPoint? {
+    var now: (Date, Double)? {
         (.now, pointFor(.now))
     }
     
@@ -32,11 +33,24 @@ struct CelestialChart: View {
         CelestialService().celestialLocation(celestial: celestial, at: observer, at: date).altitude
     }
     
+    func checkFor(_ date: Date) -> Bool {
+
+        #warning("better guard")
+        if let first = chartPoints.first?.0,
+           let last = chartPoints.last?.0 {
+            
+            return date >= first && date <= last
+        } else {
+            return false
+        }
+    }
+    
     var body: some View {
-        ItemChart(chartPoints: chartPoints, now: now, pointFor: pointFor, showZero: true)
+        ItemChart(points: chartPoints, showZero: true, now: now)
+            .selectOverlay(selected: $selected, pointFor: pointFor, checkFor: checkFor)
+
     }
 }
-
 
 //#Preview {
 //    CelestialChart()

@@ -25,6 +25,10 @@ struct SkiesTabView: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .highPriorityGesture(
+            DragGesture(minimumDistance: 15, coordinateSpace: .local)
+                .onChanged { _ in }
+        )
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Button(systemName: "map"){

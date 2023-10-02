@@ -11,12 +11,12 @@ import CoreLocation
 
 extension MockData {
     
-    static let saturn: CelestialEvents = CelestialService().createEvent(for: Saturn.self, at: locationNY, in: timezoneNY)
-    static let mars: CelestialEvents = CelestialService().createEvent(for: Mars.self, at: locationNY, in: timezoneNY)
-    static let jupiter: CelestialEvents = CelestialService().createEvent(for: Jupiter.self, at: locationNY, in: timezoneNY)
-    static let venus: CelestialEvents = CelestialService().createEvent(for: Venus.self, at: locationNY, in: timezoneNY)
+    static let saturn: PlanetEvents = CelestialService().createEvent(for: Saturn.self, at: locationNY, in: timezoneNY)
+    static let mars: PlanetEvents = CelestialService().createEvent(for: Mars.self, at: locationNY, in: timezoneNY)
+    static let jupiter: PlanetEvents = CelestialService().createEvent(for: Jupiter.self, at: locationNY, in: timezoneNY)
+    static let venus: PlanetEvents = CelestialService().createEvent(for: Venus.self, at: locationNY, in: timezoneNY)
     
-    static var events: [CelestialEvents] { [saturn, mars, jupiter, venus] }
+    static var events: [PlanetEvents] { [saturn, mars, jupiter, venus] }
     
     static func simulateMars(for date: Date) -> [PlanetEvents.Location] {
         var locations: [PlanetEvents.Location] = []
