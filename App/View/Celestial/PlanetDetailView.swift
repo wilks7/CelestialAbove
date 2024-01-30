@@ -17,7 +17,7 @@ struct PlanetDetailView: View {
     @State private var time = Date.now
     
     var horizontalCoordinates: HorizontalCoordinates {
-        CelestialService().makeHorizontalCoordinates(for: events.celestial, at: location, at: time)
+        CelestialService.makeHorizontalCoordinates(for: events.celestial, at: location, at: time)
     }
     
     var body: some View {
@@ -26,6 +26,8 @@ struct PlanetDetailView: View {
                 VStack {
                     PlanetView(celestial: events.title)
                         .frame(width: 200, height: 200)
+                    PlanetChart(events: events, date: .now, selectable: true)
+                        .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                     Grid {
                         VStack(alignment: .leading, spacing: 0) {
                             Text("Events")

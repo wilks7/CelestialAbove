@@ -7,14 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import AppIntents
 
 struct SkiesTabView: View {
     @Environment(\.dismiss) var dismiss
     let skies: [Sky]
     @State var selected: Sky
-//    @Binding var dismissSky: Sky?
-
-
     @State private var showScene = false
     
     var body: some View {
@@ -25,30 +23,33 @@ struct SkiesTabView: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .highPriorityGesture(
-            DragGesture(minimumDistance: 15, coordinateSpace: .local)
-                .onChanged { _ in }
-        )
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                Button(systemName: "map"){
-                    self.showScene = true
+                Button(intent: SkyIntent()) {
+                    Image(systemName: "map")
                 }
+//                Button(systemName: "map"){
+//                    self.showScene = true
+//                }
+                .foregroundStyle(.white)
             }
             ToolbarItem(placement: .status) {
                 TabIndexView(selected: selected, skies: skies)
             }
             ToolbarItem(placement: .bottomBar) {
+
                 Button(systemName: "list.bullet") {
 //                    withAnimation{
 //                        self.dismissSky = nil
 //                    }
                     dismiss()
                 }
+                .foregroundStyle(.white)
             }
         }
-        .foregroundColor(.white)
-        .background(sun: selected.weather?.today?.sun, timezone: selected.timezone, time: .now)
+        .background {
+            BackGroundView(sun: selected.weather?.today?.sun, timezone: selected.timezone, time: .now, showClouds: true)
+        }
     }
     
     
@@ -58,10 +59,12 @@ struct SkiesTabView: View {
     //              UIApplication.shared.open(url, options: [:], completionHandler: nil)
     //        }
     //    }
+
+}
+
+extension SkiesTabView {
     
-    
-    
-    struct TabIndexView: View {
+    private struct TabIndexView: View {
         
         let selected: Sky
         let skies: [Sky]
@@ -70,7 +73,7 @@ struct SkiesTabView: View {
             HStack(spacing: 10) {
                 ForEach(skies) { sky in
                     Group {
-                        if (sky.currentLocation ?? false) {
+                        if sky.currentLocation {
                             Image(systemName:"location.fill")
                                 .font(.caption2)
                         } else {

@@ -81,7 +81,8 @@ struct ChooseSkyView: View {
 //        animation: .default)
 //    private var skies: FetchedResults<Sky>
     #warning("fix")
-    @Query private var skies: [Sky]
+    let skies: [Sky] = []
+//    @Query private var skies: [Sky]
 
     var body: some View {
         List {

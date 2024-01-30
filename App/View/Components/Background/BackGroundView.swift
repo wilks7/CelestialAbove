@@ -8,65 +8,17 @@
 import SwiftUI
 import WeatherKit
 
-extension View {
-    
-    func background(sun: SunEvents?, timezone: TimeZone, time: Date, showClouds: Bool = true) -> some View {
-        self.background(
-            BackGroundView(sun: sun, timezone: timezone, time: time, showClouds: showClouds)
-        )
-    }
-
-    // Widget
-    func background(colors: [Color], showClouds: Bool = false) -> some View {
-        self.background(
-            BackGroundView(colors: colors, showClouds: showClouds)
-        )
-    }
-}
-
-
-
-class BackGroundViewModel: ObservableObject {
-    @Published var colors: [Color]
-    let sun: SunEvents?
-    let timezone: TimeZone
-    
-    init(sun: SunEvents?, timezone: TimeZone, time: Date = .now) {
-        self.sun = sun
-        self.timezone = timezone
-        self.colors = Color.colors(for: sun, timezone: timezone, at: time)
-    }
-    
-    init(colors: [Color]) {
-        self.colors = colors
-        self.sun = nil
-        self.timezone = Calendar.current.timeZone
-    }
-    
-    
-    @MainActor
-    func changeColor(date: Date) {
-        let colors = Color.colors(for: sun, timezone: timezone, at: date)
-        print("\n")
-        print(date.formatted())
-        print("[\(colors.first?.description ?? ""), \(colors.last?.description ?? "")]")
-        print("\n")
-        self.colors = colors
-    }
-    
-//    func changeColor
-}
 
 struct BackGroundView: View {
     @ObservedObject var model: BackGroundViewModel
     var colors: [Color] { model.colors }
     
-    init(sun: SunEvents?, timezone: TimeZone, time: Date, showClouds: Bool) {
+    init(sun: SunEvents?, timezone: TimeZone, time: Date, showClouds: Bool = false) {
         self._model = ObservedObject(wrappedValue: BackGroundViewModel(sun: sun, timezone: timezone, time: time))
         self.showClouds = showClouds
     }
     
-    init(colors: [Color], showClouds: Bool) {
+    init(colors: [Color], showClouds: Bool = false) {
         self._model = ObservedObject(wrappedValue: BackGroundViewModel(colors: colors))
         self.showClouds = showClouds
     }
@@ -154,9 +106,11 @@ extension BackGroundView {
 
 
 struct SkyBackgroundGradient: View {
+    let time: Date
+
     let sunEvents: SunEvents?
-    let timezone: TimeZone = Calendar.current.timeZone
-    var colorValue: Double { Date.now.percent(timezone) }
+    var timezone: TimeZone
+    var colorValue: Double { time.percent(timezone) }
 
     var body: some View {
         LinearGradient(colors: [

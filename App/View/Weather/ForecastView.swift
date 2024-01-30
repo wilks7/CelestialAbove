@@ -36,44 +36,33 @@ struct ForecastView<W:WeatherProtocol>: View {
 
     var body: some View {
         if !forecastArray.isEmpty {
-            VStack {
-                #warning("Add Header")
-//                ItemHeader(title: title, symbolName: "cloud")
+            if isWidget {
+                forecastView
+            } else {
                 ScrollView(alignment, showsIndicators: false) {
-                    if alignment == .horizontal {
-                        LazyHStack(spacing: 10){
-                            ForEach(forecastArray){ weather in
-                                ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
-                            }
-                        }
-                    } else {
-                        Grid {
-                            ForEach(forecastArray){ weather in
-                                GridRow {
-//                                    Text("Title")
-//                                        .font(.title3)
-//                                        .bold()
-//                                        .foregroundStyle(.white)
-//                                    Image(systemName: "cloud")
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fit)
-//                                        .font(.title2)
-//                                        .symbolVariant(.fill)
-//                                        .symbolRenderingMode(.multicolor)
-//                                        .frame(height:30)
-                                    ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
-                                }
-                            }
-                        }
-//                        VStack(alignment: .leading, spacing: 5){
-//
-//                            }
-//                        }
+                    forecastView
+                }
+            }
+
+        }
+    }
+    
+    @ViewBuilder
+    var forecastView: some View {
+        if alignment == .horizontal {
+            HStack(spacing: 10){
+                ForEach(forecastArray){ weather in
+                    ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
+                }
+            }
+        } else {
+            Grid {
+                ForEach(forecastArray){ weather in
+                    GridRow {
+                        ForecastCell(weather: weather, sunEvents: sunEvents, alignment: alignment)
                     }
                 }
             }
-//            .padding()
-//            .transparent()
         }
     }
 }

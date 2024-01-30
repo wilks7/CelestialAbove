@@ -20,10 +20,16 @@ protocol CelestialEvents {
 }
 
 extension CelestialEvents {
-    var detail: String? {
-        nil
+    
+    func isVisible(with sun: SunEvents?) -> Bool {
+        guard let sunrise = sun?.sunrise, let sunset = sun?.sunset else {return false}
+        
+        if let rise, let set {
+            return (rise > sunset) || (set < sunrise)
+        } else { return false }
     }
 }
+
 
 
 func nextEvent(date now: Date = .now, rise: Date?, set: Date?, transit: Date?) -> (date: Date?, type: EventType) {
@@ -62,4 +68,5 @@ extension SunEvents: CelestialEvents {
     var glyph: some View {
         PlanetView(celestial: title)
     }
+
 }

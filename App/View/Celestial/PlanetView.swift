@@ -27,13 +27,30 @@ struct PlanetView: View {
     
     var body: some View {
         Group {
-            #if os(iOS)
-            MySceneView(celestial: celestial, interactions: interactions)
-            #else
-            sceneView
-            #endif
+            if self.isWidget {
+                Image(systemName: "circle")
+            } else {
+                #if os(iOS)
+                MySceneView(celestial: celestial, interactions: interactions)
+                #else
+                sceneView
+                #endif
+            }
+
         }
         .frame(alignment: .center)
+
+    }
+    
+    struct PercentClipShape: Shape {
+        var percent: CGFloat = 0.5
+
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            let clippedWidth = rect.width * percent
+            path.addRect(CGRect(x: 0, y: 0, width: clippedWidth, height: rect.height))
+            return path
+        }
     }
     
     @ViewBuilder
@@ -55,6 +72,7 @@ struct PlanetView: View {
             }(),
             options:options
         )
+
     }
 }
 
@@ -78,6 +96,7 @@ struct MySceneView: UIViewRepresentable {
         } else {
             view.scene = SCNScene(named: "Earth.usdz")
         }
+        view.pointOfView?.position.z += 1000
         return view
     }
 }
@@ -86,6 +105,8 @@ struct MySceneView: UIViewRepresentable {
 struct PlanetView_Previews: PreviewProvider {
     static var previews: some View {
         PlanetView(celestial: "Mars")
-            .frame(width: 100, height: 100)
+            .frame(width: 200, height: 200)
+            .background(Color.red)
+        
     }
 }

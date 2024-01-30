@@ -10,6 +10,7 @@ import SwiftUI
 struct NewSkyView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    
 
     let searchSky: SkyKey
     
@@ -37,6 +38,7 @@ struct NewSkyView: View {
     private func add(){
         let sky = Sky(title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
         #warning("Fetch Data")
+//        SkyDefaults.add(nightSky)
         context.insert(sky)
         try? context.save()
         dismiss()

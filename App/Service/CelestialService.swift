@@ -21,7 +21,7 @@ class CelestialService {
     ///   - date: The date for which to fetch celestial events. Defaults to the current date.
     ///   - title: An optional title for the event.
     /// - Returns: An array of celestial events.
-    func fetchPlanetEvents(at location: CLLocation, in timezone: TimeZone, at date: Date = .now, title: String? = nil) -> [PlanetEvents] {
+    static func fetchPlanetEvents(at location: CLLocation, in timezone: TimeZone, at date: Date = .now, title: String? = nil) -> [PlanetEvents] {
         let planets: [Planet.Type] = [Mars.self, Saturn.self, Venus.self, Jupiter.self]
         var events: [PlanetEvents] = []
         for planet in planets {
@@ -38,7 +38,7 @@ class CelestialService {
     ///   - location: The geographical location.
     ///   - date: The date of interest.
     /// - Returns: The celestial location of the planet.
-    func celestialLocation(celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
+    static func celestialLocation(celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
         return calculateCelestialLocation(for: celestial, at: location, at: date)
     }
     
@@ -48,18 +48,18 @@ class CelestialService {
     ///   - location: The geographical location.
     ///   - date: The date of interest.
     /// - Returns: The celestial location of the planet.
-    func celestialLocation(for planet: Planet.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
+    static func celestialLocation(for planet: Planet.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
         return calculateCelestialLocation(for: planet, at: location, at: date)
     }
     
     /// Calculates the celestial location based on provided parameters.
     /// - Parameter parameter: Parameters that define the celestial body, location, and date.
     /// - Returns: The celestial location.
-    func celestialLocation(_ parameter: Parameter) -> PlanetEvents.Location {
+    static func celestialLocation(_ parameter: Parameter) -> PlanetEvents.Location {
         return calculateCelestialLocation(for: parameter.celestial, at: parameter.location, at: parameter.date)
     }
     
-    private func calculateCelestialLocation(for celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
+    private static func calculateCelestialLocation(for celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> PlanetEvents.Location {
         let object = celestial.init(julianDay: .init(date), highPrecision: true)
         let geographic = GeographicCoordinates(location)
         let horizontalCoord = object.makeHorizontalCoordinates(with: geographic)
@@ -67,7 +67,7 @@ class CelestialService {
         return PlanetEvents.Location(date: date, altitude: horizontalCoord.altitude.value, azimuth: horizontalCoord.azimuth.value)
     }
     
-    func makeHorizontalCoordinates(for celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> HorizontalCoordinates {
+    static func makeHorizontalCoordinates(for celestial: CelestialBody.Type, at location: CLLocation, at date: Date) -> HorizontalCoordinates {
         let object = celestial.init(julianDay: .init(date), highPrecision: true)
         let geographic = GeographicCoordinates(location)
         return object.makeHorizontalCoordinates(with: geographic)
@@ -81,12 +81,12 @@ class CelestialService {
     ///   - timezone: The timezone for date calculations.
     ///   - date: The date of interest. Defaults to the current date.
     /// - Returns: A celestial event.
-    func createEvent(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone, date: Date = .now) -> PlanetEvents {
+    static func createEvent(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone, date: Date = .now) -> PlanetEvents {
         let locations = fetchLocations(for: planet, at: location, in: timezone)
         let object = planet.init(julianDay: .init(date), highPrecision: true)
         let riseTransitSet = object.riseTransitSetTimes(for: GeographicCoordinates(location))
         
-        var setTime = riseTransitSet.setTime?.date
+        let setTime = riseTransitSet.setTime?.date
         let riseTime = riseTransitSet.riseTime?.date
         let transitTime = riseTransitSet.transitTime?.date
         
@@ -98,8 +98,8 @@ class CelestialService {
         
         return PlanetEvents(
             planet: planet,
-//            location: location,
-//            timezone: timezone,
+            observer: location,
+            timezone: timezone,
             rise: riseTime,
             set: setTime,
             transit: transitTime,
@@ -113,7 +113,7 @@ class CelestialService {
     ///   - location: The geographical location.
     ///   - timezone: The timezone for date calculations.
     /// - Returns: An array of celestial locations over a 24-hour period.
-    func fetchLocations(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone) -> [PlanetEvents.Location] {
+    static func fetchLocations(for planet: Planet.Type, at location: CLLocation, in timezone: TimeZone) -> [PlanetEvents.Location] {
         let start = Date.now.startOfDay(timezone)
         return (0...24).compactMap { hour -> PlanetEvents.Location? in
             guard let date = Calendar.current.date(byAdding: .hour, value: hour, to: start) else {
@@ -129,7 +129,7 @@ class CelestialService {
     ///   - location: The geographical location.
     ///   - timezone: The timezone for date calculations.
     /// - Returns: An array of celestial locations over a 24-hour period.
-    func fetchLocations(celestial: CelestialBody.Type, at location: CLLocation, in timezone: TimeZone) -> [PlanetEvents.Location] {
+    static func fetchLocations(celestial: CelestialBody.Type, at location: CLLocation, in timezone: TimeZone) -> [PlanetEvents.Location] {
         let start = Date.now.startOfDay(timezone)
         return (0...24).compactMap { hour -> PlanetEvents.Location? in
             guard let date = Calendar.current.date(byAdding: .hour, value: hour, to: start) else {
@@ -139,7 +139,7 @@ class CelestialService {
         }
     }
     
-    func fetchLocations(
+    static func fetchLocations(
         celestial: CelestialBody.Type,
         at location: CLLocation,
         within dateRange: ClosedRange<Date> = Date.now.startOfDay()...Date.now.endOfDay(),
@@ -162,6 +162,11 @@ class CelestialService {
             return self.celestialLocation(celestial: celestial, at: location, at: date)
         }
     }
+
+}
+
+import WeatherKit
+extension CelestialService {
 
 }
 

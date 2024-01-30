@@ -33,7 +33,7 @@ struct SkyPreview<Content:View>:View {
     var content: (Sky) -> Content
     var body: some View {
         PreviewContentView<Sky, Content>(content: content)
-            .modelContainer(previewContainer)
+//            .modelContainer(previewContainer)
     }
 }
 

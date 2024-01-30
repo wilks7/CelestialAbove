@@ -21,5 +21,9 @@ extension DebugLog {
     public var logger: Logger {
         Logger(subsystem: Bundle.main.bundleIdentifier!, category: name)
     }
+    
+    public static var logger: Logger {
+        Logger(subsystem: Bundle.main.bundleIdentifier!, category:String(describing: Self.self))
+    }
 
 }

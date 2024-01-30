@@ -12,8 +12,9 @@ import WeatherKit
 struct ContentView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.modelContext) private var context
-    @Query private var skies: [Sky]
     
+    @Query private var skies: [Sky]
+        
     @State private var selected: Sky? = nil
     
     private let service = WeatherService()
@@ -42,8 +43,8 @@ struct ContentView: View {
         .onAppear {
             for sky in skies {
                 Task {
-                    await sky.fetchData(service:service)
-                    try? context.save()
+                    try await sky.fetchData(service:service)
+                    try context.save()
                 }
             }
         }
@@ -53,5 +54,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(previewContainer)
+//        .modelContainer(previewContainer)
 }

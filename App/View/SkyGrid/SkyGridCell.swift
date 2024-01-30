@@ -12,7 +12,7 @@ enum ViewType { case detail, chart }
 
 struct SkyGridRow<Cell:View, Chart:View, Sheet:View>: View {
     let title: String
-    let symbolName: String
+    var symbolName: String? = nil
 
     @State var viewType: ViewType = .detail
     
@@ -45,39 +45,43 @@ struct SkyGridRow<Cell:View, Chart:View, Sheet:View>: View {
                     .padding(4)
             }
         }
-        .gesture(
-            TapGesture(count: 2)
-                .onEnded { _ in
-                    if hasChart {
-                        withAnimation {
-                            self.viewType = viewType == .detail ? .chart : .detail
-                        }
+        .gesture(doubleTap)
+        .padding(8)
+        .sheet(isPresented: $showSheet){ sheet }
+        .transparent()
+//        .frame(height: 148)
+
+    }
+    
+    var doubleTap: some Gesture {
+        TapGesture(count: 2)
+            .onEnded { _ in
+                if hasChart {
+                    withAnimation {
+                        self.viewType = viewType == .detail ? .chart : .detail
                     }
                 }
-                .exclusively(before: TapGesture(count: 1)
-                    .onEnded { _ in
-                        if hasSheet {
-                            showSheet = true
-                        }
+            }
+            .exclusively(before: TapGesture(count: 1)
+                .onEnded { _ in
+                    if hasSheet {
+                        showSheet = true
                     }
-                )
-        )
-        .padding(8)
-        .sheet(isPresented: $showSheet) {
-            sheet
-        }
-        .transparent()
+                }
+            )
     }
     
     struct ItemHeader: View {
         let title: String
-        let symbolName: String
+        let symbolName: String?
         var font: Font = .footnote.weight(.semibold)
         
         var body: some View {
             if !isWidget {
                 HStack {
-                    Image(systemName: symbolName)
+                    if let symbolName {
+                        Image(systemName: symbolName)
+                    }
                     Text(title)
                     Spacer()
                 }
@@ -106,22 +110,6 @@ extension SkyGridRow {
     }
 }
 
-import CoreLocation
-extension SkyGridRow {
-
-    
-    init<W:WeatherItem>( _ data: W.Type = W.self, weather: Weather) where Cell == ItemSmall<W.Glyph>, Chart == WeatherChartView<W>, Sheet == Text {
-        let item = W(weather: weather)
-        self.init(title: W.title, symbolName: item.symbolName) {
-            ItemSmall(label: item.label, detail: item.detail, glyph: item.glyph)
-        } chart: {
-            WeatherChartView(item: item)
-        } sheet: {
-            Text("Sheet")
-        }
-        
-    }
-}
 //
 //    
 //    init<I:SkyItem>(item: I, @ViewBuilder cell: ()->Cell) where C == I.Chart, S == SkyItemDetailView<I> {
@@ -133,4 +121,11 @@ extension SkyGridRow {
 //    }
 //}
 //
+
+#Preview {
+    SkyGridRow(title: "Title", symbolName: "circle") {
+        Text("Yoo")
+            .font(.largeTitle)
+    }
+}
 

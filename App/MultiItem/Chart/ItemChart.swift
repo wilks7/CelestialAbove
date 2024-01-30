@@ -2,6 +2,7 @@
 import SwiftUI
 import Charts
 
+
 public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Hashable, X:Comparable, Y:Comparable {
     
     public typealias PointFor = (X) -> Y
@@ -11,9 +12,8 @@ public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Ha
     
     public var now: ChartPoint? = nil
     public var showZero = false
+    public var color: Color = .blue
     @Binding var selected: ChartPoint?
-
-    
 
 
     public var body: some View {
@@ -23,10 +23,13 @@ public struct ItemChart<X:Plottable, Y:Plottable>: View where X: Hashable, Y: Ha
                     x: .value("Time", $0.0),
                     y: .value("Value", $0.1)
                 )
-                .lineStyle(.init(lineWidth: 4))
+                .lineStyle(.init(lineWidth: 3))
+                .foregroundStyle(color)
+
             }
             if showZero {
                 RuleMark(y: .value("Value", 0))
+                    .lineStyle(.init(lineWidth: 1.5))
                     .foregroundStyle(.white)
             }
             if let selected {
@@ -65,5 +68,17 @@ extension ItemChart {
         self.showZero = showZero
         self._selected = .constant(now)
     }
-    
+}
+
+
+extension ItemChart {
+    init<C:Chartable>(item: C, showZero: Bool = false,
+                      selected: Binding<(C.X, C.Y)?> = .constant(nil),
+                      now: (X,Y)? = nil
+    ) where X == C.X, Y == C.Y {
+        self.chartPoints = item.points
+        self.showZero = showZero
+        self._selected = selected
+        self.now = now
+    }
 }

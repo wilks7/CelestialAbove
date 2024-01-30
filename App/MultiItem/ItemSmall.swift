@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct ItemSmall<G:View>: View {
+struct ItemSmall<G:View, D:View>: View {
     let label: String
-    var detail: String? = nil
+    
+    
+    @ViewBuilder
     let glyph: G
     
-    var body: some View {
-        small
-    }
+    @ViewBuilder
+    let detail: D
+
     
-    var small: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(label)
                 .font(.title2)
@@ -24,24 +26,30 @@ struct ItemSmall<G:View>: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             glyph
-            if let detail {
-                Text(detail)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            }
+            detail
 
         }
     }
 }
 
 extension ItemSmall {
-    init(label:String, detail: String? = nil, @ViewBuilder glyph: ()->G) {
+    init(label: String, detail: String? = nil, @ViewBuilder glyph: () -> G ) where D == Text {
         self.label = label
-        self.detail = detail
+        self.detail = Text(detail ?? "")
         self.glyph = glyph()
+    }
+    
+    init<I:Item>(item: I) where G == I.Glyph, I:Labelable, D == Text {
+        self.label = item.label
+        self.glyph = item.glyph
+        let detail = (item as? Detailable)?.detail
+        self.detail = Text(detail ?? "")
     }
 }
 
-//#Preview {
-//    ItemCell()
-//}
+#Preview {
+    ItemSmall(label: "Label", detail: "Detail") {
+        Image(systemName: "cloud")
+            .font(.system(size: 64))
+    }
+}

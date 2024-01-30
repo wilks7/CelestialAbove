@@ -12,8 +12,8 @@ import CoreLocation
 
 struct PlanetEvents {
     let planet: Planet.Type
-//    let location: CLLocation
-//    let timezone: TimeZone
+    let observer: CLLocation
+    let timezone: TimeZone
     let rise: Date?
     let set: Date?
     var transit: Date? = nil
@@ -21,7 +21,6 @@ struct PlanetEvents {
     
     var title: String { String(describing: planet) }
     var color: SwiftUI.Color { Color(planet.averageColor) }
-    
 
 }
 
@@ -52,8 +51,35 @@ extension PlanetEvents {
         let azimuth: Double
         var aboveHorizon: Bool { altitude > 0 }
         var northBasedAzimuth: Double { return (Degree(azimuth) + 180).reduced.value }
-
     }
 }
 
+extension PlanetEvents: Item {
+    
+    var glyph: PlanetView {
+        PlanetView(celestial: title)
+    }
+    
+}
 
+extension PlanetEvents: Labelable {
+    var label: String { "Rises" }
+    var sublabel: String? { rise?.time(timezone) }
+}
+
+extension PlanetEvents: Detailable {
+    var detail: String { "Transits" }
+    var subdetail: String? { transit?.time(timezone) }
+    
+    var info: String { "Sets" }
+    var subinfo: String? { self.set?.time(timezone) }
+}
+
+extension PlanetEvents: Chartable {
+
+    
+    var points: [(Date, Double)] {
+        locations.map{ ($0.date, $0.altitude) }
+    }
+
+}

@@ -19,7 +19,11 @@ struct SkiesListView: View {
         List {
             ForEach(skies) { sky in
                 SkyCellView(sky: sky)
-                .background(sun: sky.weather?.today?.sun, timezone: sky.timezone, time: .now)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+                .background {
+                    BackGroundView(sun: sky.weather?.today?.sun, timezone: sky.timezone, time: .now)
+                }
                 .cornerRadius(16)
                 .onTapGesture {
                     withAnimation {
@@ -63,9 +67,9 @@ struct SkiesListView: View {
 }
 
 #Preview {
-    ModelPreview {
-        SkiesListView(skies: [$0], selected: .constant(nil))
-    }
+//    ModelPreview {
+        SkiesListView(skies: [], selected: .constant(nil))
+//    }
 //    SkiesListView()
 //        .modelContainer(previewContainer)
 }

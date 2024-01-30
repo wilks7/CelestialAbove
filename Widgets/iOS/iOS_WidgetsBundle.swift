@@ -13,9 +13,7 @@ struct iOS_WidgetsBundle: WidgetBundle {
     var body: some Widget {
         StatusWidgets()
         #if os(iOS)
-        if #available(iOS 16.1, *) {
-            iOS_WidgetsLiveActivity()
-        }
+        iOS_WidgetsLiveActivity()
         #endif
     }
 }
