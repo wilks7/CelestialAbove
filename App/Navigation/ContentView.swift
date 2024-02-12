@@ -24,35 +24,17 @@ struct ContentView: View {
         NavigationSplitView {
             SkiesListView(skies: skies, selected: $selected)
             .navigationDestination(item: $selected) { sky in
-                #if os(iOS)
-                if horizontalSizeClass == .compact {
-                    SkiesTabView(skies: skies, selected: sky)
-                } else {
-                    SkyGridView(sky: sky)
-                }
-                #else
                 SkyGridView(sky: sky)
-                #endif
             }
         } detail: {
-            ContentUnavailableView(
-                skies.isEmpty ? "Add a Night Sky" : "Select a Sky",
-                systemImage: "moon.stars"
-            )
-        }
-        .onAppear {
-            for sky in skies {
-                Task {
-                    try await sky.fetchData(service:service)
-                    try context.save()
-                }
+            if let selected {
+                SkyGridView(sky: selected)
+            } else {
+                ContentUnavailableView(
+                    skies.isEmpty ? "Add a Night Sky" : "Select a Sky",
+                    systemImage: "moon.stars"
+                )
             }
         }
-
     }
-}
-
-#Preview {
-    ContentView()
-//        .modelContainer(previewContainer)
 }

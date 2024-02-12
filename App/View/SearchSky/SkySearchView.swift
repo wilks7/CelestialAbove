@@ -9,12 +9,16 @@ import SwiftUI
 import CoreData
 
 extension View {
-    func skySearchable() -> some View { modifier( SkySearchView() ) }
+    func skySearchable(add: @escaping (SkyKey) -> Void) -> some View {
+        modifier( SkySearchView(add: add) )
+    }
 }
 struct SkySearchView: ViewModifier {
     @Environment(\.isSearching) private var isSearching: Bool
     
     @StateObject var model = SearchResults()
+    
+    var add: (SkyKey) -> Void
     
     func body(content: Content) -> some View {
         content
@@ -58,7 +62,7 @@ struct SkySearchView: ViewModifier {
         .sheet(item: $model.tappedSky,
             onDismiss: { model.tappedSky = nil },
             content: { tappedSky in
-                NewSkyView(searchSky: tappedSky)
+                NewSkyView(searchSky: tappedSky, add: add)
             }
         )
 
@@ -107,6 +111,6 @@ extension SkySearchView {
         List {
             Text("List")
         }
-        .skySearchable()
+        .skySearchable{ key in}
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 import CoreLocation
 import SwiftAA
-
+import MultiItem
 
 struct PlanetChart: View {
     let events: PlanetEvents

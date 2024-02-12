@@ -15,7 +15,7 @@ struct SkyMenuBar: Scene {
     
     var body: some Scene {
         MenuBarExtra {
-            SkiesListView(skies: skies)
+            SkiesListView(skies: skies, selected: $selection)
         } label: {
             Label("Celestial Above", systemImage: "sunrise")
         }

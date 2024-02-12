@@ -7,7 +7,7 @@
 
 import SwiftUI
 import WeatherKit
-
+import MultiItem
 
 struct WeatherItems: View {
     let weather: Weather?
@@ -52,12 +52,12 @@ fileprivate extension WeatherItems {
 }
  
 
-#Preview {
-    Grid {
-        WeatherItems(weather: MockData.weather)
-    }
-}
-
-#Preview {
-    WeatherItems.WeatherGridCell<Cloud>(weather: MockData.weather)
-}
+//#Preview {
+//    Grid {
+//        WeatherItems(weather: MockData.weather)
+//    }
+//}
+//
+//#Preview {
+//    WeatherItems.WeatherGridCell<Cloud>(weather: MockData.weather)
+//}

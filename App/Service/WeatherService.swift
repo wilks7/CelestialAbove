@@ -20,7 +20,6 @@ extension WeatherService {
             return weather
         } catch {
             logger.error("Error Fetching \(sky.title)")
-
             throw error
         }
     }

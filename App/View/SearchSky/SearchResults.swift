@@ -12,12 +12,12 @@ import MapKit
 import CoreLocation
 import CoreData
 
-struct SkyKey: Identifiable {
-    let id = UUID()
-    let title: String
-    let location: CLLocation
-    let timezone: TimeZone
-}
+//struct SkyKey: Identifiable {
+//    let id = UUID()
+//    let title: String
+//    let location: CLLocation
+//    let timezone: TimeZone
+//}
 
 class SearchResults: NSObject, ObservableObject {
         

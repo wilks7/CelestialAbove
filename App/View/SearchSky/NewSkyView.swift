@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct NewSkyView: View {
-    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
-
     let searchSky: SkyKey
+    var add: (SkyKey) -> Void
     
     var body: some View {
         NavigationStack {
@@ -23,7 +22,7 @@ struct NewSkyView: View {
             }
                 .toolbar {
                     ToolbarItem {
-                        Button("Add", action: add)
+                        Button("Add", action: addSky)
 
                     }
                     ToolbarItem {
@@ -35,12 +34,8 @@ struct NewSkyView: View {
         }
     }
     
-    private func add(){
-        let sky = Sky(title: searchSky.title, timezone: searchSky.timezone, location: searchSky.location)
-        #warning("Fetch Data")
-//        SkyDefaults.add(nightSky)
-        context.insert(sky)
-        try? context.save()
+    private func addSky(){
+        add(searchSky)
         dismiss()
     }
 }
@@ -50,6 +45,6 @@ struct NewSkyView_Previews: PreviewProvider {
         NewSkyView(searchSky: .init(
             title: "New York",
             location: .init(latitude: 40.7831, longitude: -73.9712),
-            timezone: TimeZone(identifier: "America/New_York")!))
+            timezone: TimeZone(identifier: "America/New_York")!)) { sky in}
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MultiItem
 
 struct WeatherChartView<Item: WeatherItem>: View {
     let item: Item
@@ -32,7 +33,7 @@ struct WeatherChartView<Item: WeatherItem>: View {
     }
     
     var body: some View {
-        ItemChart(chartPoints: points, selected: $selected)
+        ItemChart(points: points, selected: $selected)
             .selectOverlay(selected: $selected,
                            pointFor: item.data(from:),
                            checkFor: checkFor

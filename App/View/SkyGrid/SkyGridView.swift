@@ -10,6 +10,8 @@ import WeatherKit
 import CoreLocation
 
 struct SkyGridView: View {
+    @Environment(\.dismiss) var dismiss
+
     let sky: Sky
     var weather: Weather? { sky.weather }
         
@@ -33,7 +35,7 @@ struct SkyGridView: View {
                     GridRow {
                         SkyGridRow(title: "Hourly", symbolName: "clouds") {
                             ForecastView(forecast: weather?.hourly, timezone: sky.timezone)
-                            .padding(.top, 4)
+                                .padding(.top, 4)
                         }
                         .gridCellColumns(2)
 
@@ -56,7 +58,33 @@ struct SkyGridView: View {
                 .padding()
             }
         }
+        #if os(iOS)
         .toolbar(.hidden, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Button(intent: SkyIntent()) {
+                    Image(systemName: "map")
+                }
+//                Button(systemName: "map"){
+//                    self.showScene = true
+//                }
+                .foregroundStyle(.white)
+            }
+            ToolbarItem(placement: .bottomBar) {
+
+                Button(systemName: "list.bullet") {
+//                    withAnimation{
+//                        self.dismissSky = nil
+//                    }
+                    dismiss()
+                }
+                .foregroundStyle(.white)
+            }
+        }
+        #endif
+        .background {
+            BackGroundView(sun: sky.weather?.today?.sun, timezone: sky.timezone, time: .now, showClouds: true)
+        }
     }
     
 

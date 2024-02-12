@@ -14,19 +14,20 @@ import SwiftUI
 
 
 @Model
-class Sky: Identifiable {
-//    let nightSky: NightSky = NightSky.NewYork
+class Sky: Identifiable, NightSky {
     
     var id: String { "\(latitude),\(longitude)" }
-    let title: String = "New York"
+    var title: String = "New York"
     
-    private let timezoneID: String = "America/New_York"
-    private let altitude: Double = 100
-    private let latitude: Double = 40.7831
-    private let longitude: Double = -73.9712
+    private var timezoneID: String = "America/New_York"
+    private var altitude: Double = 100
+    private var latitude: Double = 40.7831
+    private var longitude: Double = -73.9712
     var currentLocation: Bool = false
 
-    var weatherData: Data? = nil
+    var weatherData: Data = Data()
+    @Transient
+    var events: [PlanetEvents] = []
     
     init(title: String,
          timezone: TimeZone,
@@ -39,6 +40,15 @@ class Sky: Identifiable {
         self.longitude = location.coordinate.longitude
         self.altitude = location.altitude
         self.currentLocation = current
+    }
+    
+    init(key sky: SkyKey) {
+        self.title = sky.title
+        self.timezoneID = sky.timezone.identifier
+        self.latitude = sky.location.coordinate.latitude
+        self.longitude = sky.location.coordinate.longitude
+        self.altitude = sky.location.altitude
+        self.currentLocation = sky.currentLocation
     }
 
 }
@@ -56,10 +66,8 @@ extension Sky {
     }
     
     
-//    @Transient
     var weather: Weather? {
-        guard let weatherData else {return nil}
-        return try? JSONDecoder().decode(Weather.self, from: weatherData)
+        try? JSONDecoder().decode(Weather.self, from: weatherData)
     }
 }
 
@@ -67,15 +75,25 @@ extension Sky {
     
     @MainActor
     func fetchData(service: WeatherService) async throws {
+//        self.events = CelestialService.fetchPlanetEvents(at: location, in: timezone, title: title)
         
         let lastUpdated = weather?.currentWeather.date
         
-        guard let lastUpdated, Date().timeIntervalSince(lastUpdated) > 86400
-            else {return}
-        
-        let weather = try await service.weather(for: self)
-        self.weatherData = try JSONEncoder().encode(weather)
+        if shouldFetch(lastUpdated: lastUpdated) {
+            let weather = try await service.weather(for: self)
+            try withAnimation {
+                self.weatherData = try JSONEncoder().encode(weather)
+            }
+        }
     }
-
     
+    private func shouldFetch(lastUpdated: Date?) -> Bool {
+        guard let lastUpdated else {return true}
+        
+        let timeInterval: Double = 86400
+        let lastInterval = Date().timeIntervalSince(lastUpdated)
+        
+        return lastInterval > timeInterval
+
+    }
 }

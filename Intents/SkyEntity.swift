@@ -31,13 +31,13 @@ struct SkyQuery: EntityQuery {
         }
     }
     func suggestedEntities() async throws -> [SkyEntity] {
-        SkyData.shared.skies().map{
+        SkyData.shared.allSkies().map{
             SkyEntity(title: $0.title, location: $0.location, timezone: $0.timezone, weatherData: $0.weatherData)
         }
     }
     
     func defaultResult() async -> SkyEntity? {
-        guard let first = SkyData.shared.skies().first 
+        guard let first = SkyData.shared.allSkies().first
         else {return SkyEntity.NewYork}
         return SkyEntity(title: first.title, location: first.location, timezone: first.timezone, weatherData: first.weatherData)
 

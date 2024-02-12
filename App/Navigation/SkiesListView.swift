@@ -15,6 +15,8 @@ struct SkiesListView: View {
 
     @Binding var selected: Sky?
 
+    private let weatherService = WeatherService()
+    
     var body: some View {
         List {
             ForEach(skies) { sky in
@@ -30,17 +32,22 @@ struct SkiesListView: View {
                         self.selected = sky
                     }
                 }
+                .onAppear {
+                    Task {
+                        try await sky.fetchData(service: weatherService)
+                    }
+                }
             }
             .onDelete(perform: delete)
         }
         .listStyle(.plain)
         .overlay{
             if skies.isEmpty {
-                ContentUnavailableView("Search for a Night Sky to add",systemImage: "moon.stars")
+                ContentUnavailableView("Search for a Night Sky to add", systemImage: "moon.stars")
             }
         }
         #if !os(watchOS)
-        .skySearchable()
+        .skySearchable(add: add)
         #endif
         #if os(iOS)
         .toolbar {
@@ -54,13 +61,21 @@ struct SkiesListView: View {
         .navigationTitle("Night Skies")
 
     }
+    
+    private func add(key: SkyKey) {
+//        let sky = Sky(key: key)
+        let sky = Sky(title: key.title, timezone: key.timezone, location: key.location)
+
+        withAnimation {
+            context.insert(sky)
+        }
+    }
 
     private func delete(_ indexSet: IndexSet) {
         withAnimation {
             indexSet.forEach { index in
                 context.delete(skies[index])
             }
-            try? context.save()
         }
     }
 

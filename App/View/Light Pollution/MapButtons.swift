@@ -24,7 +24,8 @@ struct MapButtonsOverlay: View {
                         .fontWeight(.semibold)
                         .padding(.vertical, 4)
                 }
-                .tint(Color(uiColor: .systemGray4))
+//                .tint(Color(uiColor: .systemGray4))
+                .tint(.gray.opacity(0.4))
                 .buttonStyle(.borderedProminent)
                 BortleScale()
             }
@@ -45,7 +46,9 @@ struct MapButtonsOverlay: View {
                     
                 }
                 .padding(8)
-                .background(Color(uiColor: .systemGray4))
+//                .background(Color(uiColor: .systemGray4))
+                .tint(.gray.opacity(0.4))
+
                 .cornerRadius(8)// corners: [.topLeft, .topRight])
 
                 Divider().frame(width: 40)
@@ -54,7 +57,9 @@ struct MapButtonsOverlay: View {
                     showSkies = true
                 }
                 .padding(8)
-                .background(Color(uiColor: .systemGray4))
+//                .background(Color(uiColor: .systemGray4))
+                .background(.gray.opacity(0.4))
+
                 .cornerRadius(8)// corners: [.bottomLeft, .bottomRight])
             }
             
@@ -62,7 +67,9 @@ struct MapButtonsOverlay: View {
                 
             }
             .padding(8)
-            .background(Color(uiColor: .systemGray4))
+//            .background(Color(uiColor: .systemGray4))
+            .background(.gray.opacity(0.4))
+
             .cornerRadius(8)
 
 

@@ -16,15 +16,26 @@ struct LightPollutionCell: View {
     var body: some View {
         SkyGridRow(title: "Light Pollution", symbolName: "map"){
             VStack {
+//                #if os(macOS)
+                
+//                #else
                 LightPollutionMap(location: location)
                     .frame(height: height)
                     .cornerRadius(8)
+//                #endif
             }
             .padding(8)
         } sheet: {
+
+            
             ZStack(alignment: .topLeading) {
+//                #if os(macOS)
+
+//                #else
                 LightPollutionMap(location: location, userIteractions: true)
                     .ignoresSafeArea(edges: .bottom)
+//                #endif
+
                 MapButtonsOverlay(location: $location)
             }
         }

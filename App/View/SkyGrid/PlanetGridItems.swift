@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import WeatherKit
+import MultiItem
 
 struct PlanetGridItems: View {
     let events: [PlanetEvents]
@@ -48,8 +49,9 @@ fileprivate extension PlanetGridItems {
     }
 }
 
-
-
+#Preview {
+    PlanetGridItems.CelestialGridRow(event: MockData.mars)
+}
 
 #Preview {
     Grid {
@@ -57,6 +59,3 @@ fileprivate extension PlanetGridItems {
     }
 }
 
-#Preview {
-    PlanetGridItems.CelestialGridRow(event: MockData.mars)
-}

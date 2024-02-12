@@ -60,6 +60,16 @@ struct ImageTile {
     let path: String
 }
 
+
+
+import MapKit
+
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
+
 class TileOverlayRenderer: MKOverlayRenderer {
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
         let z = zoomScaleToZoomLevel(zoomScale)
@@ -75,18 +85,33 @@ class TileOverlayRenderer: MKOverlayRenderer {
         
         for tile in tilesInRect {
             let rect = self.rect(for: tile.frame)
-            if let imageData = try? Data(contentsOf: URL(string: tile.path)!),
-               let image = UIImage(data: imageData),
-               let cgImage = image.cgImage {
+            if let imageData = try? Data(contentsOf: URL(string: tile.path)!) {
+#if os(iOS)
+                let image = UIImage(data: imageData)
+#elseif os(macOS)
+                let image = NSImage(data: imageData)
+#endif
                 
-                context.saveGState()
-                context.translateBy(x: rect.minX, y: rect.minY)
-                context.scaleBy(x: CGFloat(CGFloat(overZoom) / zoomScale), y: CGFloat(CGFloat(overZoom) / zoomScale))
-                context.translateBy(x: 0, y: image.size.height)
-                context.scaleBy(x: 1, y: -1)
-                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-                context.restoreGState()
+#if os(iOS)
+                let cgImage = image?.cgImage
+#elseif os(macOS)
+                var cgImage: CGImage? = nil
+                if let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil) {
+                    cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+                }
+#endif
+                
+                if let cgImage = cgImage {
+                    context.saveGState()
+                    context.translateBy(x: rect.minX, y: rect.minY)
+                    context.scaleBy(x: CGFloat(overZoom) / zoomScale, y: CGFloat(overZoom) / zoomScale)
+                    context.translateBy(x: 0, y: CGFloat(cgImage.height))
+                    context.scaleBy(x: 1, y: -1)
+                    context.draw(cgImage, in: CGRect(x: 0, y: 0, width: CGFloat(cgImage.width), height: CGFloat(cgImage.height)))
+                    context.restoreGState()
+                }
             }
         }
     }
 }
+

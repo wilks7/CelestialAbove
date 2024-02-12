@@ -16,7 +16,9 @@ struct WeatherDetailView: View {
         NavigationStack {
             Text(selected.label)
                 .navigationTitle(selected.label)
+            #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
+            #endif
         }
     }
 }

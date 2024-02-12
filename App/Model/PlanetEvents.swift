@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftAA
 import WeatherKit
 import CoreLocation
+import MultiItem
 
 struct PlanetEvents {
     let planet: Planet.Type

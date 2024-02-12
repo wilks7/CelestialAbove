@@ -8,7 +8,38 @@
 import SwiftUI
 import MapKit
 
-struct LightPollutionMap: UIViewRepresentable {
+
+#if os(macOS)
+typealias Representable = NSViewRepresentable
+#else
+typealias Representable = UIViewRepresentable
+#endif
+
+struct LightPollutionMap: Representable {
+    func makeNSView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        
+        let overlay = TileOverlay()
+        mapView.addOverlay(overlay)
+        let regionRadius: CLLocationDistance = 50000
+        let location = location.coordinate//CLLocationCoordinate2D(latitude: 33.7490, longitude: -84.3880)
+        let coordinateRegion = MKCoordinateRegion(
+                                    center: location,
+                                    latitudinalMeters: regionRadius * 2.0,
+                                    longitudinalMeters: regionRadius * 2.0)
+//
+        mapView.setRegion(coordinateRegion, animated: false)
+//        mapView.isUserInteractionEnabled = userIteractions
+        return mapView
+    }
+    
+    func updateNSView(_ nsView: MKMapView, context: Context) {
+        
+    }
+    
+    typealias NSViewType = MKMapView
+    
     let location: CLLocation
 
     var mapStyle: MKMapType = .mutedStandard
@@ -28,7 +59,7 @@ struct LightPollutionMap: UIViewRepresentable {
                                     longitudinalMeters: regionRadius * 2.0)
 //
         mapView.setRegion(coordinateRegion, animated: false)
-        mapView.isUserInteractionEnabled = userIteractions
+//        mapView.isUserInteractionEnabled = userIteractions
         return mapView
     }
     
